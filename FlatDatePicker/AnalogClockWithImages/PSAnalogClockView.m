@@ -131,11 +131,11 @@ NSString * const PSAnalogClockViewCenterCap  = @"center_cap";
   if (animated) {
     
     CGFloat duration           = 1.f;
-    UIViewAnimationCurve curve = UIViewAnimationCurveLinear;
+    UIViewAnimationOptions curve = UIViewAnimationOptionCurveLinear;
     
     if (PSAnalogClockViewOptionClunkyHands & self.options) {
-      duration = 0.3f;
-      curve    = UIViewAnimationCurveEaseOut;
+      duration = .15f;
+      curve    = UIViewAnimationOptionCurveEaseOut;
     }
     
     [UIView animateWithDuration:duration
