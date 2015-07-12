@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="din-light.ttf">
+            <string>DIN-Light</string>
+            <string>DIN-Light</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" customClass="LaunchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designed by James Dong in NYC." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-j6-KI8">
+                                <rect key="frame" x="9" y="544" width="303" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="303" id="oFn-fX-SMw"/>
+                                    <constraint firstAttribute="height" constant="21" id="yFB-GJ-vH8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DIN-Light" family="DIN Light" pointSize="10"/>
+                                <color key="textColor" red="0.83529411764705885" green="0.82745098039215681" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSERBY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-p7-EeU">
+                                <rect key="frame" x="26" y="178" width="269" height="212"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="212" id="OjO-Wm-RbJ"/>
+                                    <constraint firstAttribute="width" constant="269" id="PXq-1y-biR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DIN-Light" family="DIN Light" pointSize="32"/>
+                                <color key="textColor" red="0.83529411764705885" green="0.82745098039215681" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.15294117647058825" green="0.15686274509803921" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="43S-Ms-3gC"/>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KSZ-Na-hsM"/>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="b71-mF-tsO"/>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ffz-rM-y8g"/>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="moW-tK-PFC"/>
+                            <constraint firstItem="LwQ-j6-KI8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qSa-cf-Jea"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="LwQ-j6-KI8" secondAttribute="bottom" constant="3" id="riH-Ic-ZoJ"/>
+                            <constraint firstItem="Yad-p7-EeU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="x9i-2Z-LMG"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="355"/>
+        </scene>
+    </scenes>
+</document>

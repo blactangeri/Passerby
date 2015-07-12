@@ -34,7 +34,7 @@
 		<string>DIN.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchViewController</string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

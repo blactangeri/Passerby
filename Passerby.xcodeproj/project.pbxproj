@@ -10,6 +10,7 @@
 		1A38C5CE1B49F27F00EB3B5F /* PSAnalogClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */; };
 		1A4155AE1B47774800F33DDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4155AD1B47774800F33DDE /* Images.xcassets */; };
 		1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B26B1B4ACD8200196E3C /* LifeViewController.m */; };
+		1A68D7861B52D29C008DAB04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */; };
 		1A97B04C1B51C9C3006FC7C7 /* ListEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */; };
 		1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04E1B51CC38006FC7C7 /* ListEntry.m */; };
 		1AB3BDEA1B4F7C99007279FE /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB3BDE91B4F7C99007279FE /* user.png */; };
@@ -32,7 +33,6 @@
 		1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CED1B462AB0005A158A /* PhotoViewController.m */; };
 		1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */; };
 		1AF9D1E81B5209D000509C2D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1E61B5209D000509C2D /* LaunchViewController.m */; };
-		1AF9D1EA1B520C3200509C2D /* LaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF9D1E71B5209D000509C2D /* LaunchViewController.xib */; };
 		1AF9D1F21B52120400509C2D /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1EF1B52120400509C2D /* FBShimmeringLayer.m */; };
 		1AF9D1F31B52120400509C2D /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F11B52120400509C2D /* FBShimmeringView.m */; };
 		1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F51B5228EA00509C2D /* ResetViewController.m */; };
@@ -60,6 +60,7 @@
 		1A4155AD1B47774800F33DDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A45B26A1B4ACD8200196E3C /* LifeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeViewController.h; sourceTree = "<group>"; };
 		1A45B26B1B4ACD8200196E3C /* LifeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeViewController.m; sourceTree = "<group>"; };
+		1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A97B04A1B51C9C3006FC7C7 /* ListEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntries.h; sourceTree = "<group>"; };
 		1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListEntries.m; sourceTree = "<group>"; };
 		1A97B04D1B51CC38006FC7C7 /* ListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntry.h; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
 		1AF9D1E51B5209D000509C2D /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		1AF9D1E61B5209D000509C2D /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
-		1AF9D1E71B5209D000509C2D /* LaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchViewController.xib; sourceTree = "<group>"; };
 		1AF9D1EC1B52120400509C2D /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
 		1AF9D1ED1B52120400509C2D /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
 		1AF9D1EE1B52120400509C2D /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
@@ -257,9 +257,9 @@
 				1AF9D1F71B52BF4F00509C2D /* res */,
 				6B2C83691751107700BC04FB /* AppDelegate.h */,
 				6B2C836A1751107700BC04FB /* AppDelegate.m */,
+				1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */,
 				1AF9D1E51B5209D000509C2D /* LaunchViewController.h */,
 				1AF9D1E61B5209D000509C2D /* LaunchViewController.m */,
-				1AF9D1E71B5209D000509C2D /* LaunchViewController.xib */,
 				1A97B04A1B51C9C3006FC7C7 /* ListEntries.h */,
 				1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */,
 				1A97B04D1B51CC38006FC7C7 /* ListEntry.h */,
@@ -382,8 +382,8 @@
 				1AD8B3A81B50D3A9003D0E47 /* clock_minute_hand.png in Resources */,
 				1ADB9BC91B461A17008C96E5 /* DIN.ttf in Resources */,
 				1ADB9BDE1B461DC3008C96E5 /* menu.png in Resources */,
-				1AF9D1EA1B520C3200509C2D /* LaunchViewController.xib in Resources */,
 				6B2C83651751107700BC04FB /* InfoPlist.strings in Resources */,
+				1A68D7861B52D29C008DAB04 /* LaunchScreen.storyboard in Resources */,
 				6B2C836D1751107700BC04FB /* Default.png in Resources */,
 				6B2C836F1751107700BC04FB /* Default@2x.png in Resources */,
 				1AF48CE51B4629A8005A158A /* Main.storyboard in Resources */,
@@ -512,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -530,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
