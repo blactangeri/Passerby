@@ -74,7 +74,7 @@ double age;
 - (void)createClock
 {
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    CGFloat clockSize = screenHeight * 0.35;
+    CGFloat clockSize = screenHeight * 0.315;
     
     self.clock = [[PSAnalogClockView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - clockSize) / 2,
                                                                      [[UIScreen mainScreen] bounds].size.height * 0.09, clockSize, clockSize) andImages:[self clockImgs] withOptions:PSAnalogClockViewOptionClunkyHands];
@@ -113,7 +113,8 @@ double age;
     
 }
 
-- (void)addButton
+/*
+ - (void)addButton
 {
     CGFloat w = [[UIScreen mainScreen] bounds].size.width * 0.67;
     CGFloat h = 44;
@@ -129,6 +130,7 @@ double age;
     [deformationBtn.forDisplayButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, 0)];
     [deformationBtn addTarget:self action:@selector(gotoLife) forControlEvents:UIControlEventTouchUpInside];
 }
+ */
 
 - (void)changeBackground
 {

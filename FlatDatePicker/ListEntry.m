@@ -1,10 +1,3 @@
-//
-//  ListEntry.m
-//  Passerby
-//
-//  Created by KING J on 7/11/15.
-//  Copyright © 2015 Christopher Ney. All rights reserved.
-//
 
 #import "ListEntry.h"
 @interface ListEntry()

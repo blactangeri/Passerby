@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1A38C5CE1B49F27F00EB3B5F /* PSAnalogClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */; };
 		1A4155AE1B47774800F33DDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4155AD1B47774800F33DDE /* Images.xcassets */; };
 		1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B26B1B4ACD8200196E3C /* LifeViewController.m */; };
+		1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A477E5E1B53EE3800D2D6BD /* cancel.png */; };
 		1A68D7861B52D29C008DAB04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */; };
 		1A97B04C1B51C9C3006FC7C7 /* ListEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */; };
 		1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04E1B51CC38006FC7C7 /* ListEntry.m */; };
@@ -32,9 +33,6 @@
 		1AF48CF01B462AB0005A158A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CE91B462AB0005A158A /* MainViewController.m */; };
 		1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CED1B462AB0005A158A /* PhotoViewController.m */; };
 		1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */; };
-		1AF9D1E81B5209D000509C2D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1E61B5209D000509C2D /* LaunchViewController.m */; };
-		1AF9D1F21B52120400509C2D /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1EF1B52120400509C2D /* FBShimmeringLayer.m */; };
-		1AF9D1F31B52120400509C2D /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F11B52120400509C2D /* FBShimmeringView.m */; };
 		1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F51B5228EA00509C2D /* ResetViewController.m */; };
 		6B2C835B1751107700BC04FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835A1751107700BC04FB /* UIKit.framework */; };
 		6B2C835D1751107700BC04FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835C1751107700BC04FB /* Foundation.framework */; };
@@ -60,6 +58,7 @@
 		1A4155AD1B47774800F33DDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A45B26A1B4ACD8200196E3C /* LifeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeViewController.h; sourceTree = "<group>"; };
 		1A45B26B1B4ACD8200196E3C /* LifeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeViewController.m; sourceTree = "<group>"; };
+		1A477E5E1B53EE3800D2D6BD /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A97B04A1B51C9C3006FC7C7 /* ListEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntries.h; sourceTree = "<group>"; };
 		1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListEntries.m; sourceTree = "<group>"; };
@@ -92,14 +91,6 @@
 		1AF48CED1B462AB0005A158A /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		1AF48CEE1B462AB0005A158A /* SidebarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTableViewController.h; sourceTree = "<group>"; };
 		1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
-		1AF9D1E51B5209D000509C2D /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
-		1AF9D1E61B5209D000509C2D /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
-		1AF9D1EC1B52120400509C2D /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
-		1AF9D1ED1B52120400509C2D /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
-		1AF9D1EE1B52120400509C2D /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
-		1AF9D1EF1B52120400509C2D /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
-		1AF9D1F01B52120400509C2D /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
-		1AF9D1F11B52120400509C2D /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		1AF9D1F41B5228EA00509C2D /* ResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetViewController.h; sourceTree = "<group>"; };
 		1AF9D1F51B5228EA00509C2D /* ResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetViewController.m; sourceTree = "<group>"; };
 		6B2C83571751107700BC04FB /* Passerby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passerby.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +179,7 @@
 				1ADB9BD31B461DC3008C96E5 /* menu.png */,
 				1ADB9BD41B461DC3008C96E5 /* menu@2x.png */,
 				1AB3BDE91B4F7C99007279FE /* user.png */,
+				1A477E5E1B53EE3800D2D6BD /* cancel.png */,
 			);
 			name = imgs;
 			sourceTree = "<group>";
@@ -199,19 +191,6 @@
 				1ADB9BE71B461DDF008C96E5 /* SWRevealViewController.m */,
 			);
 			path = SWRevealViewController;
-			sourceTree = "<group>";
-		};
-		1AF9D1EB1B52120400509C2D /* FBShimmering */ = {
-			isa = PBXGroup;
-			children = (
-				1AF9D1EC1B52120400509C2D /* FBShimmering-Prefix.pch */,
-				1AF9D1ED1B52120400509C2D /* FBShimmering.h */,
-				1AF9D1EE1B52120400509C2D /* FBShimmeringLayer.h */,
-				1AF9D1EF1B52120400509C2D /* FBShimmeringLayer.m */,
-				1AF9D1F01B52120400509C2D /* FBShimmeringView.h */,
-				1AF9D1F11B52120400509C2D /* FBShimmeringView.m */,
-			);
-			path = FBShimmering;
 			sourceTree = "<group>";
 		};
 		1AF9D1F71B52BF4F00509C2D /* res */ = {
@@ -258,8 +237,6 @@
 				6B2C83691751107700BC04FB /* AppDelegate.h */,
 				6B2C836A1751107700BC04FB /* AppDelegate.m */,
 				1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */,
-				1AF9D1E51B5209D000509C2D /* LaunchViewController.h */,
-				1AF9D1E61B5209D000509C2D /* LaunchViewController.m */,
 				1A97B04A1B51C9C3006FC7C7 /* ListEntries.h */,
 				1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */,
 				1A97B04D1B51CC38006FC7C7 /* ListEntry.h */,
@@ -290,7 +267,6 @@
 		6B2C83611751107700BC04FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1AF9D1EB1B52120400509C2D /* FBShimmering */,
 				1ABB66D01B4E2EEC000DEFEA /* DeformationButton */,
 				1A38C5C11B49F27F00EB3B5F /* AnalogClockWithImages */,
 				1ADB9BE51B461DDF008C96E5 /* SWRevealViewController */,
@@ -346,7 +322,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Christopher Ney";
+				ORGANIZATIONNAME = "James Dong";
 				TargetAttributes = {
 					6B2C83561751107700BC04FB = {
 						DevelopmentTeam = Q7SZN6HWTC;
@@ -354,7 +330,7 @@
 				};
 			};
 			buildConfigurationList = 6B2C83521751107700BC04FB /* Build configuration list for PBXProject "Passerby" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -389,6 +365,7 @@
 				1AF48CE51B4629A8005A158A /* Main.storyboard in Resources */,
 				1AD8B3AA1B50D3A9003D0E47 /* clock_face.png in Resources */,
 				1AB3BDEA1B4F7C99007279FE /* user.png in Resources */,
+				1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */,
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
 				6B2C83771751107700BC04FB /* ViewController.xib in Resources */,
 				1ADB9BDF1B461DC3008C96E5 /* menu@2x.png in Resources */,
@@ -415,13 +392,10 @@
 				6B2C83671751107700BC04FB /* main.m in Sources */,
 				1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */,
 				1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */,
-				1AF9D1F31B52120400509C2D /* FBShimmeringView.m in Sources */,
-				1AF9D1F21B52120400509C2D /* FBShimmeringLayer.m in Sources */,
 				1AF48CF01B462AB0005A158A /* MainViewController.m in Sources */,
 				6B2C836B1751107700BC04FB /* AppDelegate.m in Sources */,
 				1ADB9BE81B461DDF008C96E5 /* SWRevealViewController.m in Sources */,
 				1AD8B3A11B50C9DC003D0E47 /* DetailViewController.m in Sources */,
-				1AF9D1E81B5209D000509C2D /* LaunchViewController.m in Sources */,
 				6B2C83741751107700BC04FB /* ViewController.m in Sources */,
 				1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */,
 				6B2C83801751114700BC04FB /* FlatDatePicker.m in Sources */,

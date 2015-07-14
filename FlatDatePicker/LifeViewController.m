@@ -1,10 +1,3 @@
-//
-//  LifeViewController.m
-//  Passerby
-//
-//  Created by KING J on 7/6/15.
-//  Copyright © 2015 Christopher Ney. All rights reserved.
-//
 
 #import "LifeViewController.h"
 #import "SWRevealViewController.h"

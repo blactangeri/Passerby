@@ -1,15 +1,8 @@
-//
-//  SidebarTableViewController.m
-//  SidebarDemo
-//
-//  Created by Simon Ng on 10/11/14.
-//  Copyright (c) 2014 AppCoda. All rights reserved.
-//
-
 #import "SidebarTableViewController.h"
 #import "SWRevealViewController.h"
 #import "PhotoViewController.h"
 #import "ViewController.h"
+#import "ListEntries.h"
 
 @interface SidebarTableViewController ()
 
@@ -129,7 +122,12 @@ UIColor *light;
 
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    
+    if (indexPath.row == 1) {
+        if ([[ListEntries sharedEntries] allEntries].count == 0) {
+            [self performSegueWithIdentifier:@"gotoDetail" sender:self];
+        }
+        else [self performSegueWithIdentifier:@"gotoPhoto" sender:self];
+    }
 }
 
 #pragma mark - Navigation
