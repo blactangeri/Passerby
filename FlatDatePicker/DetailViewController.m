@@ -10,12 +10,15 @@
 
 #define offsetForKeyboard 80.0
 
-@interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerRestoration>
+@interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate,
+                                    UIPopoverPresentationControllerDelegate, UIViewControllerRestoration, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextField *titleField;
 @property (nonatomic, weak) IBOutlet UITextView *descField;
 @property (nonatomic, weak) IBOutlet UIButton *dateLabel;
-@property(nonatomic, strong) UIPopoverPresentationController *ppc;
+@property (nonatomic, strong) UIPopoverPresentationController *ppc;
+@property (nonatomic, strong) DeformationButton *saveButton;
+@property (nonatomic, strong) SSFlatDatePicker *dp;
 
 @end
 
@@ -149,13 +152,14 @@ CGFloat h;
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
     self.navigationItem.leftBarButtonItem = left;
 
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];
+    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    //[self.view addGestureRecognizer:tap];
 }
 
 - (void)dismissKeyboard
 {
-    [self.view endEditing:YES];
+    [_titleField endEditing:YES];
+    [_descField endEditing:YES];
 }
 
 - (void)setupTextField
@@ -197,21 +201,91 @@ CGFloat h;
     _dateLabel.layer.borderWidth = 0;
 }
 
+- (IBAction)setDeadline:(id)sender
+{
+    [[SSFlatDatePicker appearance] setFont:[UIFont fontWithName:@"din-light" size:24]];
+    [[SSFlatDatePicker appearance] setGradientColor:[UIColor darkGrayColor]];
+    _dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
+    [_dp addTarget:self action:@selector(getDeadline) forControlEvents:UIControlEventValueChanged];
+    
+    UIViewController *dateVC = [[UIViewController alloc] init];
+    dateVC.view = _dp;
+    
+    UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:dateVC];
+    destNav.modalPresentationStyle = UIModalPresentationPopover;
+    dateVC.preferredContentSize = CGSizeMake(w * 0.9, h * 0.2);
+    _ppc = destNav.popoverPresentationController;
+    _ppc.delegate = self;
+    _ppc.sourceView = self.view;
+    _ppc.sourceRect = [sender frame];
+    destNav.navigationBarHidden = YES;
+    [self presentViewController:destNav animated:YES completion:nil];
+    
+    
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(nonnull UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(nonnull UIPopoverPresentationController *)popoverPresentationController
+{
+    
+    self.entry.dateToFulfill = _dp.date;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setLocale:[NSLocale currentLocale]];
+    NSString *dateString = [formatter stringFromDate:[_dp date]];
+    self.dateLabel.titleLabel.text = dateString;
+}
+
+- (void)getDeadline
+{
+    self.entry.dateToFulfill = _dp.date;
+}
+
 - (void)setupSaveButton
 {
-    CGFloat bw = 100;
-    CGFloat bh = 40;
+    CGFloat bw = 200;
+    CGFloat bh = 50;
     CGFloat x = (w - bw) / 2.0;
     CGFloat y = (_dateLabel.frame.origin.y + _dateLabel.frame.size.height) + 44;
     
-    DeformationButton *deformationBtn = [[DeformationButton alloc] initWithFrame:CGRectMake(x, y, bw, bh) withColor:[UIColor grayColor]];
-    [self.view addSubview:deformationBtn];
+    _saveButton = [[DeformationButton alloc] initWithFrame:CGRectMake(x, y, bw, bh) withColor:[UIColor grayColor]];
+    [self.view addSubview:_saveButton];
     
-    [deformationBtn.forDisplayButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [deformationBtn.forDisplayButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
-    [deformationBtn.forDisplayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [deformationBtn.forDisplayButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    //[deformationBtn addTarget:self action:@selector(gotoLife) forControlEvents:UIControlEventTouchUpInside];
+    [_saveButton.forDisplayButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [_saveButton.forDisplayButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
+    [_saveButton.forDisplayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_saveButton.forDisplayButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)save
+{
+    if (!_titleField.text || _titleField.text.length == 0) {
+        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Empty title" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [toast show];
+        int duration = 1;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [toast dismissWithClickedButtonIndex:0 animated:YES];
+        });
+        return;
+    }
+    else if (!self.entry.dateToFulfill) {
+        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a deadline" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [toast show];
+        int duration = 1;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [toast dismissWithClickedButtonIndex:0 animated:YES];
+        });
+        return;
+    }
+    
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
 - (void)cancelEditting
@@ -260,10 +334,7 @@ CGFloat h;
     [UIView commitAnimations];
 }
 
-- (void)save
-{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
-}
+
 
 - (void)complete
 {
@@ -271,27 +342,6 @@ CGFloat h;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
-- (IBAction)setDeadline:(id)sender
-{
-    SSFlatDatePicker *dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
-    UIViewController *dateVC = [[UIViewController alloc] init];
-    dateVC.view = dp;
-    
-    UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:dateVC];/*Here dateVC is controller you want to show in popover*/
-    destNav.modalPresentationStyle = UIModalPresentationPopover;
-    dateVC.preferredContentSize = CGSizeMake(w * 0.9, h * 0.2);
-    _ppc = destNav.popoverPresentationController;
-    _ppc.delegate = self;
-    _ppc.sourceView = self.view;
-    _ppc.sourceRect = [sender frame];
-    destNav.navigationBarHidden = YES;
-    [self presentViewController:destNav animated:YES completion:nil];
-}
-
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(nonnull UIPresentationController *)controller
-{
-    return UIModalPresentationNone;
-}
 /*
 #pragma mark - Navigation
 
@@ -338,6 +388,15 @@ CGFloat h;
     {
         [textView resignFirstResponder];
     }
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(nonnull UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(nonnull UITouch *)touch
+{
+    if (touch.view == _saveButton) {
+        return NO;
+    }
+    
     return YES;
 }
 

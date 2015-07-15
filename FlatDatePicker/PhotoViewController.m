@@ -18,9 +18,20 @@
 
 @implementation PhotoViewController
 
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(nonnull NSArray *)identifierComponents coder:(nonnull NSCoder *)coder
+{
+    return [[self alloc] init];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupBackground];
+    
+}
+
+- (void)setupBackground
+{
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -35,6 +46,7 @@
     self.navigationController.navigationBar.translucent = YES;
     
     [self.view setBackgroundColor:[UIColor colorWithRed:34.0 / 255.0 green:34.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
+   
 }
 
 - (void)didReceiveMemoryWarning {

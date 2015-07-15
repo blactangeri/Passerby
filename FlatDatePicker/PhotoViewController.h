@@ -1,7 +1,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoViewController : UITableViewController
+@interface PhotoViewController : UITableViewController <UIViewControllerRestoration>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
