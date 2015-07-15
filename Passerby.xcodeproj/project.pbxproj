@@ -15,8 +15,6 @@
 		1A97B04C1B51C9C3006FC7C7 /* ListEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */; };
 		1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04E1B51CC38006FC7C7 /* ListEntry.m */; };
 		1AB3BDEA1B4F7C99007279FE /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB3BDE91B4F7C99007279FE /* user.png */; };
-		1ABB66DA1B4E322C000DEFEA /* DeformationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABB66D21B4E2EEC000DEFEA /* DeformationButton.m */; };
-		1ABB66DB1B4E3233000DEFEA /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABB66D51B4E2EEC000DEFEA /* MMMaterialDesignSpinner.m */; };
 		1ABB66DD1B4E354C000DEFEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABB66DC1B4E354C000DEFEA /* QuartzCore.framework */; };
 		1AD5C4A11B55CB1D008490E5 /* SSFlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C4A01B55CB1D008490E5 /* SSFlatDatePicker.m */; };
 		1AD8B3A11B50C9DC003D0E47 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B3A01B50C9DC003D0E47 /* DetailViewController.m */; };
@@ -67,10 +65,6 @@
 		1A97B04D1B51CC38006FC7C7 /* ListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntry.h; sourceTree = "<group>"; };
 		1A97B04E1B51CC38006FC7C7 /* ListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListEntry.m; sourceTree = "<group>"; };
 		1AB3BDE91B4F7C99007279FE /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
-		1ABB66D11B4E2EEC000DEFEA /* DeformationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeformationButton.h; sourceTree = "<group>"; };
-		1ABB66D21B4E2EEC000DEFEA /* DeformationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeformationButton.m; sourceTree = "<group>"; };
-		1ABB66D41B4E2EEC000DEFEA /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMaterialDesignSpinner.h; sourceTree = "<group>"; };
-		1ABB66D51B4E2EEC000DEFEA /* MMMaterialDesignSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMaterialDesignSpinner.m; sourceTree = "<group>"; };
 		1ABB66DC1B4E354C000DEFEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1AD5C49F1B55CB1D008490E5 /* SSFlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFlatDatePicker.h; sourceTree = "<group>"; };
 		1AD5C4A01B55CB1D008490E5 /* SSFlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFlatDatePicker.m; sourceTree = "<group>"; };
@@ -149,25 +143,6 @@
 				1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */,
 			);
 			path = AnalogClockWithImages;
-			sourceTree = "<group>";
-		};
-		1ABB66D01B4E2EEC000DEFEA /* DeformationButton */ = {
-			isa = PBXGroup;
-			children = (
-				1ABB66D11B4E2EEC000DEFEA /* DeformationButton.h */,
-				1ABB66D21B4E2EEC000DEFEA /* DeformationButton.m */,
-				1ABB66D31B4E2EEC000DEFEA /* MMMaterialDesignSpinner-master */,
-			);
-			path = DeformationButton;
-			sourceTree = "<group>";
-		};
-		1ABB66D31B4E2EEC000DEFEA /* MMMaterialDesignSpinner-master */ = {
-			isa = PBXGroup;
-			children = (
-				1ABB66D41B4E2EEC000DEFEA /* MMMaterialDesignSpinner.h */,
-				1ABB66D51B4E2EEC000DEFEA /* MMMaterialDesignSpinner.m */,
-			);
-			path = "MMMaterialDesignSpinner-master";
 			sourceTree = "<group>";
 		};
 		1ADB9BC51B4619FD008C96E5 /* fonts */ = {
@@ -283,7 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				1AE841A51B54C34D004BBE03 /* UITextView+Placeholder */,
-				1ABB66D01B4E2EEC000DEFEA /* DeformationButton */,
 				1A38C5C11B49F27F00EB3B5F /* AnalogClockWithImages */,
 				1ADB9BE51B461DDF008C96E5 /* SWRevealViewController */,
 				6B2C83621751107700BC04FB /* FlatDatePicker-Info.plist */,
@@ -403,8 +377,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */,
-				1ABB66DB1B4E3233000DEFEA /* MMMaterialDesignSpinner.m in Sources */,
-				1ABB66DA1B4E322C000DEFEA /* DeformationButton.m in Sources */,
 				1A97B04C1B51C9C3006FC7C7 /* ListEntries.m in Sources */,
 				1A38C5CE1B49F27F00EB3B5F /* PSAnalogClockView.m in Sources */,
 				1AE841A81B54C34D004BBE03 /* UITextView+Placeholder.m in Sources */,

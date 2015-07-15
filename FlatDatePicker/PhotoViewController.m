@@ -14,6 +14,7 @@
 
 @interface PhotoViewController ()
 
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *rbbi;
 @end
 
 @implementation PhotoViewController
@@ -61,12 +62,43 @@
 
 - (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    NSArray *entries = [[ListEntries sharedEntries] allEntries];
+    ListEntry *entry = entries[indexPath.row];
+    
+    cell.textLabel.text = entry.title;
+    cell.detailTextLabel.text = entry.dateToFulfill;
+    
+    return cell;
 }
 
+- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    DetailViewController *dvc = [[DetailViewController alloc] initForNewEntry:NO];
+    NSArray *entries = [[ListEntries sharedEntries] allEntries];
+    ListEntry *selectedEntry = [entries objectAtIndex:indexPath.row];
+    dvc.entry = selectedEntry;
+    [self.navigationController pushViewController:dvc animated:YES];
+}
 
+- (void)tableView:(nonnull UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *entries = [[ListEntries sharedEntries] allEntries];
+        ListEntry *entry = [entries objectAtIndex:indexPath.row];
+        [[ListEntries sharedEntries] removeEntry:entry];
+        
+        [tableView deleteRowsAtIndexPaths:indexPath withRowAnimation:YES];
+    }
+}
 
-
+- (void)addNewEntry
+{
+    
+}
 
 
 

@@ -14,7 +14,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *desc;
-@property (nonatomic, readonly, strong) NSDate *dateCreated;
+@property (nonatomic, strong) NSDate *dateCreated;
 @property (nonatomic, strong) NSDate *dateToFulfill;
 @property (nonatomic, copy) NSString *entryKey;
 

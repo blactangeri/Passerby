@@ -1,7 +1,5 @@
 
-
 #import "DetailViewController.h"
-#import "DeformationButton/DeformationButton.h"
 #import "ListEntries.h"
 #import "ListEntry.h"
 #import "UITextView+Placeholder.h"
@@ -17,9 +15,8 @@
 @property (nonatomic, weak) IBOutlet UITextView *descField;
 @property (nonatomic, weak) IBOutlet UIButton *dateLabel;
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
-@property (nonatomic, strong) DeformationButton *saveButton;
+@property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
-
 @end
 
 CGFloat w;
@@ -43,9 +40,6 @@ CGFloat h;
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(nonnull NSArray *)identifierComponents coder:(nonnull NSCoder *)coder
 {
     BOOL isNew = NO;
-    if (identifierComponents.count == 3) {
-        isNew = YES;
-    }
     
     return [[self alloc] initForNewEntry:isNew];
 }
@@ -59,14 +53,7 @@ CGFloat h;
         self.restorationClass = [self class];
         
         if (isNew) {
-            UIButton *userButton = [[UIButton alloc] init];
-            UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            [userButton setImage:userImg forState:UIControlStateNormal];
-            [userButton setFrame:CGRectMake(0, 0, 18, 18)];
-            userButton.tintColor = [UIColor lightGrayColor];
-            [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
-            UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
-            self.navigationItem.leftBarButtonItem = left;
+            self.navigationItem.title = @"CREATE A NEW GOAL";
         }
     }
     
@@ -139,7 +126,7 @@ CGFloat h;
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     self.navigationController.navigationBar.translucent = YES;
     
-    self.navigationItem.title = @"CREATE A NEW GOAL";
+    
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:18],
                                                                       NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
 
@@ -232,65 +219,78 @@ CGFloat h;
 - (void)popoverPresentationControllerDidDismissPopover:(nonnull UIPopoverPresentationController *)popoverPresentationController
 {
     
-    self.entry.dateToFulfill = _dp.date;
+    self.entry.dateToFulfill = [_dp date];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setLocale:[NSLocale currentLocale]];
     NSString *dateString = [formatter stringFromDate:[_dp date]];
+    
     self.dateLabel.titleLabel.text = dateString;
 }
 
 - (void)getDeadline
 {
-    self.entry.dateToFulfill = _dp.date;
+    self.entry.dateToFulfill = [_dp date];
 }
 
 - (void)setupSaveButton
 {
     CGFloat bw = 200;
-    CGFloat bh = 50;
+    CGFloat bh = 45;
     CGFloat x = (w - bw) / 2.0;
     CGFloat y = (_dateLabel.frame.origin.y + _dateLabel.frame.size.height) + 44;
     
-    _saveButton = [[DeformationButton alloc] initWithFrame:CGRectMake(x, y, bw, bh) withColor:[UIColor grayColor]];
+    _saveButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, bw, bh)];
     [self.view addSubview:_saveButton];
-    
-    [_saveButton.forDisplayButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [_saveButton.forDisplayButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
-    [_saveButton.forDisplayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_saveButton.forDisplayButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_saveButton setBackgroundColor:[UIColor darkGrayColor]];
+    _saveButton.layer.cornerRadius = 23;
+    [_saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [_saveButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
+    [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_saveButton addTarget:self action:@selector(changeBgColor) forControlEvents:UIControlEventTouchDown];
     [_saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)save
 {
+    [_saveButton setBackgroundColor:[UIColor darkGrayColor]];
+    
     if (!_titleField.text || _titleField.text.length == 0) {
         UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Empty title" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [toast show];
-        int duration = 1;
+        int duration = 0.7;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [toast dismissWithClickedButtonIndex:0 animated:YES];
         });
         return;
     }
-    else if (!self.entry.dateToFulfill) {
+    else if (_dp == nil) {
         UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a deadline" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [toast show];
-        int duration = 1;
+        int duration = 0.7;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [toast dismissWithClickedButtonIndex:0 animated:YES];
         });
         return;
     }
+    self.entry.title = _titleField.text;
+    self.entry.desc = _descField.text;
+    self.entry.dateCreated = [NSDate date];
     
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+    [self performSegueWithIdentifier:@"gotoList" sender:self];
+}
+
+- (void)changeBgColor
+{
+    [_saveButton setBackgroundColor:[UIColor grayColor]];
 }
 
 - (void)cancelEditting
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [[ListEntries sharedEntries] removeEntry:self.entry];
 }
 
 - (void)didReceiveMemoryWarning {

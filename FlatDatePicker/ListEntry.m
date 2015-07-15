@@ -2,8 +2,6 @@
 #import "ListEntry.h"
 @interface ListEntry()
 
-@property (nonatomic, strong) NSDate *dateCreated;
-
 @end
 
 @implementation ListEntry

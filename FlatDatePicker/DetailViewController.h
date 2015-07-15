@@ -6,6 +6,7 @@
 
 @property (nonatomic, strong) ListEntry *entry;
 @property (nonnull, copy) void (^dismissBlock)(void);
+@property (nonatomic) BOOL isNew;
 
 - (instancetype)initForNewEntry:(BOOL)isNew;
 

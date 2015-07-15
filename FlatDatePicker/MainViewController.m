@@ -3,7 +3,6 @@
 #import "SWRevealViewController.h"
 #import "PSAnalogClockView.h"
 #import "LifeViewController.h"
-#import "DeformationButton.h"
 
 @interface MainViewController ()
 

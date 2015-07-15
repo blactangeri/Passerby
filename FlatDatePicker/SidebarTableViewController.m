@@ -3,6 +3,7 @@
 #import "PhotoViewController.h"
 #import "ViewController.h"
 #import "ListEntries.h"
+#import "DetailViewController.h"
 
 @interface SidebarTableViewController ()
 
@@ -134,18 +135,15 @@ UIColor *light;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    // Set the title of navigation bar by using the menu items
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    UINavigationController *destViewController = (UINavigationController*)segue.destinationViewController;
-    destViewController.title = [[menuItems objectAtIndex:indexPath.row] capitalizedString];
-    
-    // Set the photo if it navigates to the PhotoView
-    if ([segue.identifier isEqualToString:@"Photo"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        PhotoViewController *photoController = [navController childViewControllers].firstObject;
-        NSString *photoFilename = [NSString stringWithFormat:@"%@_photo", [menuItems objectAtIndex:indexPath.row]];
+    if ([segue.identifier isEqualToString:@"gotoDetail"]) {
+        ListEntry *newEntry = [[ListEntries sharedEntries] createEntry];
+        
+        UINavigationController *nav = segue.destinationViewController;
+        DetailViewController *dvc = (DetailViewController *)[nav.viewControllers firstObject];
+        dvc.isNew = YES;
+        dvc.entry = newEntry;
     }
+    
 }
 
 
