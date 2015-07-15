@@ -4,18 +4,18 @@
 #import "DeformationButton/DeformationButton.h"
 #import "ListEntries.h"
 #import "ListEntry.h"
-
+#import "UITextView+Placeholder.h"
+#import "SSFlatDatePicker.h"
 
 
 #define offsetForKeyboard 80.0
 
-@interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
+@interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerRestoration>
 
 @property (nonatomic, weak) IBOutlet UITextField *titleField;
 @property (nonatomic, weak) IBOutlet UITextView *descField;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *leftBbi;
-@property (nonatomic, strong) UIPopoverController *datepickerPopover;
+@property (nonatomic, weak) IBOutlet UIButton *dateLabel;
+@property(nonatomic, strong) UIPopoverPresentationController *ppc;
 
 @end
 
@@ -33,8 +33,41 @@ CGFloat h;
     [self setupBackground];
     [self setupTextField];
     [self setupTextView];
-    [self setupLabel];
-    [self setupButton];
+    [self setupDeadlineButton];
+    [self setupSaveButton];
+}
+
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(nonnull NSArray *)identifierComponents coder:(nonnull NSCoder *)coder
+{
+    BOOL isNew = NO;
+    if (identifierComponents.count == 3) {
+        isNew = YES;
+    }
+    
+    return [[self alloc] initForNewEntry:isNew];
+}
+
+- (instancetype)initForNewEntry:(BOOL)isNew
+{
+    self = [super initWithNibName:nil bundle:nil];
+    
+    if (self) {
+        self.restorationIdentifier = NSStringFromClass([self class]);
+        self.restorationClass = [self class];
+        
+        if (isNew) {
+            UIButton *userButton = [[UIButton alloc] init];
+            UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [userButton setImage:userImg forState:UIControlStateNormal];
+            [userButton setFrame:CGRectMake(0, 0, 18, 18)];
+            userButton.tintColor = [UIColor lightGrayColor];
+            [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+            self.navigationItem.leftBarButtonItem = left;
+        }
+    }
+    
+    return self;
 }
 
 - (void)encodeRestorableStateWithCoder:(nonnull NSCoder *)coder
@@ -67,6 +100,33 @@ CGFloat h;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:_descField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:[UITextView class]];
+    
+    ListEntry *entry = self.entry;
+    self.titleField.text = entry.title;
+    self.descField.text = entry.desc;
+    
+    static NSDateFormatter *df;
+    if (!df) {
+        df = [[NSDateFormatter alloc] init];
+        df.dateStyle = NSDateFormatterMediumStyle;
+    }
+    
+    if (self.entry.dateToFulfill != nil) {
+        self.dateLabel.titleLabel.text = [df stringFromDate:entry.dateToFulfill];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.view endEditing:YES];
+    ListEntry *entry = self.entry;
+    entry.title = self.titleField.text;
+    entry.desc = self.descField.text;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:[UITextView class]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:[UITextView class]];
 }
 
 - (void)setupBackground
@@ -89,8 +149,13 @@ CGFloat h;
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
     self.navigationItem.leftBarButtonItem = left;
 
-    [_leftBbi setTarget:self];
-    [_leftBbi setAction:@selector(cancelEditting)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 - (void)setupTextField
@@ -99,7 +164,7 @@ CGFloat h;
     
     _titleField.delegate = self;
     _titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tap to set a new goal"
-                                                                        attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],
+                                                                        attributes:@{NSForegroundColorAttributeName:[UIColor grayColor],
                                                                                      NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22]
                                                                                      }];
     [_titleField setFont:[UIFont fontWithName:@"din-light" size:22]];
@@ -111,29 +176,33 @@ CGFloat h;
 {
     _descField.frame = CGRectMake(w * 0.2 / 2.0, (h * 0.3 + 44) * 1.1, w * 0.8, h * 0.2);
     _descField.delegate = self;
-    [_descField setText:@"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling."];
     [_descField setFont:[UIFont fontWithName:@"din-light" size:18]];
     [_descField setTextColor:[UIColor lightGrayColor]];
     [_descField setTextAlignment:NSTextAlignmentJustified];
+    _descField.text = @"";
+    
+    _descField.placeholder = @"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
+    _descField.placeholderColor = [UIColor grayColor];
 }
 
-- (void)setupLabel
+- (void)setupDeadlineButton
 {
     CGFloat lw = w / 2.0;
-    CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) * 1;
+    CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
     _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
-    _dateLabel.text = @"Set a deadline";
-    _dateLabel.font = [UIFont fontWithName:@"din-light" size:18];
-    _dateLabel.textColor = [UIColor lightGrayColor];
-    _dateLabel.textAlignment = NSTextAlignmentCenter;
+    [_dateLabel setTitle:@"Set a deadline" forState:UIControlStateNormal];
+    _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:22];
+    [_dateLabel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _dateLabel.layer.borderWidth = 0;
 }
 
-- (void)setupButton
+- (void)setupSaveButton
 {
     CGFloat bw = 100;
     CGFloat bh = 40;
     CGFloat x = (w - bw) / 2.0;
-    CGFloat y = (_dateLabel.frame.origin.y + _dateLabel.frame.size.height) * 1.1;
+    CGFloat y = (_dateLabel.frame.origin.y + _dateLabel.frame.size.height) + 44;
     
     DeformationButton *deformationBtn = [[DeformationButton alloc] initWithFrame:CGRectMake(x, y, bw, bh) withColor:[UIColor grayColor]];
     [self.view addSubview:deformationBtn];
@@ -191,6 +260,38 @@ CGFloat h;
     [UIView commitAnimations];
 }
 
+- (void)save
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+- (void)complete
+{
+    [[ListEntries sharedEntries] removeEntry:self.entry];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+- (IBAction)setDeadline:(id)sender
+{
+    SSFlatDatePicker *dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
+    UIViewController *dateVC = [[UIViewController alloc] init];
+    dateVC.view = dp;
+    
+    UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:dateVC];/*Here dateVC is controller you want to show in popover*/
+    destNav.modalPresentationStyle = UIModalPresentationPopover;
+    dateVC.preferredContentSize = CGSizeMake(w * 0.9, h * 0.2);
+    _ppc = destNav.popoverPresentationController;
+    _ppc.delegate = self;
+    _ppc.sourceView = self.view;
+    _ppc.sourceRect = [sender frame];
+    destNav.navigationBarHidden = YES;
+    [self presentViewController:destNav animated:YES completion:nil];
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(nonnull UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
 /*
 #pragma mark - Navigation
 
@@ -210,7 +311,7 @@ CGFloat h;
 {
     _titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tap to set a new goal"
                                                                         attributes:@{
-                                                                                     NSForegroundColorAttributeName:[UIColor lightGrayColor],
+                                                                                     NSForegroundColorAttributeName:[UIColor grayColor],
                                                                                      NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22]
                                                                                      }];
 }
@@ -223,11 +324,6 @@ CGFloat h;
 
 - (void)textViewDidBeginEditing:(nonnull UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling."]) {
-        textView.text = @"";
-    }
-    [textView becomeFirstResponder];
-    
     [self moveUp:YES];
 }
 
