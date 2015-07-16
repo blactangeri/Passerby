@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
+
 @end
 
 CGFloat w;
@@ -37,28 +38,6 @@ CGFloat h;
     [self setupSaveButton];
 }
 
-+ (UIViewController *)viewControllerWithRestorationIdentifierPath:(nonnull NSArray *)identifierComponents coder:(nonnull NSCoder *)coder
-{
-    BOOL isNew = NO;
-    
-    return [[self alloc] initForNewEntry:isNew];
-}
-
-- (instancetype)initForNewEntry:(BOOL)isNew
-{
-    self = [super initWithNibName:nil bundle:nil];
-    
-    if (self) {
-        self.restorationIdentifier = NSStringFromClass([self class]);
-        self.restorationClass = [self class];
-        
-        if (isNew) {
-            self.navigationItem.title = @"CREATE A NEW GOAL";
-        }
-    }
-    
-    return self;
-}
 
 - (void)encodeRestorableStateWithCoder:(nonnull NSCoder *)coder
 {
@@ -91,18 +70,15 @@ CGFloat h;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:_descField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:[UITextView class]];
     
-    ListEntry *entry = self.entry;
-    self.titleField.text = entry.title;
-    self.descField.text = entry.desc;
-    
-    static NSDateFormatter *df;
-    if (!df) {
-        df = [[NSDateFormatter alloc] init];
-        df.dateStyle = NSDateFormatterMediumStyle;
-    }
-    
-    if (self.entry.dateToFulfill != nil) {
-        self.dateLabel.titleLabel.text = [df stringFromDate:entry.dateToFulfill];
+    if (!_isNew) {
+        self.titleField.text = _entry.title;
+        self.descField.text = _entry.desc;
+        static NSDateFormatter *df;
+        if (!df) {
+            df = [[NSDateFormatter alloc] init];
+            df.dateStyle = NSDateFormatterMediumStyle;
+        }
+        self.dateLabel.titleLabel.text = [df stringFromDate:_entry.dateToFulfill];
     }
 }
 
@@ -111,12 +87,15 @@ CGFloat h;
     [super viewWillDisappear:animated];
     
     [self.view endEditing:YES];
-    ListEntry *entry = self.entry;
-    entry.title = self.titleField.text;
-    entry.desc = self.descField.text;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:[UITextView class]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:[UITextView class]];
+    
+    if (!_isNew) {
+        _entry.title = self.titleField.text;
+        _entry.desc = self.descField.text;
+        _entry.dateToFulfill = [_dp date];
+    }
 }
 
 - (void)setupBackground
@@ -131,13 +110,25 @@ CGFloat h;
                                                                       NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
 
     UIButton *userButton = [[UIButton alloc] init];
-    UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [userButton setImage:userImg forState:UIControlStateNormal];
-    [userButton setFrame:CGRectMake(0, 0, 18, 18)];
-    userButton.tintColor = [UIColor lightGrayColor];
-    [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
-    self.navigationItem.leftBarButtonItem = left;
+    
+    if (_isNew) {
+        UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [userButton setImage:userImg forState:UIControlStateNormal];
+        [userButton setFrame:CGRectMake(0, 0, 18, 18)];
+        userButton.tintColor = [UIColor lightGrayColor];
+        [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+        self.navigationItem.leftBarButtonItem = left;
+    }
+    else {
+        UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [userButton setImage:userImg forState:UIControlStateNormal];
+        [userButton setFrame:CGRectMake(0, 0, 18, 18)];
+        userButton.tintColor = [UIColor lightGrayColor];
+        [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+        self.navigationItem.leftBarButtonItem = left;
+    }
 
     //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     //[self.view addGestureRecognizer:tap];
@@ -218,20 +209,12 @@ CGFloat h;
 
 - (void)popoverPresentationControllerDidDismissPopover:(nonnull UIPopoverPresentationController *)popoverPresentationController
 {
-    
-    self.entry.dateToFulfill = [_dp date];
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setLocale:[NSLocale currentLocale]];
     NSString *dateString = [formatter stringFromDate:[_dp date]];
     
     self.dateLabel.titleLabel.text = dateString;
-}
-
-- (void)getDeadline
-{
-    self.entry.dateToFulfill = [_dp date];
 }
 
 - (void)setupSaveButton
@@ -274,12 +257,14 @@ CGFloat h;
         });
         return;
     }
+    
+    self.entry = [[ListEntries sharedEntries] createEntry];
     self.entry.title = _titleField.text;
     self.entry.desc = _descField.text;
+    self.entry.dateToFulfill = [_dp date];
     self.entry.dateCreated = [NSDate date];
     
-    
-    [self performSegueWithIdentifier:@"gotoList" sender:self];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)changeBgColor
@@ -290,7 +275,6 @@ CGFloat h;
 - (void)cancelEditting
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    [[ListEntries sharedEntries] removeEntry:self.entry];
 }
 
 - (void)didReceiveMemoryWarning {

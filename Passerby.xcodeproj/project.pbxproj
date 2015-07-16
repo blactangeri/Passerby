@@ -34,6 +34,7 @@
 		1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CED1B462AB0005A158A /* PhotoViewController.m */; };
 		1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */; };
 		1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F51B5228EA00509C2D /* ResetViewController.m */; };
+		1AFD53271B575F8600D4D7FF /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFD53261B575F8600D4D7FF /* check.png */; };
 		6B2C835B1751107700BC04FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835A1751107700BC04FB /* UIKit.framework */; };
 		6B2C835D1751107700BC04FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835C1751107700BC04FB /* Foundation.framework */; };
 		6B2C835F1751107700BC04FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835E1751107700BC04FB /* CoreGraphics.framework */; };
@@ -93,6 +94,7 @@
 		1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
 		1AF9D1F41B5228EA00509C2D /* ResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetViewController.h; sourceTree = "<group>"; };
 		1AF9D1F51B5228EA00509C2D /* ResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetViewController.m; sourceTree = "<group>"; };
+		1AFD53261B575F8600D4D7FF /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		6B2C83571751107700BC04FB /* Passerby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passerby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2C835A1751107700BC04FB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6B2C835C1751107700BC04FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,6 +159,7 @@
 		1ADB9BCE1B461DBB008C96E5 /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				1AFD53261B575F8600D4D7FF /* check.png */,
 				1ADB9BD31B461DC3008C96E5 /* menu.png */,
 				1ADB9BD41B461DC3008C96E5 /* menu@2x.png */,
 				1AB3BDE91B4F7C99007279FE /* user.png */,
@@ -361,6 +364,7 @@
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
 				6B2C83771751107700BC04FB /* ViewController.xib in Resources */,
 				1ADB9BDF1B461DC3008C96E5 /* menu@2x.png in Resources */,
+				1AFD53271B575F8600D4D7FF /* check.png in Resources */,
 				6BB019971751257B00643F6D /* FlatDatePicker-Icon-Close.png in Resources */,
 				6BB019981751257B00643F6D /* FlatDatePicker-Icon-Check.png in Resources */,
 				6BB019991751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png in Resources */,

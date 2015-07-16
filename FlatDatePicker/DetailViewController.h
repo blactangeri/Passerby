@@ -8,8 +8,6 @@
 @property (nonnull, copy) void (^dismissBlock)(void);
 @property (nonatomic) BOOL isNew;
 
-- (instancetype)initForNewEntry:(BOOL)isNew;
-
 extern CGFloat w;
 extern CGFloat h;
 @end

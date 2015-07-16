@@ -36,6 +36,7 @@
         _desc = [aDecoder decodeObjectForKey:@"desc"];
         _dateToFulfill = [aDecoder decodeObjectForKey:@"dtf"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dc"];
+        _dateCompleted = [aDecoder decodeObjectForKey:@"dateCompleted"];
     }
     
     return self;
@@ -47,6 +48,7 @@
     [aCoder encodeObject:self.desc forKey:@"desc"];
     [aCoder encodeObject:self.dateToFulfill forKey:@"dtf"];
     [aCoder encodeObject:self.dateCreated forKey:@"dc"];
+    [aCoder encodeObject:self.dateCompleted forKey:@"dateCompleted"];
 }
 
 @end

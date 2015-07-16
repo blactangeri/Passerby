@@ -26,13 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setupBackground];
-    
-}
-
-- (void)setupBackground
-{
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -40,13 +33,22 @@
         [self.sidebarButton setAction: @selector( revealToggle: )];
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+    [self setupBackground];
+    
+}
+
+- (void)setupBackground
+{
+    
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:34.0 / 255.0 green:34.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
+    
+    
    
 }
 
@@ -62,26 +64,32 @@
 
 - (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     
     NSArray *entries = [[ListEntries sharedEntries] allEntries];
     ListEntry *entry = entries[indexPath.row];
     
     cell.textLabel.text = entry.title;
-    cell.detailTextLabel.text = entry.dateToFulfill;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setLocale:[NSLocale currentLocale]];
+    cell.detailTextLabel.text = [formatter stringFromDate:entry.dateToFulfill];
     
     return cell;
 }
 
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    DetailViewController *dvc = [[DetailViewController alloc] initForNewEntry:NO];
     NSArray *entries = [[ListEntries sharedEntries] allEntries];
     ListEntry *selectedEntry = [entries objectAtIndex:indexPath.row];
+    DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.entry = selectedEntry;
-    [self.navigationController pushViewController:dvc animated:YES];
+    dvc.isNew = NO;
+    
+    
 }
 
 - (void)tableView:(nonnull UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -91,7 +99,7 @@
         ListEntry *entry = [entries objectAtIndex:indexPath.row];
         [[ListEntries sharedEntries] removeEntry:entry];
         
-        [tableView deleteRowsAtIndexPaths:indexPath withRowAnimation:YES];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
     }
 }
 
@@ -100,6 +108,19 @@
     
 }
 
+- (void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id)sender
+{
+    if ([segue.identifier isEqualToString:@"createNew2"]) {
+        
+    }
+}
+
+- (void)tableView:(nonnull UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
+    cell.textLabel.font = [UIFont fontWithName:@"din-light" size:20];
+    cell.textLabel.textColor = [UIColor lightGrayColor];
+}
 
 
 

@@ -124,10 +124,7 @@ UIColor *light;
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.row == 1) {
-        if ([[ListEntries sharedEntries] allEntries].count == 0) {
-            [self performSegueWithIdentifier:@"gotoDetail" sender:self];
-        }
-        else [self performSegueWithIdentifier:@"gotoPhoto" sender:self];
+        [self performSegueWithIdentifier:@"gotoPhoto" sender:self];
     }
 }
 
@@ -135,15 +132,11 @@ UIColor *light;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"gotoDetail"]) {
-        ListEntry *newEntry = [[ListEntries sharedEntries] createEntry];
+    if ([segue.identifier isEqualToString:@"gotoPhoto"]) {
         
         UINavigationController *nav = segue.destinationViewController;
-        DetailViewController *dvc = (DetailViewController *)[nav.viewControllers firstObject];
-        dvc.isNew = YES;
-        dvc.entry = newEntry;
+        
     }
-    
 }
 
 
