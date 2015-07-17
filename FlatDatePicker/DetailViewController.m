@@ -5,7 +5,6 @@
 #import "UITextView+Placeholder.h"
 #import "SSFlatDatePicker.h"
 
-
 #define offsetForKeyboard 80.0
 
 @interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate,
@@ -17,7 +16,7 @@
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
-
+@property (nonatomic, weak) NSString *dtc;
 @end
 
 CGFloat w;
@@ -35,7 +34,7 @@ CGFloat h;
     [self setupTextField];
     [self setupTextView];
     [self setupDeadlineButton];
-    [self setupSaveButton];
+    if (_isNew) [self setupSaveButton];
 }
 
 
@@ -73,12 +72,7 @@ CGFloat h;
     if (!_isNew) {
         self.titleField.text = _entry.title;
         self.descField.text = _entry.desc;
-        static NSDateFormatter *df;
-        if (!df) {
-            df = [[NSDateFormatter alloc] init];
-            df.dateStyle = NSDateFormatterMediumStyle;
-        }
-        self.dateLabel.titleLabel.text = [df stringFromDate:_entry.dateToFulfill];
+        self.dateLabel.titleLabel.text = _entry.dateToFulfill;
     }
 }
 
@@ -94,12 +88,12 @@ CGFloat h;
     if (!_isNew) {
         _entry.title = self.titleField.text;
         _entry.desc = self.descField.text;
-        _entry.dateToFulfill = [_dp date];
     }
 }
 
 - (void)setupBackground
 {
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -121,17 +115,14 @@ CGFloat h;
         self.navigationItem.leftBarButtonItem = left;
     }
     else {
-        UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [userButton setImage:userImg forState:UIControlStateNormal];
-        [userButton setFrame:CGRectMake(0, 0, 18, 18)];
+        [userButton setFrame:CGRectMake(0, 0, 20, 20)];
         userButton.tintColor = [UIColor lightGrayColor];
-        [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
-        self.navigationItem.leftBarButtonItem = left;
+        [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+        self.navigationItem.rightBarButtonItem = right;
     }
-
-    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    //[self.view addGestureRecognizer:tap];
 }
 
 - (void)dismissKeyboard
@@ -142,29 +133,37 @@ CGFloat h;
 
 - (void)setupTextField
 {
-    _titleField.frame = CGRectMake(0, h * 0.3, w, 44);
+    _titleField.frame = CGRectMake(0, h * 0.2, w, 44);
     
     _titleField.delegate = self;
-    _titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tap to set a new goal"
-                                                                        attributes:@{NSForegroundColorAttributeName:[UIColor grayColor],
-                                                                                     NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22]
-                                                                                     }];
     [_titleField setFont:[UIFont fontWithName:@"din-light" size:22]];
     [_titleField setTextColor:[UIColor lightGrayColor]];
     [_titleField setTextAlignment:NSTextAlignmentCenter];
+    
+    if (_isNew) {
+        _titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Tap to set a new goal" attributes:@{NSForegroundColorAttributeName:[UIColor grayColor], NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22]}];
+    }
+    else {
+        _titleField.text = _entry.title;
+    }
 }
 
 - (void)setupTextView
 {
-    _descField.frame = CGRectMake(w * 0.2 / 2.0, (h * 0.3 + 44) * 1.1, w * 0.8, h * 0.2);
+    _descField.frame = CGRectMake(w * 0.2 / 2.0, (_titleField.frame.origin.y + _titleField.frame.size.height + 22) * 1, w * 0.8, h * 0.2);
     _descField.delegate = self;
     [_descField setFont:[UIFont fontWithName:@"din-light" size:18]];
     [_descField setTextColor:[UIColor lightGrayColor]];
     [_descField setTextAlignment:NSTextAlignmentJustified];
-    _descField.text = @"";
-    
-    _descField.placeholder = @"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
-    _descField.placeholderColor = [UIColor grayColor];
+    [_descField setText:@""];
+
+    if (_isNew) {
+        _descField.placeholder = @"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
+        _descField.placeholderColor = [UIColor grayColor];
+    }
+    else {
+        _descField.text = _entry.desc;
+    }
 }
 
 - (void)setupDeadlineButton
@@ -172,11 +171,14 @@ CGFloat h;
     CGFloat lw = w / 2.0;
     CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
     _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
-    [_dateLabel setTitle:@"Set a deadline" forState:UIControlStateNormal];
     _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:22];
     [_dateLabel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
     _dateLabel.layer.borderWidth = 0;
+    
+    if (!_isNew) _dateLabel.titleLabel.text = _entry.dateToFulfill;
+    else [_dateLabel setTitle:@"Set a deadline" forState:UIControlStateNormal];
+
 }
 
 - (IBAction)setDeadline:(id)sender
@@ -184,7 +186,6 @@ CGFloat h;
     [[SSFlatDatePicker appearance] setFont:[UIFont fontWithName:@"din-light" size:24]];
     [[SSFlatDatePicker appearance] setGradientColor:[UIColor darkGrayColor]];
     _dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
-    [_dp addTarget:self action:@selector(getDeadline) forControlEvents:UIControlEventValueChanged];
     
     UIViewController *dateVC = [[UIViewController alloc] init];
     dateVC.view = _dp;
@@ -198,8 +199,6 @@ CGFloat h;
     _ppc.sourceRect = [sender frame];
     destNav.navigationBarHidden = YES;
     [self presentViewController:destNav animated:YES completion:nil];
-    
-    
 }
 
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(nonnull UIPresentationController *)controller
@@ -215,6 +214,7 @@ CGFloat h;
     NSString *dateString = [formatter stringFromDate:[_dp date]];
     
     self.dateLabel.titleLabel.text = dateString;
+    _dtc = dateString;
 }
 
 - (void)setupSaveButton
@@ -261,10 +261,10 @@ CGFloat h;
     self.entry = [[ListEntries sharedEntries] createEntry];
     self.entry.title = _titleField.text;
     self.entry.desc = _descField.text;
-    self.entry.dateToFulfill = [_dp date];
+    self.entry.dateToFulfill = _dtc;
     self.entry.dateCreated = [NSDate date];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
 - (void)changeBgColor
@@ -274,7 +274,14 @@ CGFloat h;
 
 - (void)cancelEditting
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+- (void)completeTask
+{
+    self.entry.dateCompleted = [NSDate date];
+    self.isCompleted = YES;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

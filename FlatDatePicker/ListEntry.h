@@ -15,8 +15,8 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *desc;
 @property (nonatomic, strong) NSDate *dateCreated;
-@property (nonatomic, strong) NSDate *dateToFulfill;
+@property (nonatomic, strong) NSString *dateToFulfill;
 @property (nonatomic, copy) NSString *entryKey;
-@property (nonatomic, strong) NSDate *dateCompleted;
+@property (nonatomic, strong) NSString *dateCompleted;
 
 @end

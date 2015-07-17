@@ -132,11 +132,7 @@ UIColor *light;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"gotoPhoto"]) {
-        
-        UINavigationController *nav = segue.destinationViewController;
-        
-    }
+    
 }
 
 
