@@ -12,10 +12,10 @@
 @interface ListEntries : NSObject
 
 @property (nonatomic, readonly) NSArray *allEntries;
-
+@property (nonatomic, readonly) NSArray *allEntries2;
 + (instancetype)sharedEntries;
 - (ListEntry *)createEntry;
 - (void)removeEntry:(ListEntry *)entry;
 - (BOOL)saveChanges;
-
+- (void)moveToCompleted:(ListEntry *)entry;
 @end

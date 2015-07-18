@@ -218,9 +218,9 @@ CGFloat h;
 
 - (void)setupDeadlineButton
 {
-    CGFloat lw = w / 2.0;
+    CGFloat lw = w;
     CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
-    _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
+    _dateLabel.frame = CGRectMake(0, y, lw, 44);
     _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
     [_dateLabel setTitleColor:[UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -333,10 +333,30 @@ CGFloat h;
 
 - (void)completeTask
 {
-    self.entry.dateCompleted = [NSDate date];
-    self.isCompleted = YES;
-    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    //[self.navigationController popViewControllerAnimated:YES];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Goal Completed?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:
+                             ^(UIAlertAction *action){
+                                 
+                                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                                 [formatter setLocale:[NSLocale currentLocale]];
+                                 [formatter setDateStyle:NSDateFormatterMediumStyle];
+                                 NSString *date = [formatter stringFromDate:[NSDate date]];
+                                 [_dateLabel setTitle:[NSString stringWithFormat:@"GOAL COMPLETED ON %@", date] forState:UIControlStateNormal];
+                                 [_dateLabel setEnabled:NO];
+                                 
+                                 self.entry.dateCompleted = [NSDate date];
+                                 [[ListEntries sharedEntries] moveToCompleted:self.entry];
+                                 
+                             }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    [alert addAction:OK];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
