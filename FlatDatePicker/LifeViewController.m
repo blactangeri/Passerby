@@ -1,10 +1,14 @@
 
 #import "LifeViewController.h"
 #import "SWRevealViewController.h"
+#import "ListEntries.h"
+#import "ListEntry.h"
 
-@interface LifeViewController ()
+@interface LifeViewController () <UIPopoverPresentationControllerDelegate>
 
-@property (nonatomic, weak) NSDate *dob;
+@property (nonatomic) NSMutableArray *events;
+@property (nonatomic) NSMutableArray *months;
+
 @end
 
 int month;
@@ -37,8 +41,40 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
-    UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
-    [self.view addGestureRecognizer:touchRecognizer];
+    UIButton *btn = [[UIButton alloc] init];
+    UIImage *undoImg = [[UIImage imageNamed:@"undo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [btn setImage:undoImg forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(18, 18, 23, 23)];
+    btn.tintColor = [UIColor lightGrayColor];
+    [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+
+    
+    //UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
+    //[self.view addGestureRecognizer:touchRecognizer];
+    
+    _events = [[NSMutableArray alloc] init];
+    _months = [NSMutableArray array];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadEvents];
+}
+
+- (void)loadEvents
+{
+    if ([[ListEntries sharedEntries] allEntries].count > 0) {
+        for (ListEntry *entry in [[ListEntries sharedEntries] allEntries]) {
+            [_events addObject:entry];
+            NSDate *date = entry.dateToFulfill;
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            NSCalendarUnit unit = NSCalendarUnitMonth;
+            NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:date options:0];
+            NSInteger month = [comp month] - 1;
+            [_months addObject:[NSNumber numberWithInteger:month]];
+        }
+    }
 }
 
 - (void)goBack
@@ -103,9 +139,48 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     else cell.backgroundColor = [UIColor grayColor];
     
+    if (_months.count > 0) {
+        NSNumber *number = [NSNumber numberWithInteger:indexPath.row];
+        if ([_months containsObject:number]) {
+            cell.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0];
+        }
+    }
+    
     return cell;
 }
 
+- (void)collectionView:(nonnull UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (_events.count > 0) {
+        NSNumber *number = [NSNumber numberWithInteger:indexPath.row];
+        if ([_months containsObject:number]) {
+            int i = [_months indexOfObject:number];
+            ListEntry *entry = [_events objectAtIndex:i];
+            NSString *descString = entry.desc;
+            
+            UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
+            [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
+            [view setFont:[UIFont fontWithName:@"din-light" size:15]];
+            [view setTextColor:[UIColor lightGrayColor]];
+            [view setTextAlignment:NSTextAlignmentJustified];
+            [view setText:descString];
+            
+            UIViewController *pop = [[UIViewController alloc] init];
+            pop.view = view;
+            UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:pop];
+            destNav.modalPresentationStyle = UIModalPresentationPopover;
+            pop.preferredContentSize = CGSizeMake(150, 30);
+            UIPopoverPresentationController *ppc;
+            ppc = destNav.popoverPresentationController;
+            ppc.delegate = self;
+            ppc.sourceView = self.view;
+            ppc.sourceRect = [collectionView layoutAttributesForItemAtIndexPath:indexPath].frame;
+            [ppc setBackgroundColor:pop.view.backgroundColor];
+            destNav.navigationBarHidden = YES;
+            [self presentViewController:destNav animated:YES completion:nil];
+        }
+    }
+}
 
 - (CGSize)collectionView:(nonnull UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
@@ -136,4 +211,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     return CGSizeMake(screenWidth, screenHeight - screenWidth);
 }
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(nonnull UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
+
 @end

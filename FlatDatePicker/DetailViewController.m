@@ -246,6 +246,9 @@ CGFloat h;
     _ppc.delegate = self;
     _ppc.sourceView = self.view;
     _ppc.sourceRect = [sender frame];
+    [_ppc setPermittedArrowDirections:UIPopoverArrowDirectionDown];
+    [_ppc setBackgroundColor:[UIColor darkGrayColor]];
+    
     destNav.navigationBarHidden = YES;
     [self presentViewController:destNav animated:YES completion:nil];
 }
@@ -364,7 +367,7 @@ CGFloat h;
     
     CGRect rect = self.view.frame;
     
-    CGFloat offset = h * 0.15;
+    CGFloat offset = h * 0.15 - 10;
     
     if (move) {
         rect.origin.y -= offset;
@@ -381,12 +384,6 @@ CGFloat h;
 }
 
 
-
-- (void)complete
-{
-    [[ListEntries sharedEntries] removeEntry:self.entry];
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
-}
 
 /*
 #pragma mark - Navigation

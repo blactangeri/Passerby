@@ -16,6 +16,8 @@
 		1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B26B1B4ACD8200196E3C /* LifeViewController.m */; };
 		1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A477E5E1B53EE3800D2D6BD /* cancel.png */; };
 		1A68D7861B52D29C008DAB04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */; };
+		1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6031B5A80BE0031E6D0 /* days.png */; };
+		1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6051B5A964F0031E6D0 /* undo.png */; };
 		1A97B04C1B51C9C3006FC7C7 /* ListEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */; };
 		1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A97B04E1B51CC38006FC7C7 /* ListEntry.m */; };
 		1AB3BDEA1B4F7C99007279FE /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB3BDE91B4F7C99007279FE /* user.png */; };
@@ -70,6 +72,8 @@
 		1A45B26B1B4ACD8200196E3C /* LifeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeViewController.m; sourceTree = "<group>"; };
 		1A477E5E1B53EE3800D2D6BD /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		1A68D7851B52D29C008DAB04 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1A8DE6031B5A80BE0031E6D0 /* days.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = days.png; sourceTree = "<group>"; };
+		1A8DE6051B5A964F0031E6D0 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		1A97B04A1B51C9C3006FC7C7 /* ListEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntries.h; sourceTree = "<group>"; };
 		1A97B04B1B51C9C3006FC7C7 /* ListEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListEntries.m; sourceTree = "<group>"; };
 		1A97B04D1B51CC38006FC7C7 /* ListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntry.h; sourceTree = "<group>"; };
@@ -183,7 +187,9 @@
 				1ADB9BD41B461DC3008C96E5 /* menu@2x.png */,
 				1AB3BDE91B4F7C99007279FE /* user.png */,
 				1A477E5E1B53EE3800D2D6BD /* cancel.png */,
+				1A8DE6031B5A80BE0031E6D0 /* days.png */,
 				1A07D2761B59A51000A80B12 /* back.png */,
+				1A8DE6051B5A964F0031E6D0 /* undo.png */,
 				1A07D2781B59B6EA00A80B12 /* save.png */,
 			);
 			name = imgs;
@@ -384,10 +390,12 @@
 				1AF48CE51B4629A8005A158A /* Main.storyboard in Resources */,
 				1AD8B3AA1B50D3A9003D0E47 /* clock_face.png in Resources */,
 				1AB3BDEA1B4F7C99007279FE /* user.png in Resources */,
+				1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */,
 				1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */,
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
 				6B2C83771751107700BC04FB /* ViewController.xib in Resources */,
 				1ADB9BDF1B461DC3008C96E5 /* menu@2x.png in Resources */,
+				1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */,
 				1AFD53271B575F8600D4D7FF /* check.png in Resources */,
 				6BB019971751257B00643F6D /* FlatDatePicker-Icon-Close.png in Resources */,
 				6BB019981751257B00643F6D /* FlatDatePicker-Icon-Check.png in Resources */,

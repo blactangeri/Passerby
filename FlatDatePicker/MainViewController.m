@@ -157,6 +157,7 @@ double age;
         NSDateComponents *comp = [sysCalendar components:unit fromDate:_dob toDate:[NSDate date] options:NSCalendarWrapComponents];
         
         [lvc setMonth:[comp month]];
+        [lvc setDob:_dob];
     }
 }
 

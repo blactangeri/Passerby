@@ -37,10 +37,10 @@ UIColor *light;
     menuItems = @[@"my days", @"passer's list", @"reset birthday"];
 
     UIImage *star = [UIImage imageNamed:@"star.png"];
-    UIImage *clock = [UIImage imageNamed:@"clock.png"];
+    UIImage *days = [UIImage imageNamed:@"days.png"];
     UIImage *settings = [UIImage imageNamed:@"settings.png"];
     
-    cellImages = @[star, clock, settings];
+    cellImages = @[days, star, settings];
     
     [self setHeader];
 }

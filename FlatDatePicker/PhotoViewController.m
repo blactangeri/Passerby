@@ -163,12 +163,12 @@
     NSString *text = @"GET STARTED BY CREATING A NEW ITEM";
     NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:15], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     
-    return [[NSAttributedString alloc] initWithString:text attributes:dict];}
+    return [[NSAttributedString alloc] initWithString:text.lowercaseString attributes:dict];}
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"GET STARTED BY CREATING A NEW ITEM";
-    NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:15], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
+    NSString *text = @"EMPTY LIST";
+    NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:24], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:dict];
 }
