@@ -61,6 +61,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
+    [self.navigationItem setTitle:@"PASSER'S LIST"];
+    
     [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
 }
 
@@ -82,8 +84,12 @@
     NSArray *entries = [[ListEntries sharedEntries] allEntries];
     ListEntry *entry = entries[indexPath.row];
     
-    cell.textLabel.text = entry.title;
-    cell.detailTextLabel.text = entry.dateToFulfill;
+    cell.textLabel.text = entry.desc;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setLocale:[NSLocale currentLocale]];
+    NSString *dateString = [formatter stringFromDate:entry.dateToFulfill];
+    cell.detailTextLabel.text = dateString;
     
     return cell;
 }
@@ -110,17 +116,17 @@
 
 - (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return 65;
+    return 70;
 }
 
 - (void)tableView:(nonnull UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
-    cell.textLabel.font = [UIFont fontWithName:@"din-light" size:20];
-    cell.textLabel.textColor = [UIColor lightGrayColor];
+    cell.textLabel.font = [UIFont fontWithName:@"din-light" size:22];
+    cell.textLabel.textColor = [UIColor whiteColor];
     
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:16];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
 }
 
 - (IBAction)createNew:(id)sender

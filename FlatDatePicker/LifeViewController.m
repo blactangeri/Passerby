@@ -43,7 +43,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)goBack
 {
-    [self performSegueWithIdentifier:@"gotoMain" sender:self];
+    [self.presentingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setMonth:(int)v

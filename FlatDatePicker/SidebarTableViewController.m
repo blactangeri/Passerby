@@ -34,7 +34,7 @@ UIColor *light;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.backgroundColor = [UIColor blackColor];
     
-    menuItems = @[@"today", @"bucket list", @"reset birthday"];
+    menuItems = @[@"my days", @"passer's list", @"reset birthday"];
 
     UIImage *star = [UIImage imageNamed:@"star.png"];
     UIImage *clock = [UIImage imageNamed:@"clock.png"];

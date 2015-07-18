@@ -5,7 +5,7 @@
 #import "UITextView+Placeholder.h"
 #import "SSFlatDatePicker.h"
 
-#define offsetForKeyboard 80.0
+//#define offsetForKeyboard 80.0
 
 @interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate,
                                     UIPopoverPresentationControllerDelegate, UIViewControllerRestoration, UIGestureRecognizerDelegate>
@@ -16,7 +16,8 @@
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
-@property (nonatomic, weak) NSString *dtc;
+@property (nonatomic, strong) NSDate *dtc;
+@property (nonatomic, strong) UILabel *dateLbl;
 @end
 
 CGFloat w;
@@ -31,10 +32,10 @@ CGFloat h;
      h = [[UIScreen mainScreen] bounds].size.height;
     
     [self setupBackground];
-    [self setupTextField];
+    [self setupDatelabel];
+    //[self setupTextField];
     [self setupTextView];
     [self setupDeadlineButton];
-    if (_isNew) [self setupSaveButton];
 }
 
 
@@ -70,9 +71,14 @@ CGFloat h;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:[UITextView class]];
     
     if (!_isNew) {
-        self.titleField.text = _entry.title;
+        //self.titleField.text = _entry.title;
         self.descField.text = _entry.desc;
-        self.dateLabel.titleLabel.text = _entry.dateToFulfill;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [formatter setLocale:[NSLocale currentLocale]];
+        NSString *dateString = [formatter stringFromDate:_entry.dateToFulfill];
+        self.dateLabel.titleLabel.text = dateString;
+        self.dtc = _entry.dateToFulfill;
     }
 }
 
@@ -86,14 +92,14 @@ CGFloat h;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:[UITextView class]];
     
     if (!_isNew) {
-        _entry.title = self.titleField.text;
+        //_entry.title = self.titleField.text;
         _entry.desc = self.descField.text;
+        _entry.dateToFulfill = self.dtc;
     }
 }
 
 - (void)setupBackground
 {
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -113,6 +119,15 @@ CGFloat h;
         [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
         self.navigationItem.leftBarButtonItem = left;
+        
+        UIButton *saveButton = [[UIButton alloc] init];
+        UIImage *saveImg = [[UIImage imageNamed:@"save.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [saveButton setImage:saveImg forState:UIControlStateNormal];
+        [saveButton setFrame:CGRectMake(0, 0, 18, 18)];
+        saveButton.tintColor = [UIColor lightGrayColor];
+        [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+        self.navigationItem.rightBarButtonItem = right;
     }
     else {
         UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -122,15 +137,30 @@ CGFloat h;
         [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
         self.navigationItem.rightBarButtonItem = right;
+        
+        UIImage *backImg = [[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIButton *backButton = [[UIButton alloc] init];
+        [backButton setImage:backImg forState:UIControlStateNormal];
+        [backButton setFrame:CGRectMake(0, 0, 20, 20)];
+        backButton.tintColor = [UIColor lightGrayColor];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     }
+    
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dismissKeyboard
 {
-    [_titleField endEditing:YES];
+    //[_titleField endEditing:YES];
     [_descField endEditing:YES];
 }
 
+/*
 - (void)setupTextField
 {
     _titleField.frame = CGRectMake(0, h * 0.2, w, 44);
@@ -147,22 +177,46 @@ CGFloat h;
         _titleField.text = _entry.title;
     }
 }
+ */
+
+- (void)setupDatelabel
+{
+    self.dateLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, h * 0.1 - 12, w, 24)];
+    self.dateLbl.textColor = [UIColor grayColor];
+    self.dateLbl.textAlignment = NSTextAlignmentCenter;
+    self.dateLbl.font = [UIFont fontWithName:@"din-light" size:24];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    if (_isNew) {
+        
+        [self.dateLbl setText:[formatter stringFromDate:[NSDate date]]];
+    }
+    else {
+        [self.dateLbl setText:[formatter stringFromDate:_entry.dateToFulfill]];
+    }
+    [self.view addSubview:self.dateLbl];
+
+}
 
 - (void)setupTextView
 {
-    _descField.frame = CGRectMake(w * 0.2 / 2.0, (_titleField.frame.origin.y + _titleField.frame.size.height + 22) * 1, w * 0.8, h * 0.2);
+    [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h * 0.33)];
     _descField.delegate = self;
-    [_descField setFont:[UIFont fontWithName:@"din-light" size:18]];
+    [_descField setFont:[UIFont fontWithName:@"din-light" size:20]];
     [_descField setTextColor:[UIColor lightGrayColor]];
     [_descField setTextAlignment:NSTextAlignmentJustified];
     [_descField setText:@""];
 
     if (_isNew) {
-        _descField.placeholder = @"Add description here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
+        _descField.placeholder = @"Set a new goal here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
         _descField.placeholderColor = [UIColor grayColor];
     }
     else {
         _descField.text = _entry.desc;
+        //[_descField sizeToFit];
     }
 }
 
@@ -171,14 +225,13 @@ CGFloat h;
     CGFloat lw = w / 2.0;
     CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
     _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
-    _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:22];
+    _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
     [_dateLabel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
     _dateLabel.layer.borderWidth = 0;
-    
-    if (!_isNew) _dateLabel.titleLabel.text = _entry.dateToFulfill;
-    else [_dateLabel setTitle:@"Set a deadline" forState:UIControlStateNormal];
 
+    if (_isNew)[_dateLabel setTitle:@"SET A DEADLINE" forState:UIControlStateNormal];
+    else [_dateLabel setTitle:@"EDIT DEADLINE" forState:UIControlStateNormal];
 }
 
 - (IBAction)setDeadline:(id)sender
@@ -213,10 +266,11 @@ CGFloat h;
     [formatter setLocale:[NSLocale currentLocale]];
     NSString *dateString = [formatter stringFromDate:[_dp date]];
     
-    self.dateLabel.titleLabel.text = dateString;
-    _dtc = dateString;
+    [_dateLbl setText:dateString];
+    _dtc = [_dp date];
 }
 
+/*
 - (void)setupSaveButton
 {
     CGFloat bw = 200;
@@ -234,13 +288,14 @@ CGFloat h;
     [_saveButton addTarget:self action:@selector(changeBgColor) forControlEvents:UIControlEventTouchDown];
     [_saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
 }
+ */
 
 - (void)save
 {
-    [_saveButton setBackgroundColor:[UIColor darkGrayColor]];
+    //[_saveButton setBackgroundColor:[UIColor darkGrayColor]];
     
-    if (!_titleField.text || _titleField.text.length == 0) {
-        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Empty title" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    if (!_descField.text || _descField.text.length == 0) {
+        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a goal" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [toast show];
         int duration = 0.7;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -281,7 +336,8 @@ CGFloat h;
 {
     self.entry.dateCompleted = [NSDate date];
     self.isCompleted = YES;
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -311,13 +367,16 @@ CGFloat h;
     [UIView setAnimationDuration:0.3];
     
     CGRect rect = self.view.frame;
+    
+    CGFloat offset = h * 0.15;
+    
     if (move) {
-        rect.origin.y -= offsetForKeyboard;
-        rect.size.height += offsetForKeyboard;
+        rect.origin.y -= offset;
+        rect.size.height += offset;
     }
     else {
-        rect.origin.y += offsetForKeyboard;
-        rect.size.height -= offsetForKeyboard;
+        rect.origin.y += offset;
+        rect.size.height -= offset;
     }
     
     self.view.frame = rect;
