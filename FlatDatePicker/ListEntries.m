@@ -73,10 +73,7 @@
 
 - (void)removeEntry:(ListEntry *)entry
 {
-    NSString *key = entry.entryKey;
-    if (key) {
-        [self.privateEntries removeObjectIdenticalTo:entry];
-    }
+    [self.privateEntries removeObjectIdenticalTo:entry];
 }
 
 @end

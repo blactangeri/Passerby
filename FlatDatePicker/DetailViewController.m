@@ -106,7 +106,7 @@ CGFloat h;
     self.navigationController.navigationBar.translucent = YES;
     
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:18],
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:24],
                                                                       NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
 
     UIButton *userButton = [[UIButton alloc] init];
@@ -181,21 +181,17 @@ CGFloat h;
 
 - (void)setupDatelabel
 {
-    self.dateLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, h * 0.1 - 12, w, 24)];
-    self.dateLbl.textColor = [UIColor grayColor];
-    self.dateLbl.textAlignment = NSTextAlignmentCenter;
-    self.dateLbl.font = [UIFont fontWithName:@"din-light" size:24];
-
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     
     if (_isNew) {
         
-        [self.dateLbl setText:[formatter stringFromDate:[NSDate date]]];
+        [self.navigationItem setTitle:[formatter stringFromDate:[NSDate date]]];
     }
     else {
-        [self.dateLbl setText:[formatter stringFromDate:_entry.dateToFulfill]];
+        [self.navigationItem setTitle:[formatter stringFromDate:_entry.dateToFulfill]];
     }
     [self.view addSubview:self.dateLbl];
 
@@ -226,7 +222,7 @@ CGFloat h;
     CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
     _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
     _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
-    [_dateLabel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [_dateLabel setTitleColor:[UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
     _dateLabel.layer.borderWidth = 0;
 
@@ -266,7 +262,7 @@ CGFloat h;
     [formatter setLocale:[NSLocale currentLocale]];
     NSString *dateString = [formatter stringFromDate:[_dp date]];
     
-    [_dateLbl setText:dateString];
+    [self.navigationItem setTitle:dateString];
     _dtc = [_dp date];
 }
 

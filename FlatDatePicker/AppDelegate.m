@@ -15,10 +15,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22],
-                                                           NSForegroundColorAttributeName: [UIColor grayColor]}];
-    UIBarButtonItem *bbi = [UIBarButtonItem appearance];
-    [bbi setTintColor:[UIColor grayColor]];
     
     //UIImage *backButtonImage = [[UIImage imageNamed:@"back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
