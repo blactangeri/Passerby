@@ -214,7 +214,7 @@ CGFloat h;
     [_descField setText:@""];
 
     if (_isNew) {
-        _descField.placeholder = @"Set a new goal here. Life is short. Make each day count. Do something that makes your life a story worth telling.";
+        _descField.placeholder = @"Set the next big thing to do in your life. Your time is limited. Make each day count. Do something that makes your life a story worth telling.";
         _descField.placeholderColor = [UIColor grayColor];
     }
     else {

@@ -102,7 +102,7 @@ static NSString * const reuseIdentifier = @"Cell";
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont fontWithName:@"din-light" size:24];
-        label.text = [NSString stringWithFormat:@"Your time is limited\n\n%d/900", month];
+        label.text = [NSString stringWithFormat:@"YOUR TIME IS LIMITED\n\n%d/900", month];
         header.backgroundColor = [UIColor blackColor];
         [header addSubview:label];
         return  header;
