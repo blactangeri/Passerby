@@ -99,11 +99,16 @@ static NSString * const reuseIdentifier = @"Cell";
         
         UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
         [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
-        [view setFont:[UIFont fontWithName:@"din-light" size:18]];
+        [view setFont:[UIFont fontWithName:@"din-light" size:17]];
         [view setTextColor:[UIColor whiteColor]];
         [view setTextAlignment:NSTextAlignmentJustified];
-        [view setText:descString];
         
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        NSString *dateString = [formatter stringFromDate:entry.dateToFulfill];
+        [view setText:[NSString stringWithFormat:@"%@\n%@", dateString, descString]];
+
         UIViewController *pop = [[UIViewController alloc] init];
         pop.view = view;
         UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:pop];
@@ -140,7 +145,7 @@ static NSString * const reuseIdentifier = @"Cell";
         label.numberOfLines = 0;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
-        label.font = [UIFont fontWithName:@"din-light" size:24];
+        label.font = [UIFont fontWithName:@"din-light" size:23];
         label.text = [NSString stringWithFormat:@"YOUR TIME IS LIMITED\n\n%d/900", month];
         header.backgroundColor = [UIColor blackColor];
         [header addSubview:label];
@@ -196,13 +201,17 @@ static NSString * const reuseIdentifier = @"Cell";
             int i = [_months indexOfObject:number];
             ListEntry *entry = [_events objectAtIndex:i];
             NSString *descString = entry.desc;
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setLocale:[NSLocale currentLocale]];
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            NSString *dateString = [formatter stringFromDate:entry.dateToFulfill];
             
             UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
             [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
             [view setFont:[UIFont fontWithName:@"din-light" size:15]];
             [view setTextColor:[UIColor lightGrayColor]];
             [view setTextAlignment:NSTextAlignmentJustified];
-            [view setText:descString];
+            [view setText:[NSString stringWithFormat:@"%@\n%@", dateString, descString]];
             
             UIViewController *pop = [[UIViewController alloc] init];
             pop.view = view;

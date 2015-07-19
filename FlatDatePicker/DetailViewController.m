@@ -206,7 +206,7 @@ CGFloat h;
 
 - (void)setupTextView
 {
-    [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h * 0.33)];
+    [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h * 0.38)];
     _descField.delegate = self;
     [_descField setFont:[UIFont fontWithName:@"din-light" size:20]];
     [_descField setTextColor:[UIColor lightGrayColor]];
@@ -403,7 +403,7 @@ CGFloat h;
     
     CGRect rect = self.view.frame;
     
-    CGFloat offset = h * 0.15 - 10;
+    CGFloat offset = h * 0.15 - 5;
     
     if (move) {
         rect.origin.y -= offset;
