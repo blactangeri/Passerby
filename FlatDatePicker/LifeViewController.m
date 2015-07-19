@@ -44,7 +44,7 @@ static NSString * const reuseIdentifier = @"Cell";
     UIButton *btn = [[UIButton alloc] init];
     UIImage *undoImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [btn setImage:undoImg forState:UIControlStateNormal];
-    [btn setFrame:CGRectMake(10, 10, 22, 22)];
+    [btn setFrame:CGRectMake(12, 12, 22, 22)];
     btn.tintColor = [UIColor lightGrayColor];
     [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
