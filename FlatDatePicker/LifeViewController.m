@@ -46,12 +46,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [btn setImage:undoImg forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(12, 12, 22, 22)];
     btn.tintColor = [UIColor lightGrayColor];
-    [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(gotoMain) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
 
     
-    //UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
-    //[self.view addGestureRecognizer:touchRecognizer];
+    UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEvent)];
+    [self.view addGestureRecognizer:touchRecognizer];
     
     _events = [[NSMutableArray alloc] init];
     _months = [NSMutableArray array];
@@ -77,10 +77,41 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-- (void)goBack
+- (void)gotoMain
 {
     [self.presentingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showEvent
+{
+    if (_events.count > 0) {
+        ListEntry *entry = [_events objectAtIndex:0];
+        NSString *descString = entry.desc;
+        
+        UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
+        [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
+        [view setFont:[UIFont fontWithName:@"din-light" size:15]];
+        [view setTextColor:[UIColor whiteColor]];
+        [view setTextAlignment:NSTextAlignmentJustified];
+        [view setText:descString];
+        
+        UIViewController *pop = [[UIViewController alloc] init];
+        pop.view = view;
+        UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:pop];
+        destNav.modalPresentationStyle = UIModalPresentationPopover;
+        pop.preferredContentSize = CGSizeMake(150, 30);
+        UIPopoverPresentationController *ppc;
+        ppc = destNav.popoverPresentationController;
+        ppc.delegate = self;
+        ppc.sourceView = self.view;
+        int row = [[_months objectAtIndex:0] intValue];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
+        ppc.sourceRect = [self.collectionView layoutAttributesForItemAtIndexPath:path].frame;
+        [ppc setBackgroundColor:pop.view.backgroundColor];
+        destNav.navigationBarHidden = YES;
+        [self presentViewController:destNav animated:YES completion:nil];
+    }
 }
 
 - (void)setMonth:(int)v

@@ -244,7 +244,7 @@ CGFloat h;
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [_dateLabel setEnabled:NO];
         _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
-        NSString *str = [NSString stringWithFormat:@"Goal ompleted on %@", [formatter stringFromDate:_entry.dateCompleted]];
+        NSString *str = [NSString stringWithFormat:@"Completed on %@", [formatter stringFromDate:_entry.dateCompleted]];
         [_dateLabel setTitle:str forState:UIControlStateDisabled];
     }
 }
@@ -357,7 +357,7 @@ CGFloat h;
                                  [formatter setDateStyle:NSDateFormatterMediumStyle];
                                  NSString *date = [formatter stringFromDate:[NSDate date]];
                                  _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
-                                 [_dateLabel setTitle:[NSString stringWithFormat:@"Goal completed on %@", date] forState:UIControlStateNormal];
+                                 [_dateLabel setTitle:[NSString stringWithFormat:@"Completed on %@", date] forState:UIControlStateNormal];
                                  [_dateLabel setEnabled:NO];
                                  
                                  self.entry.dateCompleted = [NSDate date];

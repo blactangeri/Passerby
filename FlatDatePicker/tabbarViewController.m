@@ -38,13 +38,13 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(24, 24), NO, 0.0);
-    [[UIImage imageNamed:@"todo.png"] drawInRect:CGRectMake(0, 0, 24, 24)];
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(25, 25), NO, 0.0);
+    [[UIImage imageNamed:@"todo.png"] drawInRect:CGRectMake(0, 0, 25, 25)];
     UIImage *todo = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(24, 24), NO, 0.0);
-    [[UIImage imageNamed:@"save.png"] drawInRect:CGRectMake(0, 0, 24, 24)];
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(25, 25), NO, 0.0);
+    [[UIImage imageNamed:@"save.png"] drawInRect:CGRectMake(0, 0, 25, 25)];
     UIImage *save = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
