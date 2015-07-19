@@ -46,6 +46,7 @@
     if ([[ListEntries sharedEntries] allEntries2].count > 0) {
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
+    else [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
@@ -205,6 +206,7 @@
                          ^(UIAlertAction *action){
                              [[ListEntries sharedEntries] removeAll];
                              [self.tableView reloadData];
+                             [self.navigationItem.rightBarButtonItem setEnabled:NO];
                          }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                              {
