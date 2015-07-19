@@ -118,7 +118,7 @@ CGFloat h;
     if (_isNew) {
         UIImage *userImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [userButton setImage:userImg forState:UIControlStateNormal];
-        [userButton setFrame:CGRectMake(0, 0, 18, 18)];
+        [userButton setFrame:CGRectMake(0, 0, 20, 20)];
         userButton.tintColor = [UIColor lightGrayColor];
         [userButton addTarget:self action:@selector(cancelEditting) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:userButton];
@@ -127,7 +127,7 @@ CGFloat h;
         UIButton *saveButton = [[UIButton alloc] init];
         UIImage *saveImg = [[UIImage imageNamed:@"save.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [saveButton setImage:saveImg forState:UIControlStateNormal];
-        [saveButton setFrame:CGRectMake(0, 0, 18, 18)];
+        [saveButton setFrame:CGRectMake(0, 0, 20, 20)];
         saveButton.tintColor = [UIColor lightGrayColor];
         [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
@@ -137,7 +137,7 @@ CGFloat h;
         if (!_isComplete) {
             UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [userButton setImage:userImg forState:UIControlStateNormal];
-            [userButton setFrame:CGRectMake(0, 0, 20, 20)];
+            [userButton setFrame:CGRectMake(0, 0, 22, 22)];
             userButton.tintColor = [UIColor lightGrayColor];
             [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
             UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
