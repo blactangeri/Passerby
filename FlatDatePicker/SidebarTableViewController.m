@@ -56,7 +56,9 @@ UIColor *light;
         }
     }
     
-    CGFloat ret = (self.tableView.bounds.size.height - h) / 2;
+    //CGFloat ret = (self.tableView.bounds.size.height - h) / 2.0;
+    CGFloat ret = ([[UIScreen mainScreen] bounds].size.height - h) / 2.0;
+
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, ret)];
     header.backgroundColor = [UIColor clearColor];
@@ -99,7 +101,7 @@ UIColor *light;
 
 - (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return 44.0;
+    return 50.0;
 }
 
 - (void)tableView:(nonnull UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath

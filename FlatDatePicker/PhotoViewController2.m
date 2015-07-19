@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 AppCoda. All rights reserved.
 //
 
-#import "PhotoViewController.h"
+#import "PhotoViewController2.h"
 #import "SWRevealViewController.h"
 #import "ListEntries.h"
 #import "ListEntry.h"
 #import "DetailViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 
-@interface PhotoViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface PhotoViewController2 () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *rbbi;
 
 @end
 
-@implementation PhotoViewController
+@implementation PhotoViewController2
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(nonnull NSArray *)identifierComponents coder:(nonnull NSCoder *)coder
 {
@@ -31,7 +31,7 @@
     
     [self.tableView reloadData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-
+    
     [self setupBackground];
     
     self.tableView.emptyDataSetDelegate = self;
@@ -39,9 +39,14 @@
     self.tableView.tableFooterView = [UIView new];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.tableView reloadData];
+    if ([[ListEntries sharedEntries] allEntries2].count > 0) {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    }
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
@@ -59,16 +64,25 @@
     }
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    //self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    
+    UIButton *delBtn = [[UIButton alloc] init];
+    UIImage *delImg = [[UIImage imageNamed:@"delete.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [delBtn setImage:delImg forState:UIControlStateNormal];
+    [delBtn setFrame:CGRectMake(0, 0, 25, 25)];
+    delBtn.tintColor = [UIColor lightGrayColor];
+    [delBtn addTarget:self action:@selector(clearAll) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:delBtn];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    if ([[ListEntries sharedEntries] allEntries2].count == 0) {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
     
     //[self.navigationItem setTitle:@"PASSER'S LIST"];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    self.navigationController.navigationBar.translucent = NO;
     
     [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
     
@@ -81,7 +95,7 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[ListEntries sharedEntries] allEntries].count;
+    return [[ListEntries sharedEntries] allEntries2].count;
 }
 
 - (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -89,14 +103,14 @@
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     
-    NSArray *entries = [[ListEntries sharedEntries] allEntries];
+    NSArray *entries = [[ListEntries sharedEntries] allEntries2];
     ListEntry *entry = entries[indexPath.row];
     
     cell.textLabel.text = entry.desc;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setLocale:[NSLocale currentLocale]];
-    NSString *dateString = [formatter stringFromDate:entry.dateToFulfill];
+    NSString *dateString = [formatter stringFromDate:entry.dateCompleted];
     cell.detailTextLabel.text = dateString;
     
     return cell;
@@ -104,22 +118,12 @@
 
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    NSArray *entries = [[ListEntries sharedEntries] allEntries];
+    NSArray *entries = [[ListEntries sharedEntries] allEntries2];
     DetailViewController *dvc = (DetailViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
     dvc.isNew = NO;
+    dvc.isComplete = YES;
     dvc.entry = [entries objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
-}
-
-- (void)tableView:(nonnull UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *entries = [[ListEntries sharedEntries] allEntries];
-        ListEntry *entry = [entries objectAtIndex:indexPath.row];
-        [[ListEntries sharedEntries] removeEntry:entry];
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
 }
 
 - (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -137,17 +141,6 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
 }
 
-- (void)tableView:(nonnull UITableView *)tableView willBeginEditingRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor darkGrayColor]];
-}
-
-- (void)tableView:(nonnull UITableView *)tableView didEndEditingRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
-}
 
 - (IBAction)createNew:(id)sender
 {
@@ -159,18 +152,18 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"list.png"];
+    return [UIImage imageNamed:@"save.png"];
     return nil;
 }
 
@@ -183,8 +176,8 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"EMPTY LIST";
-    NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:24], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
+    NSString *text = @"NO GOAL COMPLETED YET";
+    NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:23], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:dict];
 }
@@ -205,5 +198,23 @@
     
 }
 
+- (void)clearAll
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Clear All?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:
+                         ^(UIAlertAction *action){
+                             [[ListEntries sharedEntries] removeAll];
+                             [self.tableView reloadData];
+                         }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end

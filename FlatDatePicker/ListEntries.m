@@ -104,4 +104,9 @@
     [self.privateEntries removeObjectIdenticalTo:entry];
 }
 
+- (void)removeAll
+{
+    [self.completedEntries removeAllObjects];
+}
+
 @end

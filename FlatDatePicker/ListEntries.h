@@ -18,4 +18,5 @@
 - (void)removeEntry:(ListEntry *)entry;
 - (BOOL)saveChanges;
 - (void)moveToCompleted:(ListEntry *)entry;
+- (void)removeAll;
 @end

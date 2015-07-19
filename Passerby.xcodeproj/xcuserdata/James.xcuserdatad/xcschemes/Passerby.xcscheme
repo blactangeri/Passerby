@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6B2C83561751107700BC04FB"
-               BuildableName = "Passerby.app"
+               BuildableName = "FlatDatePicker"
                BlueprintName = "Passerby"
                ReferencedContainer = "container:Passerby.xcodeproj">
             </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6B2C83561751107700BC04FB"
-            BuildableName = "Passerby.app"
+            BuildableName = "FlatDatePicker"
             BlueprintName = "Passerby"
             ReferencedContainer = "container:Passerby.xcodeproj">
          </BuildableReference>

@@ -10,14 +10,13 @@
 @interface DetailViewController () <UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate,
                                     UIPopoverPresentationControllerDelegate, UIViewControllerRestoration, UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) IBOutlet UITextField *titleField;
+//@property (nonatomic, weak) IBOutlet UITextField *titleField;
 @property (nonatomic, weak) IBOutlet UITextView *descField;
 @property (nonatomic, weak) IBOutlet UIButton *dateLabel;
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
-@property (nonatomic, strong) UIButton *saveButton;
+//@property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
 @property (nonatomic, strong) NSDate *dtc;
-@property (nonatomic, strong) UILabel *dateLbl;
 @end
 
 CGFloat w;
@@ -36,13 +35,14 @@ CGFloat h;
     //[self setupTextField];
     [self setupTextView];
     [self setupDeadlineButton];
+    
 }
 
 
 - (void)encodeRestorableStateWithCoder:(nonnull NSCoder *)coder
 {
     [coder encodeObject:self.entry.entryKey forKey:@"entry.entryKey"];
-    self.entry.title = _titleField.text;
+    //self.entry.title = _titleField.text;
     self.entry.desc = _descField.text;
     
     [[ListEntries sharedEntries] saveChanges];
@@ -80,6 +80,8 @@ CGFloat h;
         self.dateLabel.titleLabel.text = dateString;
         self.dtc = _entry.dateToFulfill;
     }
+    
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,6 +98,8 @@ CGFloat h;
         _entry.desc = self.descField.text;
         _entry.dateToFulfill = self.dtc;
     }
+    
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)setupBackground
@@ -130,13 +134,15 @@ CGFloat h;
         self.navigationItem.rightBarButtonItem = right;
     }
     else {
-        UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [userButton setImage:userImg forState:UIControlStateNormal];
-        [userButton setFrame:CGRectMake(0, 0, 20, 20)];
-        userButton.tintColor = [UIColor lightGrayColor];
-        [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
-        self.navigationItem.rightBarButtonItem = right;
+        if (!_isComplete) {
+            UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [userButton setImage:userImg forState:UIControlStateNormal];
+            [userButton setFrame:CGRectMake(0, 0, 20, 20)];
+            userButton.tintColor = [UIColor lightGrayColor];
+            [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+            self.navigationItem.rightBarButtonItem = right;
+        }
         
         UIImage *backImg = [[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIButton *backButton = [[UIButton alloc] init];
@@ -147,6 +153,11 @@ CGFloat h;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     }
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    if (!_isComplete) [self.view addGestureRecognizer:tap];
 }
 
 - (void)goBack
@@ -190,11 +201,7 @@ CGFloat h;
         
         [self.navigationItem setTitle:[formatter stringFromDate:[NSDate date]]];
     }
-    else {
-        [self.navigationItem setTitle:[formatter stringFromDate:_entry.dateToFulfill]];
-    }
-    [self.view addSubview:self.dateLbl];
-
+    else if (!_isComplete) [self.navigationItem setTitle:[formatter stringFromDate:_entry.dateToFulfill]];
 }
 
 - (void)setupTextView
@@ -214,20 +221,32 @@ CGFloat h;
         _descField.text = _entry.desc;
         //[_descField sizeToFit];
     }
+    if (_isComplete) [_descField setEditable:NO];
 }
 
 - (void)setupDeadlineButton
 {
-    CGFloat lw = w;
+    CGFloat lw = w / 2.0;
     CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
-    _dateLabel.frame = CGRectMake(0, y, lw, 44);
+    _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
     _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
     [_dateLabel setTitleColor:[UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
     _dateLabel.layer.borderWidth = 0;
 
     if (_isNew)[_dateLabel setTitle:@"SET A DEADLINE" forState:UIControlStateNormal];
-    else [_dateLabel setTitle:@"EDIT DEADLINE" forState:UIControlStateNormal];
+    else if (!_isComplete) [_dateLabel setTitle:@"EDIT DEADLINE" forState:UIControlStateNormal];
+    
+    
+    else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [_dateLabel setEnabled:NO];
+        _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
+        NSString *str = [NSString stringWithFormat:@"Goal ompleted on %@", [formatter stringFromDate:_entry.dateCompleted]];
+        [_dateLabel setTitle:str forState:UIControlStateDisabled];
+    }
 }
 
 - (IBAction)setDeadline:(id)sender
@@ -313,7 +332,7 @@ CGFloat h;
     }
     
     self.entry = [[ListEntries sharedEntries] createEntry];
-    self.entry.title = _titleField.text;
+    //self.entry.title = _titleField.text;
     self.entry.desc = _descField.text;
     self.entry.dateToFulfill = _dtc;
     self.entry.dateCreated = [NSDate date];
@@ -321,10 +340,6 @@ CGFloat h;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
-- (void)changeBgColor
-{
-    [_saveButton setBackgroundColor:[UIColor grayColor]];
-}
 
 - (void)cancelEditting
 {
@@ -341,7 +356,8 @@ CGFloat h;
                                  [formatter setLocale:[NSLocale currentLocale]];
                                  [formatter setDateStyle:NSDateFormatterMediumStyle];
                                  NSString *date = [formatter stringFromDate:[NSDate date]];
-                                 [_dateLabel setTitle:[NSString stringWithFormat:@"GOAL COMPLETED ON %@", date] forState:UIControlStateNormal];
+                                 _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
+                                 [_dateLabel setTitle:[NSString stringWithFormat:@"Goal completed on %@", date] forState:UIControlStateNormal];
                                  [_dateLabel setEnabled:NO];
                                  
                                  self.entry.dateCompleted = [NSDate date];
@@ -415,6 +431,7 @@ CGFloat h;
 }
 */
 
+/*
 - (void)textFieldDidBeginEditing:(nonnull UITextField *)textField
 {
     _titleField.placeholder = nil;
@@ -428,12 +445,7 @@ CGFloat h;
                                                                                      NSFontAttributeName: [UIFont fontWithName:@"din-light" size:22]
                                                                                      }];
 }
-
-- (BOOL)textFieldShouldReturn:(nonnull UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return NO;
-}
+*/
 
 - (void)textViewDidBeginEditing:(nonnull UITextView *)textView
 {
@@ -445,6 +457,7 @@ CGFloat h;
     [self moveUp:NO];
 }
 
+/*
 - (BOOL)textView:(nonnull UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(nonnull NSString *)text
 {
     if ([text isEqualToString:@"\n"])
@@ -453,7 +466,7 @@ CGFloat h;
     }
     return YES;
 }
-
+ 
 - (BOOL)gestureRecognizer:(nonnull UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(nonnull UITouch *)touch
 {
     if (touch.view == _saveButton) {
@@ -462,5 +475,6 @@ CGFloat h;
     
     return YES;
 }
+ */
 
 @end
