@@ -65,6 +65,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    BOOL success = [[ListEntries sharedEntries] saveChanges];
+    
+    if (success) {
+        NSLog(@"data saved");
+    }
+    else NSLog(@"data not saved");
 }
 
 - (BOOL)application:(nonnull UIApplication *)application shouldRestoreApplicationState:(nonnull NSCoder *)coder

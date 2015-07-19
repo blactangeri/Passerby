@@ -51,7 +51,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
     
     UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEvent)];
-    [self.view addGestureRecognizer:touchRecognizer];
+    [self.collectionView addGestureRecognizer:touchRecognizer];
     
     _events = [[NSMutableArray alloc] init];
     _months = [NSMutableArray array];
@@ -86,12 +86,20 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)showEvent
 {
     if (_events.count > 0) {
-        ListEntry *entry = [_events objectAtIndex:0];
+        
+        /*
+        NSSortDescriptor *lowToHigh = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+        [_months sortUsingDescriptors:@[lowToHigh]];
+        */
+        
+        int rand  = arc4random() % _events.count;
+        
+        ListEntry *entry = [_events objectAtIndex:rand];
         NSString *descString = entry.desc;
         
         UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
         [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
-        [view setFont:[UIFont fontWithName:@"din-light" size:15]];
+        [view setFont:[UIFont fontWithName:@"din-light" size:18]];
         [view setTextColor:[UIColor whiteColor]];
         [view setTextAlignment:NSTextAlignmentJustified];
         [view setText:descString];
@@ -105,7 +113,7 @@ static NSString * const reuseIdentifier = @"Cell";
         ppc = destNav.popoverPresentationController;
         ppc.delegate = self;
         ppc.sourceView = self.view;
-        int row = [[_months objectAtIndex:0] intValue];
+        int row = [[_months objectAtIndex:rand] intValue];
         NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
         ppc.sourceRect = [self.collectionView layoutAttributesForItemAtIndexPath:path].frame;
         [ppc setBackgroundColor:pop.view.backgroundColor];
