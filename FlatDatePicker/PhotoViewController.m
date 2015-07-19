@@ -107,6 +107,11 @@
     NSString *dateString = [formatter stringFromDate:entry.dateToFulfill];
     cell.detailTextLabel.text = dateString;
     
+    //[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor darkGrayColor];
+    [cell setSelectedBackgroundView:view];
+    
     return cell;
 }
 

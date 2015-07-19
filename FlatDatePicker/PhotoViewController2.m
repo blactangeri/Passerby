@@ -122,6 +122,10 @@
     NSString *dateString = [formatter stringFromDate:entry.dateCompleted];
     cell.detailTextLabel.text = dateString;
     
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor darkGrayColor];
+    [cell setSelectedBackgroundView:view];
+    
     return cell;
 }
 
