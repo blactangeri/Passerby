@@ -142,7 +142,7 @@ static NSString * const reuseIdentifier = @"Cell";
     if (_months.count > 0) {
         NSNumber *number = [NSNumber numberWithInteger:indexPath.row];
         if ([_months containsObject:number]) {
-            cell.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1.0];
+            cell.backgroundColor = [UIColor yellowColor];
         }
     }
     
