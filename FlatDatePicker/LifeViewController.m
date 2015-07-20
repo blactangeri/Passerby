@@ -95,7 +95,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [_months sortUsingDescriptors:@[lowToHigh]];
         */
         
-        int rand  = arc4random() % _events.count;
+        //int rand  = arc4random() % _events.count;
         
         ListEntry *entry = [_events objectAtIndex:i];
         NSString *descString = entry.desc;
@@ -121,12 +121,14 @@ static NSString * const reuseIdentifier = @"Cell";
         ppc = destNav.popoverPresentationController;
         ppc.delegate = self;
         ppc.sourceView = self.view;
-        int row = [[_months objectAtIndex:rand] intValue];
+        int row = [[_months objectAtIndex:i] intValue];
         NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
         ppc.sourceRect = [self.collectionView layoutAttributesForItemAtIndexPath:path].frame;
         [ppc setBackgroundColor:pop.view.backgroundColor];
         destNav.navigationBarHidden = YES;
         [self presentViewController:destNav animated:YES completion:nil];
+        
+        ++i;
     }
 }
 
