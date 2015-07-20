@@ -12,6 +12,7 @@
 @end
 
 int month;
+int i;
 
 @implementation LifeViewController
 
@@ -75,6 +76,8 @@ static NSString * const reuseIdentifier = @"Cell";
             [_months addObject:[NSNumber numberWithInteger:month]];
         }
     }
+    
+    i = 0;
 }
 
 - (void)gotoMain
@@ -94,7 +97,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         int rand  = arc4random() % _events.count;
         
-        ListEntry *entry = [_events objectAtIndex:rand];
+        ListEntry *entry = [_events objectAtIndex:i];
         NSString *descString = entry.desc;
         
         UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
@@ -146,7 +149,7 @@ static NSString * const reuseIdentifier = @"Cell";
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont fontWithName:@"din-light" size:23];
-        label.text = [NSString stringWithFormat:@"YOUR TIME IS LIMITED\n\n%d/900", month];
+        label.text = [NSString stringWithFormat:@"%d/900\n\nToday begins\nthe rest of your life", month];
         header.backgroundColor = [UIColor blackColor];
         [header addSubview:label];
         return  header;
