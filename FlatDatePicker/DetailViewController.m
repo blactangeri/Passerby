@@ -214,7 +214,7 @@ CGFloat h;
     [_descField setText:@""];
 
     if (_isNew) {
-        _descField.placeholder = @"Set the next big thing to do in your life. Your time is limited. Don't let your life pass you by. Do something that makes your life a story worth telling.";
+        _descField.placeholder = @"Set the next big thing to do in your life. Life is short. Don't let it pass you by. Do something that makes your life a story worth telling.";
         _descField.placeholderColor = [UIColor grayColor];
     }
     else {
@@ -252,7 +252,8 @@ CGFloat h;
 - (IBAction)setDeadline:(id)sender
 {
     [[SSFlatDatePicker appearance] setFont:[UIFont fontWithName:@"din-light" size:24]];
-    [[SSFlatDatePicker appearance] setGradientColor:[UIColor darkGrayColor]];
+    [[SSFlatDatePicker appearance] setGradientColor:[UIColor whiteColor]];
+    [[SSFlatDatePicker appearance] setTextColor:[UIColor blackColor]];
     _dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
     
     UIViewController *dateVC = [[UIViewController alloc] init];

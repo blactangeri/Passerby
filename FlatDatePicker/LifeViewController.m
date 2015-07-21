@@ -96,7 +96,9 @@ static NSString * const reuseIdentifier = @"Cell";
         */
         
         //int rand  = arc4random() % _events.count;
-        
+        if (i >= _events.count) {
+            i = 0;
+        }
         ListEntry *entry = [_events objectAtIndex:i];
         NSString *descString = entry.desc;
         

@@ -44,16 +44,6 @@
     [okBtn setImage:[UIImage imageNamed:@"FlatDatePicker-Icon-Check.png"] forState:UIControlStateNormal];
     [okBtn addTarget:self action:@selector(actionButtonValid) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:okBtn];
-    
-    UIButton *cancelButton = [[UIButton alloc] init];
-    UIImage *cancelImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [cancelButton setImage:cancelImg forState:UIControlStateNormal];
-    [cancelButton setFrame:CGRectMake(0, 0, 18, 18)];
-    cancelButton.tintColor = [UIColor grayColor];
-    [cancelButton addTarget:self action:@selector(cancelReset) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *lbbi = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
-    self.navigationItem.leftBarButtonItem = lbbi;
-    
 }
 
 - (void)cancelReset
