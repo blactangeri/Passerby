@@ -87,7 +87,7 @@ double age;
     
     self.dobLabel.textColor = [UIColor grayColor];
     self.dobLabel.textAlignment = NSTextAlignmentCenter;
-    self.dobLabel.font = [UIFont fontWithName:@"din-light" size:24];
+    self.dobLabel.font = [UIFont fontWithName:@"din-light" size:25];
     //NSString *currentTime = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterLongStyle];
     self.dobLabel.numberOfLines = 0;
 
