@@ -1,9 +1,9 @@
 #import <UIKit/UIKit.h>
 
-#import "FlatDatePicker.h"
+#import "SSFlatDatePicker.h"
 
-@interface ViewController : UIViewController <FlatDatePickerDelegate>
+@interface ViewController : UIViewController 
 
-@property (nonatomic, strong) FlatDatePicker *flatDatePicker;
+@property (nonatomic, strong) SSFlatDatePicker *flatDatePicker;
 
 @end

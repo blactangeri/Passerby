@@ -1,10 +1,3 @@
-//
-//  SSFlatDatePicker.m
-//  FlatDatePicker
-//
-//  Created by Shen Steven on 5/29/13.
-//  Copyright (c) 2013 theXingApp. All rights reserved.
-//
 
 #import "SSFlatDatePicker.h"
 #import <QuartzCore/QuartzCore.h>
@@ -227,6 +220,8 @@
 @property (nonatomic, strong) SSFlatDatePickerCollectionView *scrollerAPM;
 
 @property (nonatomic, assign) NSRange yearRange;
+@property (nonatomic, assign) NSRange monthRange;
+
 @end
 
 @implementation SSFlatDatePicker {
@@ -339,8 +334,8 @@
                                                  fromDate:date];
   
   NSRange range;
-  range.location = dateComponents.year - 100;
-  range.length = 200;
+  range.location = dateComponents.year;
+  range.length = 100;
   self.yearRange = range;
   
   self.layer.cornerRadius = 5.0f;

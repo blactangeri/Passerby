@@ -56,8 +56,6 @@
 		6B2C836F1751107700BC04FB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2C836E1751107700BC04FB /* Default@2x.png */; };
 		6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2C83701751107700BC04FB /* Default-568h@2x.png */; };
 		6B2C83741751107700BC04FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C83731751107700BC04FB /* ViewController.m */; };
-		6B2C83771751107700BC04FB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B2C83751751107700BC04FB /* ViewController.xib */; };
-		6B2C83801751114700BC04FB /* FlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C837F1751114700BC04FB /* FlatDatePicker.m */; };
 		6BB019971751257B00643F6D /* FlatDatePicker-Icon-Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB019931751257B00643F6D /* FlatDatePicker-Icon-Close.png */; };
 		6BB019981751257B00643F6D /* FlatDatePicker-Icon-Check.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB019941751257B00643F6D /* FlatDatePicker-Icon-Check.png */; };
 		6BB019991751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB019951751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png */; };
@@ -134,9 +132,6 @@
 		6B2C83701751107700BC04FB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6B2C83721751107700BC04FB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6B2C83731751107700BC04FB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6B2C83761751107700BC04FB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		6B2C837E1751114700BC04FB /* FlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatDatePicker.h; sourceTree = "<group>"; };
-		6B2C837F1751114700BC04FB /* FlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatDatePicker.m; sourceTree = "<group>"; };
 		6BB019931751257B00643F6D /* FlatDatePicker-Icon-Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Close.png"; sourceTree = "<group>"; };
 		6BB019941751257B00643F6D /* FlatDatePicker-Icon-Check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Check.png"; sourceTree = "<group>"; };
 		6BB019951751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Check@2x.png"; sourceTree = "<group>"; };
@@ -295,7 +290,6 @@
 				1A8DE60C1B5AF1CF0031E6D0 /* tabbarViewController.h */,
 				1A8DE60D1B5AF1CF0031E6D0 /* tabbarViewController.m */,
 				1AF48CE41B4629A8005A158A /* Main.storyboard */,
-				6B2C83751751107700BC04FB /* ViewController.xib */,
 				6B2C83611751107700BC04FB /* Supporting Files */,
 				1A4155AD1B47774800F33DDE /* Images.xcassets */,
 			);
@@ -327,8 +321,6 @@
 			children = (
 				1AD5C49F1B55CB1D008490E5 /* SSFlatDatePicker.h */,
 				1AD5C4A01B55CB1D008490E5 /* SSFlatDatePicker.m */,
-				6B2C837E1751114700BC04FB /* FlatDatePicker.h */,
-				6B2C837F1751114700BC04FB /* FlatDatePicker.m */,
 				6BB019931751257B00643F6D /* FlatDatePicker-Icon-Close.png */,
 				6BB019941751257B00643F6D /* FlatDatePicker-Icon-Check.png */,
 				6BB019951751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png */,
@@ -414,7 +406,6 @@
 				1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */,
 				1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */,
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
-				6B2C83771751107700BC04FB /* ViewController.xib in Resources */,
 				1ADB9BDF1B461DC3008C96E5 /* menu@2x.png in Resources */,
 				1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */,
 				1AFD53271B575F8600D4D7FF /* check.png in Resources */,
@@ -452,7 +443,6 @@
 				6B2C83741751107700BC04FB /* ViewController.m in Sources */,
 				1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */,
 				1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */,
-				6B2C83801751114700BC04FB /* FlatDatePicker.m in Sources */,
 				1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,14 +456,6 @@
 				6B2C83641751107700BC04FB /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6B2C83751751107700BC04FB /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6B2C83761751107700BC04FB /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

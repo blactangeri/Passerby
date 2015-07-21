@@ -4,6 +4,7 @@
 #import "ViewController.h"
 #import "ListEntries.h"
 #import "DetailViewController.h"
+#import "ResetViewController.h"
 
 @interface SidebarTableViewController ()
 
