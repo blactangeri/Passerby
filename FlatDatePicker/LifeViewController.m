@@ -43,7 +43,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     
     UIButton *btn = [[UIButton alloc] init];
-    UIImage *undoImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *undoImg = [[UIImage imageNamed:@"menu.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [btn setImage:undoImg forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(12, 12, 22, 22)];
     btn.tintColor = [UIColor lightGrayColor];
@@ -56,6 +56,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     _events = [[NSMutableArray alloc] init];
     _months = [NSMutableArray array];
+    
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMain)];
+    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
