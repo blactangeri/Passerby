@@ -316,7 +316,7 @@ CGFloat h;
     if (!_descField.text || _descField.text.length == 0) {
         UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a goal" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [toast show];
-        int duration = 0.7;
+        int duration = 0.9;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [toast dismissWithClickedButtonIndex:0 animated:YES];
         });

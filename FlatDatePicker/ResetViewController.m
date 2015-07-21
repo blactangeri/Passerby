@@ -28,6 +28,8 @@
     CGFloat h = [[UIScreen mainScreen] bounds].size.height;
     
     [[SSFlatDatePicker appearance] setFont:[UIFont fontWithName:@"din-light" size:24]];
+    [[SSFlatDatePicker appearance] setGradientColor:[UIColor blackColor]];
+    [[SSFlatDatePicker appearance] setTextColor:[UIColor whiteColor]];
     
     self.flatDatePicker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, (h - 260) / 2.0,  w, 260)];
     [self.view addSubview:self.flatDatePicker];
