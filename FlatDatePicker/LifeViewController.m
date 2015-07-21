@@ -104,7 +104,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [view setBackgroundColor:[UIColor colorWithRed:39.0/255.0 green:40.0/255.0 blue:34.0/255.0 alpha:1.0]];
         [view setFont:[UIFont fontWithName:@"din-light" size:17]];
         [view setTextColor:[UIColor whiteColor]];
-        [view setTextAlignment:NSTextAlignmentJustified];
+        [view setTextAlignment:NSTextAlignmentLeft];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setLocale:[NSLocale currentLocale]];
