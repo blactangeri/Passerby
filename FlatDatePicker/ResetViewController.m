@@ -31,7 +31,7 @@
     [[SSFlatDatePicker appearance] setGradientColor:[UIColor blackColor]];
     [[SSFlatDatePicker appearance] setTextColor:[UIColor whiteColor]];
     
-    self.flatDatePicker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, (h - 260) / 2.0,  w, 260)];
+    self.flatDatePicker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, (h - h/3.0) / 2.0,  w, h / 3.0)];
     [self.view addSubview:self.flatDatePicker];
     
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, _flatDatePicker.frame.origin.y / 2.0, w, 44)];

@@ -43,7 +43,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     
     UIButton *btn = [[UIButton alloc] init];
-    UIImage *undoImg = [[UIImage imageNamed:@"menu.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *undoImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [btn setImage:undoImg forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(12, 12, 22, 22)];
     btn.tintColor = [UIColor lightGrayColor];
