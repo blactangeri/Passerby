@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "ViewController.h"
 #import "ListEntries.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -19,15 +20,31 @@
     //UIImage *backButtonImage = [[UIImage imageNamed:@"back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
+    [Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+         
         
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         ViewController *viewController = [[ViewController alloc] init];
         self.window.rootViewController = viewController;
         [self.window makeKeyAndVisible];
+    }
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert |
+                                                                                 UIUserNotificationTypeBadge |
+                                                                                 UIUserNotificationTypeSound
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        //[[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    }
+    else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert |
+         UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound ];
     }
         
     return YES;
@@ -76,6 +93,27 @@
 - (BOOL)application:(nonnull UIApplication *)application shouldRestoreApplicationState:(nonnull NSCoder *)coder
 {
     return YES;
+}
+
+- (void)application:(nonnull UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)deviceToken
+{
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[@"global"];
+    [currentInstallation saveInBackground];
+    
+    NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+}
+
+- (void)application:(nonnull UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error
+{
+    NSLog(@"Did Fail to Register for Remote Notifications");
+    NSLog(@"%@, %@", error, error.localizedDescription);
+}
+
+- (void)application:(nonnull UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+{
+    [PFPush handlePush:userInfo];
 }
 
 @end
