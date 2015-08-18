@@ -46,7 +46,12 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert |
          UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound ];
     }
-        
+    
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        application.applicationIconBadgeNumber = 0;
+    }
+    
     return YES;
 }
 
@@ -114,6 +119,18 @@
 - (void)application:(nonnull UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
 {
     [PFPush handlePush:userInfo];
+}
+
+- (void)application:(nonnull UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Passerby"
+                                                        message:notification.alertBody delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 @end

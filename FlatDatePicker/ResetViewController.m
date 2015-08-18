@@ -16,6 +16,12 @@
     [self setBackground];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[self setBackground];
+}
+
 - (void)setBackground
 {
     self.view.backgroundColor = [UIColor blackColor];
@@ -32,6 +38,7 @@
     [[SSFlatDatePicker appearance] setTextColor:[UIColor whiteColor]];
     
     self.flatDatePicker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, (h - h/3.0) / 2.0,  w, h / 3.0)];
+	self.flatDatePicker.datePickerMode = SSFlatDatePickerModeDate;
     [self.view addSubview:self.flatDatePicker];
     
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, _flatDatePicker.frame.origin.y / 2.0, w, 44)];

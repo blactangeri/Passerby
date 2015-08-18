@@ -337,6 +337,14 @@ CGFloat h;
     self.entry.desc = _descField.text;
     self.entry.dateToFulfill = _dtc;
     self.entry.dateCreated = [NSDate date];
+    
+    // local notification
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate date];
+    localNotification.alertBody = @"Hello there";
+    localNotification.alertAction = @"show me the thing";
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
