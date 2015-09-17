@@ -1,11 +1,3 @@
-//
-//  PhotoViewController.m
-//  SidebarDemo
-//
-//  Created by Simon Ng on 10/11/14.
-//  Copyright (c) 2014 AppCoda. All rights reserved.
-//
-
 #import "PhotoViewController.h"
 #import "SWRevealViewController.h"
 #import "ListEntries.h"
@@ -160,6 +152,7 @@
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
+	[self.tableView reloadData];
 }
 
 - (IBAction)createNew:(id)sender

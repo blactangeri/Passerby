@@ -121,6 +121,7 @@
     [PFPush handlePush:userInfo];
 }
 
+/*
 - (void)application:(nonnull UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification
 {
     UIApplicationState state = [application applicationState];
@@ -132,5 +133,6 @@
     
     application.applicationIconBadgeNumber = 0;
 }
+ */
 
 @end
