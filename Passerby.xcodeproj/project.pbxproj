@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A07A48B1BABBBE400E2AD4D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A07A48A1BABBBE400E2AD4D /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		1A07D2771B59A51000A80B12 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07D2761B59A51000A80B12 /* back.png */; };
 		1A07D2791B59B6EA00A80B12 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07D2781B59B6EA00A80B12 /* save.png */; };
 		1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A07D27C1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m */; };
@@ -77,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A07A4891BABBBE400E2AD4D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		1A07A48A1BABBBE400E2AD4D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1A07D2761B59A51000A80B12 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		1A07D2781B59B6EA00A80B12 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		1A07D27B1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 		6B2C83611751107700BC04FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A07A4891BABBBE400E2AD4D /* MBProgressHUD.h */,
+				1A07A48A1BABBBE400E2AD4D /* MBProgressHUD.m */,
 				1A07D27A1B59F3B100A80B12 /* DZNEmptyDataSet */,
 				1AE841A51B54C34D004BBE03 /* UITextView+Placeholder */,
 				1A38C5C11B49F27F00EB3B5F /* AnalogClockWithImages */,
@@ -499,6 +504,7 @@
 				1AE841A81B54C34D004BBE03 /* UITextView+Placeholder.m in Sources */,
 				1AD5C4A11B55CB1D008490E5 /* SSFlatDatePicker.m in Sources */,
 				6B2C83671751107700BC04FB /* main.m in Sources */,
+				1A07A48B1BABBBE400E2AD4D /* MBProgressHUD.m in Sources */,
 				1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */,
 				1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */,
 				1AF48CF01B462AB0005A158A /* MainViewController.m in Sources */,

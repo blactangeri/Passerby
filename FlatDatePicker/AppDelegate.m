@@ -32,7 +32,8 @@
         self.window.rootViewController = viewController;
         [self.window makeKeyAndVisible];
     }
-    
+	
+	/*
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert |
                                                                                  UIUserNotificationTypeBadge |
@@ -46,7 +47,8 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert |
          UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound ];
     }
-    
+    */
+	
     UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification) {
         application.applicationIconBadgeNumber = 0;
