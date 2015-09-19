@@ -132,7 +132,7 @@
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     NSArray *entries = [[ListEntries sharedEntries] allEntries2];
-    DetailViewController *dvc = (DetailViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+	DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.isNew = NO;
     dvc.isComplete = YES;
     dvc.entry = [entries objectAtIndex:indexPath.row];

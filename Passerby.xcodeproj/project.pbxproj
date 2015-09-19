@@ -15,11 +15,13 @@
 		1A07A4F21BAC5A1E00E2AD4D /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A07A4EB1BAC5A1E00E2AD4D /* RAMTransitionItemAnimation.swift */; settings = {ASSET_TAGS = (); }; };
 		1A07A4F31BAC5A1E00E2AD4D /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A07A4EC1BAC5A1E00E2AD4D /* RAMAnimatedTabBarController.swift */; settings = {ASSET_TAGS = (); }; };
 		1A07A4F41BAC5A1E00E2AD4D /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A07A4ED1BAC5A1E00E2AD4D /* RAMItemAnimationProtocol.swift */; settings = {ASSET_TAGS = (); }; };
-		1A07A4F81BAC5BF500E2AD4D /* hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07A4F71BAC5BF500E2AD4D /* hourglass.png */; settings = {ASSET_TAGS = (); }; };
 		1A07D2771B59A51000A80B12 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07D2761B59A51000A80B12 /* back.png */; };
 		1A07D2791B59B6EA00A80B12 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07D2781B59B6EA00A80B12 /* save.png */; };
 		1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A07D27C1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m */; };
 		1A07D2871B5A113300A80B12 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A07D2861B5A113300A80B12 /* timer.png */; };
+		1A17C44D1BACF9D200D337F4 /* user2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A17C44C1BACF9D200D337F4 /* user2.png */; settings = {ASSET_TAGS = (); }; };
+		1A17C4511BACFD1F00D337F4 /* checkfilled.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A17C4501BACFD1F00D337F4 /* checkfilled.png */; settings = {ASSET_TAGS = (); }; };
+		1A17C4531BACFE3600D337F4 /* listfilled.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A17C4521BACFE3600D337F4 /* listfilled.png */; settings = {ASSET_TAGS = (); }; };
 		1A310C991B5F413400C917C5 /* launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A310C981B5F413400C917C5 /* launch.xib */; };
 		1A38C5CE1B49F27F00EB3B5F /* PSAnalogClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */; };
 		1A4155AE1B47774800F33DDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4155AD1B47774800F33DDE /* Images.xcassets */; };
@@ -68,6 +70,9 @@
 		1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CED1B462AB0005A158A /* PhotoViewController.m */; };
 		1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */; };
 		1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F51B5228EA00509C2D /* ResetViewController.m */; };
+		1AFAD78F1BAD99550097090F /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAD78E1BAD99550097090F /* Hourglass.png */; settings = {ASSET_TAGS = (); }; };
+		1AFAD7911BAE03660097090F /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAD7901BAE03660097090F /* cal.png */; settings = {ASSET_TAGS = (); }; };
+		1AFAD7941BAE073A0097090F /* DaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAD7931BAE073A0097090F /* DaysViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1AFD53271B575F8600D4D7FF /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFD53261B575F8600D4D7FF /* check.png */; };
 		6B2C835B1751107700BC04FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835A1751107700BC04FB /* UIKit.framework */; };
 		6B2C835D1751107700BC04FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835C1751107700BC04FB /* Foundation.framework */; };
@@ -95,12 +100,14 @@
 		1A07A4EB1BAC5A1E00E2AD4D /* RAMTransitionItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimation.swift; sourceTree = "<group>"; };
 		1A07A4EC1BAC5A1E00E2AD4D /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
 		1A07A4ED1BAC5A1E00E2AD4D /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
-		1A07A4F71BAC5BF500E2AD4D /* hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hourglass.png; sourceTree = "<group>"; };
 		1A07D2761B59A51000A80B12 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		1A07D2781B59B6EA00A80B12 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		1A07D27B1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		1A07D27C1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		1A07D2861B5A113300A80B12 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
+		1A17C44C1BACF9D200D337F4 /* user2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user2.png; sourceTree = "<group>"; };
+		1A17C4501BACFD1F00D337F4 /* checkfilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkfilled.png; sourceTree = "<group>"; };
+		1A17C4521BACFE3600D337F4 /* listfilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listfilled.png; sourceTree = "<group>"; };
 		1A310C981B5F413400C917C5 /* launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = launch.xib; path = ../launch.xib; sourceTree = "<group>"; };
 		1A38C5C71B49F27F00EB3B5F /* PSAnalogClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAnalogClockView.h; sourceTree = "<group>"; };
 		1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAnalogClockView.m; sourceTree = "<group>"; };
@@ -165,6 +172,10 @@
 		1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
 		1AF9D1F41B5228EA00509C2D /* ResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetViewController.h; sourceTree = "<group>"; };
 		1AF9D1F51B5228EA00509C2D /* ResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetViewController.m; sourceTree = "<group>"; };
+		1AFAD78E1BAD99550097090F /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
+		1AFAD7901BAE03660097090F /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
+		1AFAD7921BAE073A0097090F /* DaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaysViewController.h; sourceTree = "<group>"; };
+		1AFAD7931BAE073A0097090F /* DaysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaysViewController.m; sourceTree = "<group>"; };
 		1AFD53261B575F8600D4D7FF /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		6B2C83571751107700BC04FB /* Passerby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passerby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2C835A1751107700BC04FB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -312,13 +323,16 @@
 		1ADB9BCE1B461DBB008C96E5 /* imgs */ = {
 			isa = PBXGroup;
 			children = (
-				1A07A4F71BAC5BF500E2AD4D /* hourglass.png */,
+				1AFAD78E1BAD99550097090F /* Hourglass.png */,
+				1A17C4501BACFD1F00D337F4 /* checkfilled.png */,
+				1A17C4521BACFE3600D337F4 /* listfilled.png */,
 				1A07D2861B5A113300A80B12 /* timer.png */,
 				1AFD53261B575F8600D4D7FF /* check.png */,
 				1A8DE60A1B5AEDAA0031E6D0 /* todo.png */,
 				1ADB9BD31B461DC3008C96E5 /* menu.png */,
 				1ADB9BD41B461DC3008C96E5 /* menu@2x.png */,
 				1AB3BDE91B4F7C99007279FE /* user.png */,
+				1A17C44C1BACF9D200D337F4 /* user2.png */,
 				1A477E5E1B53EE3800D2D6BD /* cancel.png */,
 				1A8DE60F1B5AF7330031E6D0 /* list.png */,
 				1A8DE6111B5B02960031E6D0 /* delete.png */,
@@ -326,6 +340,7 @@
 				1A07D2761B59A51000A80B12 /* back.png */,
 				1A8DE6051B5A964F0031E6D0 /* undo.png */,
 				1A07D2781B59B6EA00A80B12 /* save.png */,
+				1AFAD7901BAE03660097090F /* cal.png */,
 			);
 			name = imgs;
 			sourceTree = "<group>";
@@ -424,6 +439,8 @@
 				1AF48CE91B462AB0005A158A /* MainViewController.m */,
 				1A45B26A1B4ACD8200196E3C /* LifeViewController.h */,
 				1A45B26B1B4ACD8200196E3C /* LifeViewController.m */,
+				1AFAD7921BAE073A0097090F /* DaysViewController.h */,
+				1AFAD7931BAE073A0097090F /* DaysViewController.m */,
 				1A310C981B5F413400C917C5 /* launch.xib */,
 				1AF48CEC1B462AB0005A158A /* PhotoViewController.h */,
 				1AF48CED1B462AB0005A158A /* PhotoViewController.m */,
@@ -543,9 +560,11 @@
 				1AD8B3A81B50D3A9003D0E47 /* clock_minute_hand.png in Resources */,
 				1A07D2871B5A113300A80B12 /* timer.png in Resources */,
 				1ADB9BC91B461A17008C96E5 /* DIN.ttf in Resources */,
+				1A17C4511BACFD1F00D337F4 /* checkfilled.png in Resources */,
 				1ADB9BDE1B461DC3008C96E5 /* menu.png in Resources */,
 				6B2C83651751107700BC04FB /* InfoPlist.strings in Resources */,
 				6B2C836D1751107700BC04FB /* Default.png in Resources */,
+				1AFAD78F1BAD99550097090F /* Hourglass.png in Resources */,
 				1A8DE60B1B5AEDAA0031E6D0 /* todo.png in Resources */,
 				6B2C836F1751107700BC04FB /* Default@2x.png in Resources */,
 				1A07D2771B59A51000A80B12 /* back.png in Resources */,
@@ -560,9 +579,11 @@
 				1A310C991B5F413400C917C5 /* launch.xib in Resources */,
 				1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */,
 				1AFD53271B575F8600D4D7FF /* check.png in Resources */,
-				1A07A4F81BAC5BF500E2AD4D /* hourglass.png in Resources */,
+				1A17C4531BACFE3600D337F4 /* listfilled.png in Resources */,
+				1A17C44D1BACF9D200D337F4 /* user2.png in Resources */,
 				6BB019971751257B00643F6D /* FlatDatePicker-Icon-Close.png in Resources */,
 				6BB019981751257B00643F6D /* FlatDatePicker-Icon-Check.png in Resources */,
+				1AFAD7911BAE03660097090F /* cal.png in Resources */,
 				1A07D2791B59B6EA00A80B12 /* save.png in Resources */,
 				1A8DE6101B5AF7330031E6D0 /* list.png in Resources */,
 				6BB019991751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png in Resources */,
@@ -604,6 +625,7 @@
 				1A07A4F01BAC5A1E00E2AD4D /* RAMFumeAnimation.swift in Sources */,
 				1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */,
 				1A07A4F11BAC5A1E00E2AD4D /* RAMRotationAnimation.swift in Sources */,
+				1AFAD7941BAE073A0097090F /* DaysViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

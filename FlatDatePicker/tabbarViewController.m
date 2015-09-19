@@ -7,6 +7,8 @@
 //
 
 #import "tabbarViewController.h"
+#import "PhotoViewController.h"
+#import "PhotoViewController2.h"
 
 @implementation tabbarViewController:UITabBarController
 
@@ -20,7 +22,16 @@
     [self.tabBar setFrame:r];
     [self.tabBar setTintColor:[UIColor grayColor]];
     [self.tabBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    
+	
+	PhotoViewController *photoVC = [[PhotoViewController alloc] init];
+	PhotoViewController2 *photoVC2 = [[PhotoViewController2 alloc] init];
+	UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:photoVC];
+	UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:photoVC2];
+	
+	NSArray *arr = [[NSArray alloc] initWithObjects: nav1, nav2, nil];
+	
+	[self setViewControllers: arr];
+	
     UITabBar *bar = self.tabBar;
     UITabBarItem *item1 = [[bar items] objectAtIndex:0];
     UITabBarItem *item2 = [[bar items] objectAtIndex:1];

@@ -12,8 +12,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setBackground];
+	[self setBackground];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -74,10 +73,8 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:[_flatDatePicker date] forKey:@"dob"];
     
-    UIStoryboard *mainSb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SWRevealViewController *swr = [mainSb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    [self presentViewController:swr animated:YES completion:nil];
-    
+	[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+	
 }
 
 #pragma mark - FlatDatePicker Delegate

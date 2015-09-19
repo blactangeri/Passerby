@@ -25,7 +25,7 @@ import UIKit
 class RAMAnimatedTabBarItem: UITabBarItem {
 
     @IBOutlet weak var animation: RAMItemAnimation?
-    @IBInspectable var textColor = UIColor.blackColor()
+    @IBInspectable var textColor = UIColor.lightGrayColor()
 
     func playAnimation(icon: UIImageView, textLabel: UILabel){
         guard let animation = animation else {
@@ -53,6 +53,19 @@ class RAMAnimatedTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		NSLog("%d", self.tabBar.frame.size.height)
+		
+		self.tabBar.backgroundImage = UIImage()
+		self.tabBar.shadowImage = UIImage()
+		self.tabBar.translucent = true
+		self.tabBar.tintColor = UIColor.init(red: 234.0/255.0, green: 0/255.0, blue: 42.0/255.0, alpha: 1.0)
+		
+		UIGraphicsBeginImageContextWithOptions(CGSizeMake(25, 25), false, 0.0)
+		self.tabBarItem.image?.drawInRect(CGRectMake(0, 0, 25, 25))
+		let newImg = UIGraphicsGetImageFromCurrentImageContext()
+		self.tabBarItem.image = newImg
+		UIGraphicsEndImageContext()
+		
         let containers = createViewContainers()
 
         createCustomIcons(containers)
@@ -77,9 +90,9 @@ class RAMAnimatedTabBarController: UITabBarController {
                 }
                 
                 container.tag = index
-
+				
+				
                 let icon = UIImageView(image: item.image)
-				//icon.image = icon.image!.imageWithRenderingMode(.AlwaysTemplate)
                 icon.translatesAutoresizingMaskIntoConstraints = false
                 icon.tintColor = UIColor.clearColor()
 
@@ -114,6 +127,8 @@ class RAMAnimatedTabBarController: UITabBarController {
 
                 item.image = nil
                 item.title = ""
+				
+				
             }
         }
     }

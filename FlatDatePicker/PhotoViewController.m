@@ -7,8 +7,6 @@
 
 @interface PhotoViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *rbbi;
-
 @end
 
 @implementation PhotoViewController
@@ -21,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView reloadData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 
     [self setupBackground];
@@ -34,44 +31,30 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.tableView reloadData];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    self.navigationController.navigationBar.translucent = NO;
-    
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
 }
 
 - (void)setupBackground
 {
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+	[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
+	self.navigationController.navigationBar.translucent = NO;
+	
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    //self.navigationController.navigationBar.translucent = YES;
-    
+	
     //[self.navigationItem setTitle:@"PASSER'S LIST"];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
     self.navigationController.navigationBar.translucent = NO;
     
     [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    
+	
+	
+	UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target: self action:@selector(createNew)];
+	[rightBarButtonItem setTintColor:[UIColor lightGrayColor]];
+	self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+	
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,7 +93,7 @@
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     NSArray *entries = [[ListEntries sharedEntries] allEntries];
-    DetailViewController *dvc = (DetailViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+	DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.isNew = NO;
     dvc.entry = [entries objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
@@ -155,9 +138,9 @@
 	[self.tableView reloadData];
 }
 
-- (IBAction)createNew:(id)sender
+- (void)createNew
 {
-    DetailViewController *dvc = (DetailViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+	DetailViewController *dvc = [[DetailViewController alloc] init];
     dvc.isNew = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dvc];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;

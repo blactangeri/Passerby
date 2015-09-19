@@ -3,6 +3,7 @@
 #import "SWRevealViewController.h"
 #import "PSAnalogClockView.h"
 #import "LifeViewController.h"
+#import "ResetViewController.h"
 
 @interface MainViewController ()
 
@@ -11,6 +12,11 @@
 @property (nonatomic, strong) NSMutableArray *statsLabels;
 @property (nonatomic, strong) UIButton *lifeButton;
 @property (nonatomic, strong) NSDate *dob;
+@property (nonatomic, strong) UILabel *lbl1;
+@property (nonatomic, strong) UILabel *lbl2;
+@property (nonatomic, strong) UILabel *lbl3;
+@property (nonatomic, strong) UILabel *lbl4;
+@property (nonatomic, strong) UILabel *lbl5;
 @property (nonatomic, strong) UILabel *lbl6;
 @end
 
@@ -30,39 +36,51 @@ double age;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
     UIButton *userButton = [[UIButton alloc] init];
-    UIImage *userImg = [[UIImage imageNamed:@"user.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *userImg = [[UIImage imageNamed:@"settings.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [userButton setImage:userImg forState:UIControlStateNormal];
-    [userButton setFrame:CGRectMake(0, 0, 28, 28)];
+    [userButton setFrame:CGRectMake(0, 0, 24, 24)];
     userButton.tintColor = [UIColor lightGrayColor];
-    [userButton addTarget:self action:@selector(gotoLife) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:userButton];
-    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-    
+    [userButton addTarget:self action:@selector(resetDOB) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:userButton];
+    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+	
+	UIButton *hourglass = [[UIButton alloc] init];
+	UIImage *hourglassImg = [[UIImage imageNamed:@"Hourglass.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	[hourglass setImage:hourglassImg forState:UIControlStateNormal];
+	[hourglass setFrame:CGRectMake(0, 0, 25, 25)];
+	hourglass.tintColor = [UIColor lightGrayColor];
+	[hourglass addTarget:self action:@selector(gotoLife) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hourglass];
+	self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+
+	
     //[self.navigationController navigationBar].tintColor = [UIColor lightGrayColor];
 
     [self createClock];
     [self addDobLabel];
-    //[self addButton];
-    [self addStatsLabels];
+	[self addStatsLabels];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
     NSTimer *timer1 = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[self updateLabel];
+}
 
-- (void)gotoLife
+
+- (void)resetDOB
 {
-    [self performSegueWithIdentifier:@"gotoLife" sender:self];
+	ResetViewController *resetVC = [[ResetViewController alloc] init];
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:resetVC];
+	[self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)gotoLife {
+	[self performSegueWithIdentifier:@"gotoLife" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,6 +118,7 @@ double age;
 
 - (void)updateLabel
 {
+	_dob = [[NSUserDefaults standardUserDefaults] objectForKey:@"dob"];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_dob];
     age = (double)interval / (365 * 24 * 3600);
     self.dobLabel.text = [NSString stringWithFormat:@"YOU ARE %.8f", age];
@@ -108,28 +127,28 @@ double age;
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendarUnit unit = NSCalendarUnitMinute;
     NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
-    _lbl6.text = [NSString stringWithFormat:@"%ld\rminutes", (long)[comp minute]];
-    
+	
+	unit = NSCalendarUnitYear;
+	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
+	_lbl1.text = [NSString stringWithFormat:@"%ld\ryears", (long)[comp year]];
+	
+	unit = NSCalendarUnitMonth;
+	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
+	_lbl2.text = [NSString stringWithFormat:@"%ld\rmonths", (long)[comp month]];
+	
+	unit = NSCalendarUnitDay;
+	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
+	_lbl3.text = [NSString stringWithFormat:@"%ld\rweeks", (long)[comp day] / 7];
+	_lbl4.text = [NSString stringWithFormat:@"%ld\rdays", (long)[comp day]];
+	
+	unit = NSCalendarUnitHour;
+	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
+	_lbl5.text = [NSString stringWithFormat:@"%ld\rhours", (long)[comp hour]];
+	
+	unit = NSCalendarUnitMinute;
+	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
+	_lbl6.text = [NSString stringWithFormat:@"%ld\rminutes", (long)[comp minute]];
 }
-
-/*
- - (void)addButton
-{
-    CGFloat w = [[UIScreen mainScreen] bounds].size.width * 0.67;
-    CGFloat h = 44;
-    CGFloat x = ([[UIScreen mainScreen] bounds].size.width- w) / 2.0;
-    CGFloat y = ([[UIScreen mainScreen] bounds].size.height - h) * 0.98;
-
-    DeformationButton *deformationBtn = [[DeformationButton alloc] initWithFrame:CGRectMake(x, y, w, h) withColor:[UIColor grayColor]];
-    [self.view addSubview:deformationBtn];
-    
-    [deformationBtn.forDisplayButton setTitle:@"Your life on a paper" forState:UIControlStateNormal];
-    [deformationBtn.forDisplayButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:18]];
-    [deformationBtn.forDisplayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [deformationBtn.forDisplayButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, 0)];
-    [deformationBtn addTarget:self action:@selector(gotoLife) forControlEvents:UIControlEventTouchUpInside];
-}
- */
 
 - (void)changeBackground
 {
@@ -146,7 +165,7 @@ double age;
              PSAnalogClockViewSecondHand: [UIImage imageNamed:@"clock_second_hand"]
              };
 }
-
+/*
 - (void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id)sender
 {
     if ([[segue identifier] isEqualToString:@"gotoLife"]) {
@@ -160,7 +179,7 @@ double age;
         [lvc setDob:_dob];
     }
 }
-
+*/
 - (void)addStatsLabels
 {
     CGFloat w = [[UIScreen mainScreen] bounds].size.width * 0.85 / 3.0;
@@ -179,64 +198,61 @@ double age;
     NSCalendarUnit unit = NSCalendarUnitYear;
     NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
     
-    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(x, y, w, h)];
-    lbl1.textColor = [UIColor grayColor];
-    lbl1.text = [NSString stringWithFormat:@"%ld\ryears", (long)[comp year]];
-    [self.view addSubview:lbl1];
-    lbl1.layer.borderColor = [[UIColor grayColor] CGColor];
-    lbl1.layer.borderWidth = 0.5;
-    lbl1.textAlignment = NSTextAlignmentCenter;
-    lbl1.font = [UIFont fontWithName:@"din-light" size:15];
-    lbl1.numberOfLines = 0;
-    [self.view addSubview:lbl1];
+    _lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(x, y, w, h)];
+    _lbl1.textColor = [UIColor grayColor];
+    _lbl1.text = [NSString stringWithFormat:@"%ld\ryears", (long)[comp year]];
+    _lbl1.layer.borderColor = [[UIColor grayColor] CGColor];
+    _lbl1.layer.borderWidth = 0.5;
+    _lbl1.textAlignment = NSTextAlignmentCenter;
+    _lbl1.font = [UIFont fontWithName:@"din-light" size:15];
+    _lbl1.numberOfLines = 0;
+    [self.view addSubview:_lbl1];
     
     unit = NSCalendarUnitMonth;
     comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
-    UILabel *lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(x + w, y, w, h)];
-    lbl2.textColor = [UIColor grayColor];
-    lbl2.text = [NSString stringWithFormat:@"%ld\rmonths", (long)[comp month]];
-    [self.view addSubview:lbl2];
-    lbl2.layer.borderColor = [[UIColor grayColor] CGColor];
-    lbl2.layer.borderWidth = 0.5;
-    lbl2.textAlignment = NSTextAlignmentCenter;
-    lbl2.font = [UIFont fontWithName:@"din-light" size:15];
-    lbl2.numberOfLines = 0;
-    [self.view addSubview:lbl2];
+    _lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(x + w, y, w, h)];
+    _lbl2.textColor = [UIColor grayColor];
+    _lbl2.text = [NSString stringWithFormat:@"%ld\rmonths", (long)[comp month]];
+    _lbl2.layer.borderColor = [[UIColor grayColor] CGColor];
+    _lbl2.layer.borderWidth = 0.5;
+    _lbl2.textAlignment = NSTextAlignmentCenter;
+    _lbl2.font = [UIFont fontWithName:@"din-light" size:15];
+    _lbl2.numberOfLines = 0;
+    [self.view addSubview:_lbl2];
     
     unit = NSCalendarUnitDay;
     comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
-    UILabel *lbl3 = [[UILabel alloc] initWithFrame:CGRectMake(x + 2 * w, y, w, h)];
-    lbl3.textColor = [UIColor grayColor];
-    lbl3.text = [NSString stringWithFormat:@"%ld\rweeks", (long)[comp day] / 7];
-    [self.view addSubview:lbl3];
-    lbl3.layer.borderColor = [[UIColor grayColor] CGColor];
-    lbl3.layer.borderWidth = 0.5;
-    lbl3.textAlignment = NSTextAlignmentCenter;
-    lbl3.font = [UIFont fontWithName:@"din-light" size:15];
-    lbl3.numberOfLines = 0;
-    [self.view addSubview:lbl3];
+    _lbl3 = [[UILabel alloc] initWithFrame:CGRectMake(x + 2 * w, y, w, h)];
+    _lbl3.textColor = [UIColor grayColor];
+    _lbl3.text = [NSString stringWithFormat:@"%ld\rweeks", (long)[comp day] / 7];
+    _lbl3.layer.borderColor = [[UIColor grayColor] CGColor];
+    _lbl3.layer.borderWidth = 0.5;
+    _lbl3.textAlignment = NSTextAlignmentCenter;
+    _lbl3.font = [UIFont fontWithName:@"din-light" size:15];
+    _lbl3.numberOfLines = 0;
+    [self.view addSubview:_lbl3];
     
-    UILabel *lbl4 = [[UILabel alloc] initWithFrame:CGRectMake(x, y + h, w, h)];
-    lbl4.textColor = [UIColor grayColor];
-    lbl4.text = [NSString stringWithFormat:@"%ld\rdays", (long)[comp day]];
-    lbl4.layer.borderColor = [[UIColor grayColor] CGColor];
-    lbl4.layer.borderWidth = 0.5;
-    lbl4.textAlignment = NSTextAlignmentCenter;
-    lbl4.font = [UIFont fontWithName:@"din-light" size:15];
-    lbl4.numberOfLines = 0;
-    [self.view addSubview:lbl4];
+    _lbl4 = [[UILabel alloc] initWithFrame:CGRectMake(x, y + h, w, h)];
+    _lbl4.textColor = [UIColor grayColor];
+    _lbl4.text = [NSString stringWithFormat:@"%ld\rdays", (long)[comp day]];
+    _lbl4.layer.borderColor = [[UIColor grayColor] CGColor];
+    _lbl4.layer.borderWidth = 0.5;
+    _lbl4.textAlignment = NSTextAlignmentCenter;
+    _lbl4.font = [UIFont fontWithName:@"din-light" size:15];
+    _lbl4.numberOfLines = 0;
+    [self.view addSubview:_lbl4];
     
     unit = NSCalendarUnitHour;
     comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
-    UILabel *lbl5 = [[UILabel alloc] initWithFrame:CGRectMake(x + w, y + h, w, h)];
-    lbl5.textColor = [UIColor grayColor];
-    lbl5.text = [NSString stringWithFormat:@"%ld\rhours", (long)[comp hour]];
-    lbl5.layer.borderColor = [[UIColor grayColor] CGColor];
-    lbl5.layer.borderWidth = 0.5;
-    lbl5.textAlignment = NSTextAlignmentCenter;
-    lbl5.font = [UIFont fontWithName:@"din-light" size:15];
-    lbl5.numberOfLines = 0;
-    [self.view addSubview:lbl5];
+    _lbl5 = [[UILabel alloc] initWithFrame:CGRectMake(x + w, y + h, w, h)];
+    _lbl5.textColor = [UIColor grayColor];
+    _lbl5.text = [NSString stringWithFormat:@"%ld\rhours", (long)[comp hour]];
+    _lbl5.layer.borderColor = [[UIColor grayColor] CGColor];
+    _lbl5.layer.borderWidth = 0.5;
+    _lbl5.textAlignment = NSTextAlignmentCenter;
+    _lbl5.font = [UIFont fontWithName:@"din-light" size:15];
+    _lbl5.numberOfLines = 0;
+    [self.view addSubview:_lbl5];
     
     unit = NSCalendarUnitMinute;
     comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
