@@ -42,7 +42,7 @@
     [self.view addSubview:self.flatDatePicker];
     
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, _flatDatePicker.frame.origin.y / 2.0, w, 44)];
-    lbl.text = @"Select your birthday";
+    lbl.text = @"Reset birthday";
     lbl.textColor = [UIColor whiteColor];
     lbl.textAlignment = NSTextAlignmentCenter;
     lbl.font = [UIFont fontWithName:@"din-light" size:24];

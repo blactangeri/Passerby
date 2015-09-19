@@ -20,7 +20,7 @@ double age;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	
     _dob = [[NSUserDefaults standardUserDefaults] objectForKey:@"dob"];
     NSTimeInterval interval = [_dob timeIntervalSinceNow];
     age = (double)interval / (365 * 24 * 3600);

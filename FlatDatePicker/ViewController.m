@@ -56,8 +56,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:[_flatDatePicker date] forKey:@"dob"];
     
     UIStoryboard *mainSb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SWRevealViewController *swr = [mainSb instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    [self presentViewController:swr animated:YES completion:nil];
+    UIViewController *ram = [mainSb instantiateViewControllerWithIdentifier:@"ram"];
+    [self presentViewController:ram animated:YES completion:nil];
     
 }
 @end

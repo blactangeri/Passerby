@@ -6,7 +6,6 @@
 //  Copyright © 2015 James Dong. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 @interface tabbarViewController : UITabBarController
 

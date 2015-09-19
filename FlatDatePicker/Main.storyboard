@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bar-rt-jPU">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--Reveal View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController storyboardIdentifier="SWRevealViewController" title="Reveal View Controller" id="vXZ-lx-hvc" customClass="SWRevealViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <segue destination="x2r-rU-PsL" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="fsX-Pn-ROa"/>
-                        <segue destination="bvA-Gx-XPl" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="19h-AJ-iXZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-430" y="23"/>
-        </scene>
         <!--Main View Controller-->
         <scene sceneID="jZ6-Nu-3CT">
             <objects>
@@ -32,113 +14,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="PL4-ln-Z8C">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="DJB-Dc-VO5">
-                            <color key="tintColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="sidebarButton" destination="DJB-Dc-VO5" id="S0X-A3-1V6"/>
-                        <segue destination="dIu-Ls-oJJ" kind="modal" identifier="gotoLife" modalTransitionStyle="flipHorizontal" id="aDl-z2-997"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="" image="user.png" id="bgL-aJ-Wrw" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="hhu-JM-ivU" id="22X-uB-1H5"/>
+                        </connections>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="PL4-ln-Z8C"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWP-sa-Vux" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="hhu-JM-ivU" customClass="RAMRotationAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1449" y="708"/>
-        </scene>
-        <!--Menu View Controller-->
-        <scene sceneID="EDl-71-Ti2">
-            <objects>
-                <tableViewController title="Menu View Controller" id="x2r-rU-PsL" customClass="SidebarTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FPA-C9-aqA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="my days" id="Prg-he-ap5">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Prg-he-ap5" id="phv-Cz-hJ5">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <segue destination="bvA-Gx-XPl" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Lcj-cZ-RFq"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="passer's list" id="fMg-ab-DwU">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fMg-ab-DwU" id="kg5-Hk-GBt">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reset" id="9RK-W5-Sy0">
-                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9RK-W5-Sy0" id="NPV-m7-HKD">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="GoI-mw-HAg" kind="modal" id="cdz-H8-8kh"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="x2r-rU-PsL" id="Hjr-Pc-OOo"/>
-                            <outlet property="delegate" destination="x2r-rU-PsL" id="RjX-lG-M8S"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="bar-rt-jPU" kind="custom" identifier="gotoPhoto" customClass="SWRevealViewControllerSeguePushController" id="U0h-Qw-ZzE"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QCz-Kj-4H8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="433" y="23"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cWg-6b-WRA">
-            <objects>
-                <navigationController storyboardIdentifier="navCon" automaticallyAdjustsScrollViewInsets="NO" id="bvA-Gx-XPl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tyc-km-tm3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2vy-k5-0iP">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="Z2I-Sz-A3d" kind="relationship" relationship="rootViewController" id="CYe-8G-Oj3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sfe-3o-uiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="987" y="708"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="I4G-4v-tt5">
-            <objects>
-                <navigationController id="GoI-mw-HAg" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="R8z-gX-gWI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uMJ-xk-gi4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="jHI-qF-lQh" kind="relationship" relationship="rootViewController" id="gWQ-66-bd2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yeE-g8-UTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="921" y="1414"/>
+            <point key="canvasLocation" x="1281" y="724"/>
         </scene>
         <!--Reset View Controller-->
         <scene sceneID="4xZ-ag-j7d">
@@ -149,17 +35,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="settings" id="Cms-iF-P4U" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target"/>
                     <navigationItem key="navigationItem" id="qit-FN-8a8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urA-SN-dEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="1414"/>
+            <point key="canvasLocation" x="1281" y="1522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="93V-ht-6XX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Urp-Kf-qLB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="A7M-Gp-bQE"/>
+                    <tabBarItem key="tabBarItem" title="" image="todo.png" id="A7M-Gp-bQE" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="ZNQ-a6-E70" id="sZk-T8-Seu"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tMR-h3-JBT"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YBR-mT-1CV">
@@ -172,6 +63,7 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FgI-O7-DTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ZNQ-a6-E70" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1519" y="-672"/>
         </scene>
@@ -188,14 +80,7 @@
                             <outlet property="delegate" destination="YTQ-Ea-8du" id="NFg-oO-bLY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LnJ-e5-E6v">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="5ha-ko-xJ0">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="sidebarButton" destination="5ha-ko-xJ0" id="UVt-Ug-U61"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="LnJ-e5-E6v"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZD-Ju-k1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,7 +90,11 @@
         <scene sceneID="oOg-74-UBu">
             <objects>
                 <navigationController id="kZm-mn-hap" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="IEj-6O-Y2Z"/>
+                    <tabBarItem key="tabBarItem" title="" image="save.png" id="IEj-6O-Y2Z" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="rxU-zk-Xo6" id="kRJ-4Z-4Gc"/>
+                        </connections>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xa3-PS-zhO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -215,6 +104,7 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCS-fw-Vot" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="rxU-zk-Xo6" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1542" y="-1448"/>
         </scene>
@@ -232,9 +122,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="4H2-Lo-cpm">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="drd-uL-LtV">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vrh-pL-2VH">
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -244,7 +131,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="rbbi" destination="vrh-pL-2VH" id="0vO-JI-vym"/>
-                        <outlet property="sidebarButton" destination="drd-uL-LtV" id="2vM-bm-nd0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6h-oF-EJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -323,6 +209,11 @@
                             <outlet property="delegate" destination="dIu-Ls-oJJ" id="3lH-gX-GQX"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" title="" image="hourglass.png" id="L9j-kb-wlm" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                        <connections>
+                            <outlet property="animation" destination="WSj-lP-Rjc" id="EDb-6J-Wdk"/>
+                        </connections>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="LID-GI-28Q">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="pyB-dm-RhC"/>
                     </navigationItem>
@@ -331,13 +222,14 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMF-M7-DSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="WSj-lP-Rjc" customClass="RAMFlipBottomTransitionItemAniamtions" customModule="Passerby" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1863" y="23"/>
+            <point key="canvasLocation" x="2034" y="708"/>
         </scene>
-        <!--Tabbar View Controller-->
+        <!--Animated Tab Bar Controller-->
         <scene sceneID="E0G-DF-Dg2">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bar-rt-jPU" customClass="tabbarViewController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ram" automaticallyAdjustsScrollViewInsets="NO" id="bar-rt-jPU" customClass="RAMAnimatedTabBarController" customModule="Passerby" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="centered" id="aMX-Tb-Xuk">
@@ -346,19 +238,24 @@
                         <color key="barTintColor" red="0.15294117647058825" green="0.19215686274509802" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Z2I-Sz-A3d" kind="relationship" relationship="viewControllers" id="t7z-Ex-a8l"/>
+                        <segue destination="dIu-Ls-oJJ" kind="relationship" relationship="viewControllers" id="JKL-9r-qkk"/>
                         <segue destination="Urp-Kf-qLB" kind="relationship" relationship="viewControllers" id="1O5-nW-GCx"/>
                         <segue destination="kZm-mn-hap" kind="relationship" relationship="viewControllers" id="6O9-mx-ps6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4w-LE-Eej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="987" y="-672"/>
+            <point key="canvasLocation" x="649" y="-690"/>
         </scene>
     </scenes>
     <resources>
+        <image name="hourglass.png" width="32" height="32"/>
         <image name="menu" width="22" height="22"/>
+        <image name="save.png" width="50" height="50"/>
+        <image name="settings" width="50" height="50"/>
+        <image name="todo.png" width="50" height="50"/>
+        <image name="user.png" width="50" height="50"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="19h-AJ-iXZ"/>
-    </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.91764705879999997" green="0.0" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

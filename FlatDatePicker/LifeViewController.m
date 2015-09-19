@@ -35,13 +35,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
-    SWRevealViewController *svc = self.revealViewController;
-    if (svc) {
-        [self.bbi setTarget:self.revealViewController];
-        [self.bbi setAction:@selector(revealToggle:)];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
+	
+	/*
     UIButton *btn = [[UIButton alloc] init];
     UIImage *undoImg = [[UIImage imageNamed:@"cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [btn setImage:undoImg forState:UIControlStateNormal];
@@ -49,7 +44,7 @@ static NSString * const reuseIdentifier = @"Cell";
     btn.tintColor = [UIColor lightGrayColor];
     [btn addTarget:self action:@selector(gotoMain) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-
+	 */
     
     UITapGestureRecognizer *touchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEvent)];
     [self.collectionView addGestureRecognizer:touchRecognizer];
@@ -57,13 +52,22 @@ static NSString * const reuseIdentifier = @"Cell";
     _events = [[NSMutableArray alloc] init];
     _months = [NSMutableArray array];
     
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMain)];
-    [self.view addGestureRecognizer:recognizer];
+    //UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMain)];
+    //[self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self loadEvents];
+	_dob = [[NSUserDefaults standardUserDefaults] objectForKey:@"dob"];
+	NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+	NSCalendarUnit unit = NSCalendarUnitMonth;
+	NSDateComponents *comp = [sysCalendar components:unit fromDate:_dob toDate:[NSDate date] options:NSCalendarWrapComponents];
+	
+	[self setMonth:[comp month]];
+	
+	[self loadEvents];
+	
+	[self.collectionView reloadData];
 }
 
 - (void)loadEvents
@@ -81,12 +85,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     
     i = 0;
-}
-
-- (void)gotoMain
-{
-    [self.presentingViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)showEvent

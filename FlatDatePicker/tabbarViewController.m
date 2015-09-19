@@ -8,13 +8,10 @@
 
 #import "tabbarViewController.h"
 
-@interface tabbarViewController ()
-
-@end
-
-@implementation tabbarViewController
+@implementation tabbarViewController:UITabBarController
 
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UINavigationController *nav = [self.viewControllers objectAtIndex:0];

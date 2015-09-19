@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  FlatDatePicker
-//
-//  Created by Christopher Ney on 25/05/13.
-//  Copyright (c) 2013 Christopher Ney. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "ViewController.h"
@@ -20,7 +12,8 @@
     //UIImage *backButtonImage = [[UIImage imageNamed:@"back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
-    [Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
+    //[Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
+	
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
