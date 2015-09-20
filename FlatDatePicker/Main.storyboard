@@ -34,15 +34,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="listfilled.png" id="xlu-Ii-XpT" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" id="xlu-Ii-XpT">
                         <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                        <connections>
-                            <outlet property="animation" destination="hxD-ks-dbq" id="mbS-RA-3W5"/>
-                        </connections>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6f-jV-4CK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="hxD-ks-dbq" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1613" y="-690"/>
         </scene>
@@ -52,9 +48,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Urp-Kf-qLB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="A7M-Gp-bQE">
                         <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                        <connections>
-                            <outlet property="animation" destination="ZNQ-a6-E70" id="sZk-T8-Seu"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tMR-h3-JBT"/>
@@ -69,7 +62,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FgI-O7-DTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ZNQ-a6-E70" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2265" y="-422"/>
         </scene>
@@ -97,22 +89,16 @@
         <scene sceneID="Fc9-AE-meZ">
             <objects>
                 <navigationController id="AUS-nr-IT5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="cal.png" id="8FH-ff-Fde" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
-                        <connections>
-                            <outlet property="animation" destination="0PC-5N-BVg" id="E8w-fb-b1U"/>
-                        </connections>
+                    <tabBarItem key="tabBarItem" title="" id="8FH-ff-Fde">
+                        <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oGv-NK-jRH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="hNJ-AT-0n5" kind="relationship" relationship="rootViewController" id="k5w-ot-yaJ"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QhK-Js-7hq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="0PC-5N-BVg" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1084" y="-1449"/>
         </scene>
@@ -127,7 +113,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Qhu-Bp-eHL">
-                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qhu-Bp-eHL" id="HXH-Un-zkU">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -154,9 +140,6 @@
                 <navigationController id="kZm-mn-hap" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="IEj-6O-Y2Z">
                         <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                        <connections>
-                            <outlet property="animation" destination="rxU-zk-Xo6" id="kRJ-4Z-4Gc"/>
-                        </connections>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xa3-PS-zhO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -168,7 +151,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCS-fw-Vot" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="rxU-zk-Xo6" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2288" y="-1198"/>
         </scene>
@@ -289,14 +271,13 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMF-M7-DSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="WSj-lP-Rjc" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2872" y="724"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Main Tabbar Controller-->
         <scene sceneID="E0G-DF-Dg2">
             <objects>
-                <tabBarController storyboardIdentifier="ram" automaticallyAdjustsScrollViewInsets="NO" id="bar-rt-jPU" customClass="RAMAnimatedTabBarController" customModule="Passerby" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ram" automaticallyAdjustsScrollViewInsets="NO" id="bar-rt-jPU" customClass="MainTabbarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="centered" id="aMX-Tb-Xuk">
@@ -319,11 +300,8 @@
         <scene sceneID="6NR-tV-mPu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TfW-jw-CD1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="user2.png" id="bgL-aJ-Wrw" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" id="bgL-aJ-Wrw">
                         <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                        <connections>
-                            <outlet property="animation" destination="iPL-uM-OmT" id="tKL-aD-L85"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QcR-1N-fBR">
@@ -337,7 +315,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCI-tn-pdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="iPL-uM-OmT" customClass="RAMBounceAnimation" customModule="Passerby" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1281" y="724"/>
         </scene>
@@ -347,9 +324,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="49N-0n-aXO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Hourglass.png" id="L9j-kb-wlm" customClass="RAMAnimatedTabBarItem" customModule="Passerby" customModuleProvider="target">
                         <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                        <connections>
-                            <outlet property="animation" destination="WSj-lP-Rjc" id="EDb-6J-Wdk"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TuP-6T-Vl8">
@@ -369,10 +343,7 @@
     </scenes>
     <resources>
         <image name="Hourglass.png" width="100" height="100"/>
-        <image name="cal.png" width="100" height="100"/>
-        <image name="listfilled.png" width="100" height="100"/>
         <image name="menu" width="22" height="22"/>
-        <image name="user2.png" width="100" height="100"/>
     </resources>
     <color key="tintColor" red="0.91764705879999997" green="0.0" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

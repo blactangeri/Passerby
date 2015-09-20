@@ -46,13 +46,13 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(25, 25), NO, 0.0);
-    [[UIImage imageNamed:@"todo.png"] drawInRect:CGRectMake(0, 0, 25, 25)];
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(26, 26), NO, 0.0);
+    [[UIImage imageNamed:@"timer.png"] drawInRect:CGRectMake(0, 0, 26, 26)];
     UIImage *todo = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(25, 25), NO, 0.0);
-    [[UIImage imageNamed:@"save.png"] drawInRect:CGRectMake(0, 0, 25, 25)];
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(26, 26), NO, 0.0);
+    [[UIImage imageNamed:@"checkfilled.png"] drawInRect:CGRectMake(0, 0, 26, 26)];
     UIImage *save = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

@@ -2,18 +2,20 @@
 #import "MainViewController.h"
 #import "ViewController.h"
 #import "ListEntries.h"
-#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
     //UIImage *backButtonImage = [[UIImage imageNamed:@"back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     //[Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
-    
+	if ([[ListEntries sharedEntries] allEntries].count == 0) {
+		[application setApplicationIconBadgeNumber:0];
+		[[UIApplication sharedApplication] cancelAllLocalNotifications];
+	}
+	
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -23,7 +25,7 @@
         ViewController *viewController = [[ViewController alloc] init];
         self.window.rootViewController = viewController;
         [self.window makeKeyAndVisible];
-    }
+	}
 	
 	/*
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
@@ -41,11 +43,16 @@
     }
     */
 	
+	UIUserNotificationType types = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+	UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+	
+	[[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+	
     UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification) {
         application.applicationIconBadgeNumber = 0;
     }
-    
+	
     return YES;
 }
 
@@ -94,6 +101,7 @@
     return YES;
 }
 
+/*
 - (void)application:(nonnull UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)deviceToken
 {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -114,19 +122,19 @@
 {
     [PFPush handlePush:userInfo];
 }
+*/
 
-/*
 - (void)application:(nonnull UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification
 {
-    UIApplicationState state = [application applicationState];
+    /*UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Passerby"
                                                         message:notification.alertBody delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
-    
+    */
     application.applicationIconBadgeNumber = 0;
 }
- */
+
 
 @end

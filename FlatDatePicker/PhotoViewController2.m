@@ -51,26 +51,10 @@
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
     self.navigationController.navigationBar.translucent = NO;
-    
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
 }
 
 - (void)setupBackground
 {
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -89,11 +73,8 @@
     if ([[ListEntries sharedEntries] allEntries2].count == 0) {
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
     }
-    
-    //[self.navigationItem setTitle:@"PASSER'S LIST"];
-    
+	
     [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -181,14 +162,14 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"GET STARTED BY CREATING A NEW ITEM";
+    NSString *text = @"no worries. a journey of a thousand miles begins with single step.";
     NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:15], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text.lowercaseString attributes:dict];}
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"NO GOAL COMPLETED YET";
+    NSString *text = @"NO COMPLETED TASK YET";
     NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:23], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:dict];

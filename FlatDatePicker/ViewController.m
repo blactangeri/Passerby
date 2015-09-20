@@ -2,6 +2,7 @@
 #import "ViewController.h"
 #import "SWRevealViewController.h"
 #import "MainViewController.h"
+#import "RKDropdownAlert.h"
 
 @interface ViewController ()
 
@@ -53,6 +54,14 @@
 
 - (void)actionButtonValid
 {
+	NSDate *now = [NSDate date];
+	NSDate *birthday = [_flatDatePicker date];
+	
+	if ([now earlierDate: birthday] == now) {
+		[RKDropdownAlert title:@"Set a valid date of birth" message:nil backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] time:1];
+		return;
+	}
+	
     [[NSUserDefaults standardUserDefaults] setObject:[_flatDatePicker date] forKey:@"dob"];
     
     UIStoryboard *mainSb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

@@ -8,6 +8,7 @@
 
 @property (nonatomic) NSMutableArray *events;
 @property (nonatomic) NSMutableArray *months;
+@property (nonatomic) NSMutableArray *completedTasksSet;
 
 @end
 
@@ -69,13 +70,9 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 	_events = [[NSMutableArray alloc] init];
 	_months = [NSMutableArray array];
+	_completedTasksSet = [NSMutableArray array];
 	
 	[self loadEvents];
-	/*
-	UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMain)];
-	[self.view addGestureRecognizer:recognizer]; */
-	
-	//[self.collectionView setScrollEnabled:YES];
 }
 
 
@@ -83,6 +80,8 @@ static NSString * const reuseIdentifier = @"Cell";
 {
 	[_months removeAllObjects];
 	[_events removeAllObjects];
+	[_completedTasksSet removeAllObjects];
+	
 	if ([[ListEntries sharedEntries] allEntries].count > 0) {
 		for (ListEntry *entry in [[ListEntries sharedEntries] allEntries]) {
 			[_events addObject:entry];
@@ -92,6 +91,16 @@ static NSString * const reuseIdentifier = @"Cell";
 			NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:date options:0];
 			NSInteger month = [comp month] - 1;
 			[_months addObject:[NSNumber numberWithInteger:month]];
+		}
+	}
+	if ([[ListEntries sharedEntries] allEntries2].count > 0) {
+		for (ListEntry *entry in [[ListEntries sharedEntries] allEntries2]) {
+			NSDate *dateCompleted = entry.dateCompleted;
+			NSCalendar *cal = [NSCalendar currentCalendar];
+			NSCalendarUnit unit = NSCalendarUnitMonth;
+			NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:dateCompleted options:0];
+			NSInteger monthCompleted = [comp month] - 1;
+			[_completedTasksSet addObject:[NSNumber numberWithInteger:monthCompleted]];
 		}
 	}
 	
@@ -212,6 +221,13 @@ static NSString * const reuseIdentifier = @"Cell";
 		NSNumber *number = [NSNumber numberWithInteger:indexPath.row];
 		if ([_months containsObject:number]) {
 			cell.backgroundColor = [UIColor yellowColor];
+		}
+	}
+	
+	if (_completedTasksSet.count > 0) {
+		NSNumber *num = [NSNumber numberWithInteger:indexPath.row];
+		if ([_completedTasksSet containsObject:num]) {
+			cell.backgroundColor = [UIColor blueColor];
 		}
 	}
 	

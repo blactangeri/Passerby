@@ -37,7 +37,7 @@
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
 	[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-	self.navigationController.navigationBar.translucent = NO;
+	self.navigationController.navigationBar.translucent = YES;
 	
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
@@ -87,9 +87,10 @@
     [cell setSelectedBackgroundView:view];
 	
 	NSDate *now = [NSDate date];
+	
 	if ([now laterDate:entry.dateToFulfill] == now) {
 		NSDictionary *dict = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleThick],
-							   NSStrikethroughColorAttributeName: [UIColor redColor]
+							   NSStrikethroughColorAttributeName: [UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0]
 							   };
 		NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:entry.desc attributes:dict];
 		cell.textLabel.attributedText = str;
@@ -107,6 +108,11 @@
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return NO;
+}
+/*
 - (void)tableView:(nonnull UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -117,7 +123,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
-
+*/
 - (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     return 70;

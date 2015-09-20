@@ -4,6 +4,7 @@
 #import "ListEntry.h"
 #import "UITextView+Placeholder.h"
 #import "SSFlatDatePicker.h"
+#import "RKDropdownAlert.h"
 
 //#define offsetForKeyboard 80.0
 
@@ -145,7 +146,7 @@ CGFloat h;
 	_descField = [[UITextView alloc] init];
     [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h / 2.0 - h * 0.15)];
     _descField.delegate = self;
-    [_descField setFont:[UIFont fontWithName:@"din-light" size:20]];
+    [_descField setFont:[UIFont fontWithName:@"din-light" size:22]];
     [_descField setTextColor:[UIColor lightGrayColor]];
     [_descField setTextAlignment:NSTextAlignmentCenter];
     [_descField setText:@""];
@@ -186,16 +187,17 @@ CGFloat h;
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	NSCalendarUnit unit = NSCalendarUnitDay;
 	
+	
+	[_dateLabel removeFromSuperview];
+	
+	_dateLabel = [[UILabel alloc] init];
+	_dateLabel.frame = CGRectMake((w - lw) / 2.0, y, w, 158);
+	[_dateLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
+	[_dateLabel setTextAlignment:NSTextAlignmentCenter];
+	[_dateLabel setTextColor:[UIColor lightGrayColor]];
+	_dateLabel.numberOfLines = 0;
+	
 	if (!_isNew && !_isComplete) {
-		
-		[_dateLabel removeFromSuperview];
-		
-		_dateLabel = [[UILabel alloc] init];
-		_dateLabel.frame = CGRectMake((w - lw) / 2.0, y, w, 158);
-		[_dateLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
-		[_dateLabel setTextAlignment:NSTextAlignmentCenter];
-		[_dateLabel setTextColor:[UIColor lightGrayColor]];
-		_dateLabel.numberOfLines = 0;
 		
 		NSDate *now = [NSDate date];
 		if ([now laterDate:_entry.dateToFulfill] == now) {
@@ -253,9 +255,6 @@ CGFloat h;
 		
 		[self.view addSubview:_dateLabel];
     }
-	
-	
-	[self.view addSubview:_dateLabel];
 }
 
 - (void)setDeadline
@@ -274,7 +273,7 @@ CGFloat h;
     _ppc = destNav.popoverPresentationController;
     _ppc.delegate = self;
     _ppc.sourceView = self.view;
-    _ppc.sourceRect = [_dateLabel frame];
+    _ppc.sourceRect = [_ddlButton frame];
     [_ppc setPermittedArrowDirections:UIPopoverArrowDirectionDown];
     [_ppc setBackgroundColor:[UIColor darkGrayColor]];
     
@@ -295,7 +294,11 @@ CGFloat h;
     NSString *dateString = [formatter stringFromDate:[_dp date]];
     
     [self.navigationItem setTitle:dateString];
-    _dtc = [_dp date];
+	
+	
+	NSDate *tmr = [NSDate dateWithTimeInterval:(24*60*60) sinceDate:[_dp date]];
+	tmr = [[NSCalendar currentCalendar] startOfDayForDate:tmr];
+    _dtc = [tmr dateByAddingTimeInterval:-1];
 	
 	_entry.dateToFulfill = _dtc;
 	[self setDaysLabel];
@@ -304,39 +307,50 @@ CGFloat h;
 
 - (void)save
 {
-    //[_saveButton setBackgroundColor:[UIColor darkGrayColor]];
-    
-    if (!_descField.text || _descField.text.length == 0) {
-        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a goal" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+	NSString *trimmedStr = [[_descField text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([trimmedStr length] == 0) {
+        /*UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a goal" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [toast show];
         int duration = 0.9;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [toast dismissWithClickedButtonIndex:0 animated:YES];
-        });
+        }); */
+		
+		[RKDropdownAlert title:@"Set a target" message:nil backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] time:1];
         return;
     }
-    else if (_dp == nil) {
-        UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:@"Set a deadline" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        [toast show];
-        int duration = 0.7;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [toast dismissWithClickedButtonIndex:0 animated:YES];
-        });
+	if (_dp == nil) {
+		[RKDropdownAlert title:@"Set a deadline" message:nil backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] time:1];
         return;
     }
-    
+	
+	NSDate *now = [NSDate date];
+	if ([now laterDate: _dtc] == now) {
+		[RKDropdownAlert title:@"Set a valid deadline" message:nil backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] time:1];
+		return;
+	}
+	
     self.entry = [[ListEntries sharedEntries] createEntry];
-    //self.entry.title = _titleField.text;
-    self.entry.desc = _descField.text;
+    self.entry.desc = [_descField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     self.entry.dateToFulfill = _dtc;
     self.entry.dateCreated = [NSDate date];
     
     // local notification
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [NSDate date];
-    localNotification.alertBody = @"Hello there";
-    localNotification.alertAction = @"show me the thing";
-    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+	NSString *alertBodyStr = @"You have new task to do";
+	
+	now = [NSDate date];
+	NSDate *timeToFire = [NSDate dateWithTimeInterval:(12 * 60 * 60) sinceDate:now];
+	
+	UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+	localNotification.fireDate = timeToFire;
+	localNotification.repeatCalendar = [NSCalendar currentCalendar];
+	localNotification.repeatInterval = NSCalendarUnitDay;
+	localNotification.alertBody = alertBodyStr;
+    localNotification.alertAction = @"open Passerby";
+	localNotification.soundName = UILocalNotificationDefaultSoundName;
+	localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber]  + 1;
+
+	[[UIApplication sharedApplication] cancelAllLocalNotifications];
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
@@ -357,7 +371,6 @@ CGFloat h;
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setLocale:[NSLocale currentLocale]];
 		[formatter setDateStyle:NSDateFormatterMediumStyle];
-		NSString *date = [formatter stringFromDate:[NSDate date]];
 		
 		self.entry.dateCompleted = [NSDate date];
 		[[ListEntries sharedEntries] moveToCompleted:self.entry];
@@ -402,17 +415,20 @@ CGFloat h;
 		[self presentViewController:destNav animated:YES completion:nil];
 	}];
 	
+	UIAlertAction *del = [UIAlertAction actionWithTitle:@"Delete Task" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+		[[ListEntries sharedEntries] removeEntry:_entry];
+		[self.navigationController popViewControllerAnimated:YES];
+	}];
+	
 	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
 	
 	[alert addAction:complete];
 	[alert addAction:edit];
+	[alert addAction:del];
 	[alert addAction:cancel];
 	
 	[self presentViewController:alert animated:true completion:nil];
 }
-
-
-
 
 - (void)deleteTask
 {
@@ -461,7 +477,7 @@ CGFloat h;
     
     CGRect rect = self.view.frame;
     
-    CGFloat offset = h * 0.15 - 5;
+    CGFloat offset = h * 0.15 - 15;
     
     if (move) {
         rect.origin.y -= offset;
