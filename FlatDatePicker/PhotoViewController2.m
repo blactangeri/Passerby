@@ -47,10 +47,6 @@
     }
     else [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)setupBackground
@@ -60,7 +56,8 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+	[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
+    self.navigationController.navigationBar.translucent = NO;
     
     UIButton *delBtn = [[UIButton alloc] init];
     UIImage *delImg = [[UIImage imageNamed:@"delete.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

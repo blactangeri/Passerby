@@ -7,10 +7,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:YES];
+
     //UIImage *backButtonImage = [[UIImage imageNamed:@"back.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     //[Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
+	
+	
 	if ([[ListEntries sharedEntries] allEntries].count == 0) {
 		[application setApplicationIconBadgeNumber:0];
 		[[UIApplication sharedApplication] cancelAllLocalNotifications];

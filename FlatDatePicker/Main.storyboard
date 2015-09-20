@@ -85,54 +85,25 @@
             </objects>
             <point key="canvasLocation" x="2828" y="-1198"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Fc9-AE-meZ">
+        <!--CalendarVC-->
+        <scene sceneID="BDt-Gw-hkQ">
             <objects>
-                <navigationController id="AUS-nr-IT5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="8FH-ff-Fde">
-                        <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oGv-NK-jRH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QhK-Js-7hq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1084" y="-1449"/>
-        </scene>
-        <!--Days View Controller-->
-        <scene sceneID="1xX-No-Jg6">
-            <objects>
-                <tableViewController id="hNJ-AT-0n5" customClass="DaysViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P5I-1h-Y3G">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="RPN-11-Nrh" customClass="CalendarVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rbU-RH-B7P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Qhu-Bp-eHL">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qhu-Bp-eHL" id="HXH-Un-zkU">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="hNJ-AT-0n5" id="I1z-gx-ERA"/>
-                            <outlet property="delegate" destination="hNJ-AT-0n5" id="sgM-42-3o7"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Tdq-e7-XbE"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Gn-Fp-yTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBarItem key="tabBarItem" title="" id="P7g-XG-VeG">
+                        <inset key="imageInsets" minX="30" minY="40" maxX="40" maxY="30"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="wiU-OY-Rqk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hu3-Ji-AoF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1619" y="-1449"/>
+            <point key="canvasLocation" x="1125" y="-1463"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oOg-74-UBu">
@@ -289,7 +260,7 @@
                     <connections>
                         <segue destination="TfW-jw-CD1" kind="relationship" relationship="viewControllers" id="t7z-Ex-a8l"/>
                         <segue destination="V1Z-O2-RUv" kind="relationship" relationship="viewControllers" id="1JC-kC-bEG"/>
-                        <segue destination="AUS-nr-IT5" kind="relationship" relationship="viewControllers" id="1NH-et-2pW"/>
+                        <segue destination="RPN-11-Nrh" kind="relationship" relationship="viewControllers" id="41H-pH-8p5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4w-LE-Eej" userLabel="First Responder" sceneMemberID="firstResponder"/>

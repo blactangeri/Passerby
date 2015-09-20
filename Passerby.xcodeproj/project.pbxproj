@@ -21,6 +21,7 @@
 		1A6AED481BAE419F006BEAA8 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED471BAE419F006BEAA8 /* edit.png */; settings = {ASSET_TAGS = (); }; };
 		1A6AED4A1BAE42F4006BEAA8 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED491BAE42F4006BEAA8 /* cal.png */; settings = {ASSET_TAGS = (); }; };
 		1A6F2A2A1BAF2C1C001BCA47 /* icon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F2A291BAF2C1C001BCA47 /* icon.jpeg */; settings = {ASSET_TAGS = (); }; };
+		1A6F2A2D1BAF31FF001BCA47 /* CalendarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */; settings = {ASSET_TAGS = (); }; };
 		1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6031B5A80BE0031E6D0 /* days.png */; };
 		1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6051B5A964F0031E6D0 /* undo.png */; };
 		1A8DE6091B5ADEE80031E6D0 /* PhotoViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */; };
@@ -101,6 +102,8 @@
 		1A6AED471BAE419F006BEAA8 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		1A6AED491BAE42F4006BEAA8 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		1A6F2A291BAF2C1C001BCA47 /* icon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpeg; sourceTree = "<group>"; };
+		1A6F2A2B1BAF31FF001BCA47 /* CalendarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarVC.h; sourceTree = "<group>"; };
+		1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarVC.m; sourceTree = "<group>"; };
 		1A8DE6031B5A80BE0031E6D0 /* days.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = days.png; sourceTree = "<group>"; };
 		1A8DE6051B5A964F0031E6D0 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		1A8DE6071B5ADEE80031E6D0 /* PhotoViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController2.h; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 				1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */,
 				1AD8B39F1B50C9DC003D0E47 /* DetailViewController.h */,
 				1AD8B3A01B50C9DC003D0E47 /* DetailViewController.m */,
+				1A6F2A2B1BAF31FF001BCA47 /* CalendarVC.h */,
+				1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */,
 				1AF9D1F41B5228EA00509C2D /* ResetViewController.h */,
 				1AF9D1F51B5228EA00509C2D /* ResetViewController.m */,
 				1AF48CE41B4629A8005A158A /* Main.storyboard */,
@@ -550,6 +555,7 @@
 				6B2C83741751107700BC04FB /* ViewController.m in Sources */,
 				1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */,
 				1AB9F08B1BAF16D100E273C8 /* RKDropdownAlert.m in Sources */,
+				1A6F2A2D1BAF31FF001BCA47 /* CalendarVC.m in Sources */,
 				1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */,
 				1AB9F09D1BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m in Sources */,
 			);

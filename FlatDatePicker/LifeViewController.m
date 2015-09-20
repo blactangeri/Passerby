@@ -71,10 +71,14 @@ static NSString * const reuseIdentifier = @"Cell";
 	_events = [[NSMutableArray alloc] init];
 	_months = [NSMutableArray array];
 	_completedTasksSet = [NSMutableArray array];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
 	
 	[self loadEvents];
 }
-
 
 - (void)loadEvents
 {
@@ -106,6 +110,23 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 	i = 0;
 }
+
+/*- (void)highlightEvents {
+	
+	for (NSNumber *num in _months) {
+		NSUInteger n = num.intValue;
+		NSIndexPath *path = [NSIndexPath indexPathWithIndex:n];
+		UICollectionViewCell *eventCell = [self.collectionView cellForItemAtIndexPath:path];
+		eventCell.backgroundColor = [UIColor yellowColor];
+	}
+	
+	for (NSNumber *num in _completedTasksSet) {
+		NSUInteger n = num.intValue;
+		NSIndexPath *path = [NSIndexPath indexPathWithIndex:n];
+		UICollectionViewCell *completedCell = [self.collectionView cellForItemAtIndexPath:path];
+		completedCell.backgroundColor = [UIColor blueColor];
+	}
+}*/
 
 - (void)gotoMain
 {
@@ -210,6 +231,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	
 	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 	
 	if (indexPath.row < month) {

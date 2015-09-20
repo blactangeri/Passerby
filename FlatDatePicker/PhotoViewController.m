@@ -37,16 +37,12 @@
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
 	[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-	self.navigationController.navigationBar.translucent = YES;
+	self.navigationController.navigationBar.translucent = NO;
 	
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	
-    //[self.navigationItem setTitle:@"PASSER'S LIST"];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
-    self.navigationController.navigationBar.translucent = NO;
-    
     [self.view setBackgroundColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];
 	
 	

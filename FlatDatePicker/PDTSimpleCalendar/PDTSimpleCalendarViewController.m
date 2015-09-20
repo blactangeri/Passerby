@@ -11,9 +11,12 @@
 #import "PDTSimpleCalendarViewFlowLayout.h"
 #import "PDTSimpleCalendarViewCell.h"
 #import "PDTSimpleCalendarViewHeader.h"
+#import "ListEntries.h"
+#import "ListEntry.h"
 
 
 const CGFloat PDTSimpleCalendarOverlaySize = 14.0f;
+NSIndexPath *path;
 
 static NSString *const PDTSimpleCalendarViewCellIdentifier = @"com.producteev.collection.cell.identifier";
 static NSString *const PDTSimpleCalendarViewHeaderIdentifier = @"com.producteev.collection.header.identifier";
@@ -99,6 +102,11 @@ static const NSCalendarUnit kCalendarUnitYMD = NSCalendarUnitYear | NSCalendarUn
     if (self.selectedDate) {
         [self.collectionViewLayout invalidateLayout];
     }
+	
+	[self.view layoutIfNeeded];
+	[self scrollToDate:[NSDate date] animated:NO];
+	
+	[self.collectionView reloadData];
 }
 
 #pragma mark - Accessors
@@ -270,6 +278,23 @@ static const NSCalendarUnit kCalendarUnitYMD = NSCalendarUnitYear | NSCalendarUn
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+	[self setDelegate:self];
+	
+	self.weekdayHeaderEnabled = YES;
+	self.weekdayTextType = PDTSimpleCalendarViewWeekdayTextTypeShort;
+	
+	NSDateComponents *comps1 = [[NSDateComponents alloc] init];
+	[comps1 setDay:1];
+	[comps1 setMonth:1];
+	[comps1 setYear:2000];
+	self.firstDate = [[NSCalendar currentCalendar] dateFromComponents:comps1];
+	
+	NSDateComponents *comps2 = [[NSDateComponents alloc] init];
+	[comps2 setDay:31];
+	[comps2 setMonth:12];
+	[comps2 setYear:2100];
+	self.lastDate = [[NSCalendar currentCalendar] dateFromComponents:comps2];
+	
     //Configure the Collection View
     [self.collectionView registerClass:[PDTSimpleCalendarViewCell class] forCellWithReuseIdentifier:PDTSimpleCalendarViewCellIdentifier];
     [self.collectionView registerClass:[PDTSimpleCalendarViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:PDTSimpleCalendarViewHeaderIdentifier];
@@ -389,6 +414,7 @@ static const NSCalendarUnit kCalendarUnitYMD = NSCalendarUnitYear | NSCalendarUn
 
     if (isToday) {
         [cell setIsToday:isToday];
+		path = indexPath;
     }
 
     if (isSelected) {
@@ -404,7 +430,17 @@ static const NSCalendarUnit kCalendarUnitYMD = NSCalendarUnitYear | NSCalendarUn
     //The circle background is made using roundedCorner which is a super expensive operation, specially with a lot of items on the screen to display (like we do)
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-
+	
+	// highlight events
+	NSDate *cellDay = [[NSCalendar currentCalendar] startOfDayForDate:cellDate];
+	for (ListEntry *entry in [[ListEntries sharedEntries] allEntries]) {
+		NSDate *entryDayToComplete = [[NSCalendar currentCalendar] startOfDayForDate:entry.dateToFulfill];
+		if (cellDay == entryDayToComplete) {
+			[cell setCircleDefaultColor:[UIColor yellowColor]];
+		}
+	}
+	
+	
     return cell;
 }
 
@@ -608,6 +644,8 @@ static const NSInteger kFirstDay = 1;
     if ([self.delegate respondsToSelector:@selector(simpleCalendarViewController:shouldUseCustomColorsForDate:)]) {
         return [self.delegate simpleCalendarViewController:self shouldUseCustomColorsForDate:date];
     }
+	
+	
 
     return NO;
 }
