@@ -27,6 +27,8 @@
 		1A4155AE1B47774800F33DDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4155AD1B47774800F33DDE /* Images.xcassets */; };
 		1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B26B1B4ACD8200196E3C /* LifeViewController.m */; };
 		1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A477E5E1B53EE3800D2D6BD /* cancel.png */; };
+		1A6AED481BAE419F006BEAA8 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED471BAE419F006BEAA8 /* edit.png */; settings = {ASSET_TAGS = (); }; };
+		1A6AED4A1BAE42F4006BEAA8 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED491BAE42F4006BEAA8 /* cal.png */; settings = {ASSET_TAGS = (); }; };
 		1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6031B5A80BE0031E6D0 /* days.png */; };
 		1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6051B5A964F0031E6D0 /* undo.png */; };
 		1A8DE6091B5ADEE80031E6D0 /* PhotoViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */; };
@@ -68,10 +70,8 @@
 		1AF48CE51B4629A8005A158A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF48CE41B4629A8005A158A /* Main.storyboard */; };
 		1AF48CF01B462AB0005A158A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CE91B462AB0005A158A /* MainViewController.m */; };
 		1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CED1B462AB0005A158A /* PhotoViewController.m */; };
-		1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */; };
 		1AF9D1F61B5228EA00509C2D /* ResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF9D1F51B5228EA00509C2D /* ResetViewController.m */; };
 		1AFAD78F1BAD99550097090F /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAD78E1BAD99550097090F /* Hourglass.png */; settings = {ASSET_TAGS = (); }; };
-		1AFAD7911BAE03660097090F /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAD7901BAE03660097090F /* cal.png */; settings = {ASSET_TAGS = (); }; };
 		1AFAD7941BAE073A0097090F /* DaysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAD7931BAE073A0097090F /* DaysViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1AFD53271B575F8600D4D7FF /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFD53261B575F8600D4D7FF /* check.png */; };
 		6B2C835B1751107700BC04FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2C835A1751107700BC04FB /* UIKit.framework */; };
@@ -115,6 +115,8 @@
 		1A45B26A1B4ACD8200196E3C /* LifeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeViewController.h; sourceTree = "<group>"; };
 		1A45B26B1B4ACD8200196E3C /* LifeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeViewController.m; sourceTree = "<group>"; };
 		1A477E5E1B53EE3800D2D6BD /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		1A6AED471BAE419F006BEAA8 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		1A6AED491BAE42F4006BEAA8 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		1A8DE6031B5A80BE0031E6D0 /* days.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = days.png; sourceTree = "<group>"; };
 		1A8DE6051B5A964F0031E6D0 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		1A8DE6071B5ADEE80031E6D0 /* PhotoViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController2.h; sourceTree = "<group>"; };
@@ -168,12 +170,9 @@
 		1AF48CE91B462AB0005A158A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		1AF48CEC1B462AB0005A158A /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		1AF48CED1B462AB0005A158A /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
-		1AF48CEE1B462AB0005A158A /* SidebarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarTableViewController.h; sourceTree = "<group>"; };
-		1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarTableViewController.m; sourceTree = "<group>"; };
 		1AF9D1F41B5228EA00509C2D /* ResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetViewController.h; sourceTree = "<group>"; };
 		1AF9D1F51B5228EA00509C2D /* ResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetViewController.m; sourceTree = "<group>"; };
 		1AFAD78E1BAD99550097090F /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
-		1AFAD7901BAE03660097090F /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		1AFAD7921BAE073A0097090F /* DaysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaysViewController.h; sourceTree = "<group>"; };
 		1AFAD7931BAE073A0097090F /* DaysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaysViewController.m; sourceTree = "<group>"; };
 		1AFD53261B575F8600D4D7FF /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -323,6 +322,7 @@
 		1ADB9BCE1B461DBB008C96E5 /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				1A6AED491BAE42F4006BEAA8 /* cal.png */,
 				1AFAD78E1BAD99550097090F /* Hourglass.png */,
 				1A17C4501BACFD1F00D337F4 /* checkfilled.png */,
 				1A17C4521BACFE3600D337F4 /* listfilled.png */,
@@ -340,7 +340,7 @@
 				1A07D2761B59A51000A80B12 /* back.png */,
 				1A8DE6051B5A964F0031E6D0 /* undo.png */,
 				1A07D2781B59B6EA00A80B12 /* save.png */,
-				1AFAD7901BAE03660097090F /* cal.png */,
+				1A6AED471BAE419F006BEAA8 /* edit.png */,
 			);
 			name = imgs;
 			sourceTree = "<group>";
@@ -446,8 +446,6 @@
 				1AF48CED1B462AB0005A158A /* PhotoViewController.m */,
 				1A8DE6071B5ADEE80031E6D0 /* PhotoViewController2.h */,
 				1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */,
-				1AF48CEE1B462AB0005A158A /* SidebarTableViewController.h */,
-				1AF48CEF1B462AB0005A158A /* SidebarTableViewController.m */,
 				1AD8B39F1B50C9DC003D0E47 /* DetailViewController.h */,
 				1AD8B3A01B50C9DC003D0E47 /* DetailViewController.m */,
 				1AF9D1F41B5228EA00509C2D /* ResetViewController.h */,
@@ -573,6 +571,7 @@
 				1A8DE6121B5B02960031E6D0 /* delete.png in Resources */,
 				1AB3BDEA1B4F7C99007279FE /* user.png in Resources */,
 				1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */,
+				1A6AED481BAE419F006BEAA8 /* edit.png in Resources */,
 				1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */,
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
 				1ADB9BDF1B461DC3008C96E5 /* menu@2x.png in Resources */,
@@ -581,9 +580,9 @@
 				1AFD53271B575F8600D4D7FF /* check.png in Resources */,
 				1A17C4531BACFE3600D337F4 /* listfilled.png in Resources */,
 				1A17C44D1BACF9D200D337F4 /* user2.png in Resources */,
+				1A6AED4A1BAE42F4006BEAA8 /* cal.png in Resources */,
 				6BB019971751257B00643F6D /* FlatDatePicker-Icon-Close.png in Resources */,
 				6BB019981751257B00643F6D /* FlatDatePicker-Icon-Check.png in Resources */,
-				1AFAD7911BAE03660097090F /* cal.png in Resources */,
 				1A07D2791B59B6EA00A80B12 /* save.png in Resources */,
 				1A8DE6101B5AF7330031E6D0 /* list.png in Resources */,
 				6BB019991751257B00643F6D /* FlatDatePicker-Icon-Check@2x.png in Resources */,
@@ -623,7 +622,6 @@
 				1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */,
 				1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */,
 				1A07A4F01BAC5A1E00E2AD4D /* RAMFumeAnimation.swift in Sources */,
-				1AF48CF31B462AB0005A158A /* SidebarTableViewController.m in Sources */,
 				1A07A4F11BAC5A1E00E2AD4D /* RAMRotationAnimation.swift in Sources */,
 				1AFAD7941BAE073A0097090F /* DaysViewController.m in Sources */,
 			);

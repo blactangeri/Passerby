@@ -125,11 +125,9 @@ double age;
     _dobLabel.textColor = [UIColor grayColor];
     
     NSCalendar *cal = [NSCalendar currentCalendar];
-    NSCalendarUnit unit = NSCalendarUnitMinute;
+    NSCalendarUnit unit = NSCalendarUnitYear;
     NSDateComponents *comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
 	
-	unit = NSCalendarUnitYear;
-	comp = [cal components:unit fromDate:_dob toDate:[NSDate date] options:0];
 	_lbl1.text = [NSString stringWithFormat:@"%ld\ryears", (long)[comp year]];
 	
 	unit = NSCalendarUnitMonth;

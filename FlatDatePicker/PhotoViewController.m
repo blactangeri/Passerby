@@ -1,5 +1,4 @@
 #import "PhotoViewController.h"
-#import "SWRevealViewController.h"
 #import "ListEntries.h"
 #import "ListEntry.h"
 #import "DetailViewController.h"
@@ -74,7 +73,7 @@
     
     NSArray *entries = [[ListEntries sharedEntries] allEntries];
     ListEntry *entry = entries[indexPath.row];
-    
+	
     cell.textLabel.text = entry.desc;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -86,6 +85,15 @@
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor darkGrayColor];
     [cell setSelectedBackgroundView:view];
+	
+	NSDate *now = [NSDate date];
+	if ([now laterDate:entry.dateToFulfill] == now) {
+		NSDictionary *dict = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleThick],
+							   NSStrikethroughColorAttributeName: [UIColor redColor]
+							   };
+		NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:entry.desc attributes:dict];
+		cell.textLabel.attributedText = str;
+	}
     
     return cell;
 }
@@ -118,11 +126,11 @@
 - (void)tableView:(nonnull UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
-    cell.textLabel.font = [UIFont fontWithName:@"din-light" size:22];
+    //cell.textLabel.font = [UIFont fontWithName:@"din-light" size:22];
     cell.textLabel.textColor = [UIColor lightGrayColor];
     
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
+    //cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
 }
 
 - (void)tableView:(nonnull UITableView *)tableView willBeginEditingRowAtIndexPath:(nonnull NSIndexPath *)indexPath

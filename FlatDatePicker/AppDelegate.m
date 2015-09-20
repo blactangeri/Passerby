@@ -13,7 +13,6 @@
     //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     //[Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
-	
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];

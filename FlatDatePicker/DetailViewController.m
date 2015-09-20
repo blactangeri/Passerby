@@ -11,7 +11,8 @@
                                     UIPopoverPresentationControllerDelegate, UIViewControllerRestoration, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITextView *descField;
-@property (nonatomic, strong) UIButton *dateLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UIButton *ddlButton;
 @property (nonatomic, strong) UIPopoverPresentationController *ppc;
 @property (nonatomic, strong) SSFlatDatePicker *dp;
 @property (nonatomic, strong) NSDate *dtc;
@@ -28,35 +29,16 @@ CGFloat h;
      w = [[UIScreen mainScreen] bounds].size.width;
      h = [[UIScreen mainScreen] bounds].size.height;
 	
-    [self setupDatelabel];
+    [self setNavbarTitle];
     [self setupTextView];
-    [self setupDeadlineButton];
+    [self setDaysLabel];
 	[self setupBackground];
+	
+	[self.navigationController.navigationBar setTitleTextAttributes:
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[UIFont fontWithName:@"din-light" size:18], NSFontAttributeName, [UIColor lightGrayColor], NSForegroundColorAttributeName, nil]];
 
-}
 
-
-- (void)encodeRestorableStateWithCoder:(nonnull NSCoder *)coder
-{
-    [coder encodeObject:self.entry.entryKey forKey:@"entry.entryKey"];
-    //self.entry.title = _titleField.text;
-    self.entry.desc = _descField.text;
-    
-    [[ListEntries sharedEntries] saveChanges];
-    
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(nonnull NSCoder *)coder
-{
-    NSString *entryKey = [coder decodeObjectForKey:@"entry.entryKey"];
-    for (ListEntry *entry in [[ListEntries sharedEntries] allEntries]) {
-        if ([entryKey isEqualToString:entry.entryKey]) {
-            self.entry = entry;
-            break;
-        }
-    }
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -68,7 +50,7 @@ CGFloat h;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:[UITextView class]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:[UITextView class]];
     
-    if (!_isNew) {
+    if (!_isNew && !_isComplete) {
         _entry.desc = self.descField.text;
         _entry.dateToFulfill = self.dtc;
     }
@@ -109,11 +91,11 @@ CGFloat h;
     }
     else {
         if (!_isComplete) {
-            UIImage *userImg = [[UIImage imageNamed:@"check.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            UIImage *userImg = [[UIImage imageNamed:@"edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [userButton setImage:userImg forState:UIControlStateNormal];
             [userButton setFrame:CGRectMake(0, 0, 23, 23)];
             userButton.tintColor = [UIColor lightGrayColor];
-            [userButton addTarget:self action:@selector(completeTask) forControlEvents:UIControlEventTouchUpInside];
+            [userButton addTarget:self action:@selector(editTask) forControlEvents:UIControlEventTouchUpInside];
             UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:userButton];
             self.navigationItem.rightBarButtonItem = right;
         }
@@ -138,86 +120,141 @@ CGFloat h;
 	
 	if (!_isNew) {
 		self.descField.text = _entry.desc;
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateStyle:NSDateFormatterMediumStyle];
-		[formatter setLocale:[NSLocale currentLocale]];
-		NSString *dateString = [formatter stringFromDate:_entry.dateToFulfill];
-		self.dateLabel.titleLabel.text = dateString;
 		self.dtc = _entry.dateToFulfill;
 	}
 	
 	[self.tabBarController.tabBar setHidden:YES];
 }
 
-- (void)goBack
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)dismissKeyboard
-{
-    [_descField endEditing:YES];
-}
-
-- (void)setupDatelabel
+- (void)setNavbarTitle
 {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
-    
+	
     if (_isNew) [self.navigationItem setTitle:[formatter stringFromDate:[NSDate date]]];
-    else if (!_isComplete) [self.navigationItem setTitle:[formatter stringFromDate:_entry.dateToFulfill]];
+    if (!_isNew && !_isComplete) [self.navigationItem setTitle:[formatter stringFromDate:_entry.dateToFulfill]];
+	if (_isComplete) {
+		[self.navigationItem setTitle: [NSString stringWithFormat:@"Completed on %@", [formatter stringFromDate:_entry.dateCompleted]]];
+	}
 }
 
 - (void)setupTextView
 {
 	_descField = [[UITextView alloc] init];
-    [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h * 0.38)];
+    [_descField setFrame:CGRectMake(w * 0.1 / 2.0, h * 0.15, w * 0.9, h / 2.0 - h * 0.15)];
     _descField.delegate = self;
     [_descField setFont:[UIFont fontWithName:@"din-light" size:20]];
     [_descField setTextColor:[UIColor lightGrayColor]];
-    [_descField setTextAlignment:NSTextAlignmentJustified];
+    [_descField setTextAlignment:NSTextAlignmentCenter];
     [_descField setText:@""];
 	[_descField setBackgroundColor:[UIColor clearColor]];
 
     if (_isNew) {
-        _descField.placeholder = @"Set the next big thing to do in your life. Life is short. Don't let it pass you by. Do something that makes your life a story worth telling.";
+        _descField.placeholder = @"What's the next big thing? Life is short. Don't let it pass you by. Do something that makes your life a story worth telling.";
         _descField.placeholderColor = [UIColor grayColor];
     }
-    else {
+    if (!_isNew && !_isComplete) {
         _descField.text = _entry.desc;
-        //[_descField sizeToFit];
     }
-    if (_isComplete) [_descField setEditable:NO];
-	
+	if (_isComplete) {
+		[_descField setEditable:NO];
+	}
+
 	[self.view addSubview:_descField];
 }
 
-- (void)setupDeadlineButton
+- (void)setDaysLabel
 {
-    CGFloat lw = w / 2.0;
-    CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 44;
-	_dateLabel = [[UIButton alloc] init];
-    _dateLabel.frame = CGRectMake((w - lw) / 2.0, y, lw, 44);
-    _dateLabel.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
-    [_dateLabel setTitleColor:[UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    _dateLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
-    _dateLabel.layer.borderWidth = 0;
+    CGFloat lw = w;
+    //CGFloat y = (_descField.frame.origin.y + _descField.frame.size.height) + 20;
+	CGFloat y = h / 2.0;
 
-    if (_isNew)[_dateLabel setTitle:@"SET A DEADLINE" forState:UIControlStateNormal];
-    else if (!_isComplete) [_dateLabel setTitle:@"EDIT DEADLINE" forState:UIControlStateNormal];
-    else {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setLocale:[NSLocale currentLocale]];
-        [formatter setDateStyle:NSDateFormatterMediumStyle];
-        [_dateLabel setEnabled:NO];
-        _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
-        NSString *str = [NSString stringWithFormat:@"Completed on %@", [formatter stringFromDate:_entry.dateCompleted]];
-        [_dateLabel setTitle:str forState:UIControlStateDisabled];
+	if (_isNew) {
+		_ddlButton = [[UIButton alloc] init];
+		_ddlButton.frame = CGRectMake(w / 4.0, y, w / 2.0, 44);
+		_ddlButton.titleLabel.font = [UIFont fontWithName:@"din-light" size:20];
+		[_ddlButton setTitleColor:[UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+		_ddlButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+		_ddlButton.layer.borderWidth = 0;
+		[_ddlButton setTitle:@"SET A DEADLINE" forState:UIControlStateNormal];
+		[_ddlButton addTarget:self action:@selector(setDeadline) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:_ddlButton];
+	}
+	
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	NSCalendarUnit unit = NSCalendarUnitDay;
+	
+	if (!_isNew && !_isComplete) {
+		
+		[_dateLabel removeFromSuperview];
+		
+		_dateLabel = [[UILabel alloc] init];
+		_dateLabel.frame = CGRectMake((w - lw) / 2.0, y, w, 158);
+		[_dateLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
+		[_dateLabel setTextAlignment:NSTextAlignmentCenter];
+		[_dateLabel setTextColor:[UIColor lightGrayColor]];
+		_dateLabel.numberOfLines = 0;
+		
+		NSDate *now = [NSDate date];
+		if ([now laterDate:_entry.dateToFulfill] == now) {
+			NSDictionary *dict = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:25],
+									NSForegroundColorAttributeName: [UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0]
+									};
+			NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Mission Failed" attributes:dict];
+
+			[_dateLabel setAttributedText:str];
+			[self.view addSubview:_dateLabel];
+		}
+		else {
+			
+			NSDateComponents *comp = [cal components:unit fromDate:[NSDate date] toDate:_entry.dateToFulfill options:0];
+			
+			NSString *text = [NSString stringWithFormat:@"You have\r\r%d\r\rdays to do it", (int)[comp day]];
+			NSString *num = [NSString stringWithFormat:@"%d", (int)[comp day	]];
+			
+			NSDictionary *dict1 = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:18],
+									NSForegroundColorAttributeName: [UIColor lightGrayColor]
+									};
+			
+			NSDictionary *dict2 = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:88],
+									NSForegroundColorAttributeName: [UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0]
+									};
+			
+			NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
+			
+			const NSRange range = [text rangeOfString:num];
+			[attrString addAttributes:dict2 range:range];
+			[_dateLabel setAttributedText:attrString];
+			
+			[self.view addSubview:_dateLabel];
+		}
+	}
+	if (_isComplete) {
+		NSDateComponents *comp = [cal components:unit fromDate:_entry.dateCompleted toDate:[NSDate date] options:0];
+		
+		NSString *text = [NSString stringWithFormat:@"You did it\r\r%d\rdays ago", (int)[comp day]];
+		NSString *num = [NSString stringWithFormat:@"%d", (int)[comp day	]];
+
+		NSDictionary *dict1 = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:18],
+								NSForegroundColorAttributeName: [UIColor lightGrayColor]
+								};
+		
+		NSDictionary *dict2 = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:88],
+								NSForegroundColorAttributeName: [UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0]
+								};
+		
+		const NSRange range = [text rangeOfString:num];
+		
+		NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
+		[attrString addAttributes:dict2 range:range];
+		[_dateLabel setAttributedText:attrString];
+		
+		[self.view addSubview:_dateLabel];
     }
 	
-	[_dateLabel addTarget:self action:@selector(setDeadline) forControlEvents:UIControlEventTouchUpInside];
+	
 	[self.view addSubview:_dateLabel];
 }
 
@@ -259,27 +296,11 @@ CGFloat h;
     
     [self.navigationItem setTitle:dateString];
     _dtc = [_dp date];
+	
+	_entry.dateToFulfill = _dtc;
+	[self setDaysLabel];
 }
 
-/*
-- (void)setupSaveButton
-{
-    CGFloat bw = 200;
-    CGFloat bh = 45;
-    CGFloat x = (w - bw) / 2.0;
-    CGFloat y = (_dateLabel.frame.origin.y + _dateLabel.frame.size.height) + 44;
-    
-    _saveButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, bw, bh)];
-    [self.view addSubview:_saveButton];
-    [_saveButton setBackgroundColor:[UIColor darkGrayColor]];
-    _saveButton.layer.cornerRadius = 23;
-    [_saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [_saveButton.titleLabel setFont:[UIFont fontWithName:@"din-light" size:20]];
-    [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_saveButton addTarget:self action:@selector(changeBgColor) forControlEvents:UIControlEventTouchDown];
-    [_saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
-}
- */
 
 - (void)save
 {
@@ -327,28 +348,84 @@ CGFloat h;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
-- (void)completeTask
+- (void)editTask {
+
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+	
+	UIAlertAction *complete = [UIAlertAction actionWithTitle:@"Complete Task" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+		
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setLocale:[NSLocale currentLocale]];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
+		NSString *date = [formatter stringFromDate:[NSDate date]];
+		
+		self.entry.dateCompleted = [NSDate date];
+		[[ListEntries sharedEntries] moveToCompleted:self.entry];
+		
+		UIButton *delBtn = [[UIButton alloc] init];
+		UIImage *delImg = [[UIImage imageNamed:@"delete.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+		[delBtn setImage:delImg forState:UIControlStateNormal];
+		[delBtn setFrame:CGRectMake(0, 0, 25, 25)];
+		delBtn.tintColor = [UIColor lightGrayColor];
+		[delBtn addTarget:self action:@selector(deleteTask) forControlEvents:UIControlEventTouchUpInside];
+		UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:delBtn];
+		self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+		
+		[self.navigationItem setTitle: [NSString stringWithFormat:@"Completed on %@", [formatter stringFromDate:_entry.dateCompleted]]];
+		
+		_isNew = NO;
+		_isComplete = YES;
+		
+		[self setDaysLabel];
+	}];
+	
+	UIAlertAction *edit = [UIAlertAction actionWithTitle:@"Edit Deadline" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+		[[SSFlatDatePicker appearance] setFont:[UIFont fontWithName:@"din-light" size:24]];
+		[[SSFlatDatePicker appearance] setGradientColor:[UIColor whiteColor]];
+		[[SSFlatDatePicker appearance] setTextColor:[UIColor blackColor]];
+		_dp = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(0, 0, w * 0.9, h * 0.2)];
+		
+		UIViewController *dateVC = [[UIViewController alloc] init];
+		dateVC.view = _dp;
+		
+		UINavigationController *destNav = [[UINavigationController alloc] initWithRootViewController:dateVC];
+		destNav.modalPresentationStyle = UIModalPresentationPopover;
+		dateVC.preferredContentSize = CGSizeMake(w * 0.9, h * 0.2);
+		_ppc = destNav.popoverPresentationController;
+		_ppc.delegate = self;
+		_ppc.sourceView = self.view;
+		_ppc.sourceRect = [_descField frame];
+		[_ppc setPermittedArrowDirections:UIPopoverArrowDirectionAny];
+		[_ppc setBackgroundColor:[UIColor darkGrayColor]];
+		
+		destNav.navigationBarHidden = YES;
+		[self presentViewController:destNav animated:YES completion:nil];
+	}];
+	
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+	
+	[alert addAction:complete];
+	[alert addAction:edit];
+	[alert addAction:cancel];
+	
+	[self presentViewController:alert animated:true completion:nil];
+}
+
+
+
+
+- (void)deleteTask
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Goal Completed?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+	
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Task?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:
                              ^(UIAlertAction *action){
                                  
-                                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                                 [formatter setLocale:[NSLocale currentLocale]];
-                                 [formatter setDateStyle:NSDateFormatterMediumStyle];
-                                 NSString *date = [formatter stringFromDate:[NSDate date]];
-                                 _dateLabel.frame = CGRectMake(0, (_descField.frame.origin.y + _descField.frame.size.height) + 44, w, 44);
-                                 [_dateLabel setTitle:[NSString stringWithFormat:@"Completed on %@", date] forState:UIControlStateNormal];
-                                 [_dateLabel setEnabled:NO];
-                                 
-                                 self.entry.dateCompleted = [NSDate date];
-                                 [[ListEntries sharedEntries] moveToCompleted:self.entry];
+								 [[ListEntries sharedEntries] removeEntry:self.entry];
+								 [self.navigationController popViewControllerAnimated:true];
                                  
                              }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                             }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     [alert addAction:OK];
     [alert addAction:cancel];
@@ -400,7 +477,15 @@ CGFloat h;
     [UIView commitAnimations];
 }
 
+- (void)goBack
+{
+	[self.navigationController popViewControllerAnimated:YES];
+}
 
+- (void)dismissKeyboard
+{
+	[_descField endEditing:YES];
+}
 
 /*
 #pragma mark - Navigation
@@ -436,6 +521,30 @@ CGFloat h;
 - (void)textViewDidEndEditing:(nonnull UITextView *)textView
 {
     [self moveUp:NO];
+}
+
+
+- (void)encodeRestorableStateWithCoder:(nonnull NSCoder *)coder
+{
+	[coder encodeObject:self.entry.entryKey forKey:@"entry.entryKey"];
+	//self.entry.title = _titleField.text;
+	self.entry.desc = _descField.text;
+	
+	[[ListEntries sharedEntries] saveChanges];
+	
+	[super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(nonnull NSCoder *)coder
+{
+	NSString *entryKey = [coder decodeObjectForKey:@"entry.entryKey"];
+	for (ListEntry *entry in [[ListEntries sharedEntries] allEntries]) {
+		if ([entryKey isEqualToString:entry.entryKey]) {
+			self.entry = entry;
+			break;
+		}
+	}
+	[super decodeRestorableStateWithCoder:coder];
 }
 
 /*

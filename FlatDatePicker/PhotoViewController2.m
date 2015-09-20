@@ -29,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView reloadData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [self setupBackground];
@@ -147,11 +146,11 @@
 - (void)tableView:(nonnull UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
-    cell.textLabel.font = [UIFont fontWithName:@"din-light" size:22];
+    //cell.textLabel.font = [UIFont fontWithName:@"din-light" size:22];
     cell.textLabel.textColor = [UIColor lightGrayColor];
     
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
+    //cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
 }
 
 

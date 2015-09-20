@@ -102,6 +102,7 @@
 - (void)removeEntry:(ListEntry *)entry
 {
     [self.privateEntries removeObjectIdenticalTo:entry];
+	[_completedEntries removeObjectIdenticalTo:entry];
 }
 
 - (void)removeAll
