@@ -21,7 +21,6 @@
 		1A6AED481BAE419F006BEAA8 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED471BAE419F006BEAA8 /* edit.png */; settings = {ASSET_TAGS = (); }; };
 		1A6AED4A1BAE42F4006BEAA8 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AED491BAE42F4006BEAA8 /* cal.png */; settings = {ASSET_TAGS = (); }; };
 		1A6F2A2A1BAF2C1C001BCA47 /* icon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F2A291BAF2C1C001BCA47 /* icon.jpeg */; settings = {ASSET_TAGS = (); }; };
-		1A6F2A2D1BAF31FF001BCA47 /* CalendarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */; settings = {ASSET_TAGS = (); }; };
 		1A8DE6041B5A80BE0031E6D0 /* days.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6031B5A80BE0031E6D0 /* days.png */; };
 		1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8DE6051B5A964F0031E6D0 /* undo.png */; };
 		1A8DE6091B5ADEE80031E6D0 /* PhotoViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */; };
@@ -35,12 +34,6 @@
 		1AA582401BAEF01C0088CED3 /* MainTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5823F1BAEF01C0088CED3 /* MainTabbarController.m */; settings = {ASSET_TAGS = (); }; };
 		1AB3BDEA1B4F7C99007279FE /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB3BDE91B4F7C99007279FE /* user.png */; };
 		1AB9F08B1BAF16D100E273C8 /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F08A1BAF16D100E273C8 /* RKDropdownAlert.m */; settings = {ASSET_TAGS = (); }; };
-		1AB9F0991BAF28FF00E273C8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AB9F08D1BAF28FF00E273C8 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		1AB9F09A1BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F0901BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		1AB9F09B1BAF28FF00E273C8 /* PDTSimpleCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F0921BAF28FF00E273C8 /* PDTSimpleCalendarViewController.m */; settings = {ASSET_TAGS = (); }; };
-		1AB9F09C1BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F0941BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.m */; settings = {ASSET_TAGS = (); }; };
-		1AB9F09D1BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F0961BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m */; settings = {ASSET_TAGS = (); }; };
-		1AB9F09E1BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9F0981BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.m */; settings = {ASSET_TAGS = (); }; };
 		1ABB66DD1B4E354C000DEFEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABB66DC1B4E354C000DEFEA /* QuartzCore.framework */; };
 		1AD5C4A11B55CB1D008490E5 /* SSFlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD5C4A01B55CB1D008490E5 /* SSFlatDatePicker.m */; };
 		1AD8B3A11B50C9DC003D0E47 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B3A01B50C9DC003D0E47 /* DetailViewController.m */; };
@@ -102,8 +95,6 @@
 		1A6AED471BAE419F006BEAA8 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		1A6AED491BAE42F4006BEAA8 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		1A6F2A291BAF2C1C001BCA47 /* icon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpeg; sourceTree = "<group>"; };
-		1A6F2A2B1BAF31FF001BCA47 /* CalendarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarVC.h; sourceTree = "<group>"; };
-		1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarVC.m; sourceTree = "<group>"; };
 		1A8DE6031B5A80BE0031E6D0 /* days.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = days.png; sourceTree = "<group>"; };
 		1A8DE6051B5A964F0031E6D0 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		1A8DE6071B5ADEE80031E6D0 /* PhotoViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController2.h; sourceTree = "<group>"; };
@@ -123,18 +114,6 @@
 		1AB3BDE91B4F7C99007279FE /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		1AB9F0891BAF16D100E273C8 /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
 		1AB9F08A1BAF16D100E273C8 /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
-		1AB9F08D1BAF28FF00E273C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AB9F08E1BAF28FF00E273C8 /* PDTSimpleCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendar.h; sourceTree = "<group>"; };
-		1AB9F08F1BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewCell.h; sourceTree = "<group>"; };
-		1AB9F0901BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewCell.m; sourceTree = "<group>"; };
-		1AB9F0911BAF28FF00E273C8 /* PDTSimpleCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewController.h; sourceTree = "<group>"; };
-		1AB9F0921BAF28FF00E273C8 /* PDTSimpleCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewController.m; sourceTree = "<group>"; };
-		1AB9F0931BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewFlowLayout.h; sourceTree = "<group>"; };
-		1AB9F0941BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewFlowLayout.m; sourceTree = "<group>"; };
-		1AB9F0951BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewHeader.h; sourceTree = "<group>"; };
-		1AB9F0961BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewHeader.m; sourceTree = "<group>"; };
-		1AB9F0971BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewWeekdayHeader.h; sourceTree = "<group>"; };
-		1AB9F0981BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewWeekdayHeader.m; sourceTree = "<group>"; };
 		1ABB66DC1B4E354C000DEFEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1AD5C49F1B55CB1D008490E5 /* SSFlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFlatDatePicker.h; sourceTree = "<group>"; };
 		1AD5C4A01B55CB1D008490E5 /* SSFlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFlatDatePicker.m; sourceTree = "<group>"; };
@@ -235,25 +214,6 @@
 				1A38C5C81B49F27F00EB3B5F /* PSAnalogClockView.m */,
 			);
 			path = AnalogClockWithImages;
-			sourceTree = "<group>";
-		};
-		1AB9F08C1BAF28FF00E273C8 /* PDTSimpleCalendar */ = {
-			isa = PBXGroup;
-			children = (
-				1AB9F08D1BAF28FF00E273C8 /* Info.plist */,
-				1AB9F08E1BAF28FF00E273C8 /* PDTSimpleCalendar.h */,
-				1AB9F08F1BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.h */,
-				1AB9F0901BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.m */,
-				1AB9F0911BAF28FF00E273C8 /* PDTSimpleCalendarViewController.h */,
-				1AB9F0921BAF28FF00E273C8 /* PDTSimpleCalendarViewController.m */,
-				1AB9F0931BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.h */,
-				1AB9F0941BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.m */,
-				1AB9F0951BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.h */,
-				1AB9F0961BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m */,
-				1AB9F0971BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.h */,
-				1AB9F0981BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.m */,
-			);
-			path = PDTSimpleCalendar;
 			sourceTree = "<group>";
 		};
 		1ADB9BC51B4619FD008C96E5 /* fonts */ = {
@@ -382,8 +342,6 @@
 				1A8DE6081B5ADEE80031E6D0 /* PhotoViewController2.m */,
 				1AD8B39F1B50C9DC003D0E47 /* DetailViewController.h */,
 				1AD8B3A01B50C9DC003D0E47 /* DetailViewController.m */,
-				1A6F2A2B1BAF31FF001BCA47 /* CalendarVC.h */,
-				1A6F2A2C1BAF31FF001BCA47 /* CalendarVC.m */,
 				1AF9D1F41B5228EA00509C2D /* ResetViewController.h */,
 				1AF9D1F51B5228EA00509C2D /* ResetViewController.m */,
 				1AF48CE41B4629A8005A158A /* Main.storyboard */,
@@ -397,7 +355,6 @@
 		6B2C83611751107700BC04FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1AB9F08C1BAF28FF00E273C8 /* PDTSimpleCalendar */,
 				1AB9F0891BAF16D100E273C8 /* RKDropdownAlert.h */,
 				1AB9F08A1BAF16D100E273C8 /* RKDropdownAlert.m */,
 				1A07D27A1B59F3B100A80B12 /* DZNEmptyDataSet */,
@@ -505,7 +462,6 @@
 				1A8DE6121B5B02960031E6D0 /* delete.png in Resources */,
 				1AB3BDEA1B4F7C99007279FE /* user.png in Resources */,
 				1A8DE6061B5A964F0031E6D0 /* undo.png in Resources */,
-				1AB9F0991BAF28FF00E273C8 /* Info.plist in Resources */,
 				1A6AED481BAE419F006BEAA8 /* edit.png in Resources */,
 				1A477E5F1B53EE3800D2D6BD /* cancel.png in Resources */,
 				6B2C83711751107700BC04FB /* Default-568h@2x.png in Resources */,
@@ -538,26 +494,20 @@
 				1A8DE6091B5ADEE80031E6D0 /* PhotoViewController2.m in Sources */,
 				1A38C5CE1B49F27F00EB3B5F /* PSAnalogClockView.m in Sources */,
 				1AE841A81B54C34D004BBE03 /* UITextView+Placeholder.m in Sources */,
-				1AB9F09A1BAF28FF00E273C8 /* PDTSimpleCalendarViewCell.m in Sources */,
 				1AD5C4A11B55CB1D008490E5 /* SSFlatDatePicker.m in Sources */,
 				6B2C83671751107700BC04FB /* main.m in Sources */,
 				1A45B26C1B4ACD8200196E3C /* LifeViewController.m in Sources */,
 				1AF48CF21B462AB0005A158A /* PhotoViewController.m in Sources */,
 				1AF48CF01B462AB0005A158A /* MainViewController.m in Sources */,
-				1AB9F09B1BAF28FF00E273C8 /* PDTSimpleCalendarViewController.m in Sources */,
 				6B2C836B1751107700BC04FB /* AppDelegate.m in Sources */,
 				1ADB9BE81B461DDF008C96E5 /* SWRevealViewController.m in Sources */,
 				1A8DE60E1B5AF1CF0031E6D0 /* tabbarViewController.m in Sources */,
 				1AD8B3A11B50C9DC003D0E47 /* DetailViewController.m in Sources */,
 				1AA582401BAEF01C0088CED3 /* MainTabbarController.m in Sources */,
-				1AB9F09E1BAF28FF00E273C8 /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */,
-				1AB9F09C1BAF28FF00E273C8 /* PDTSimpleCalendarViewFlowLayout.m in Sources */,
 				6B2C83741751107700BC04FB /* ViewController.m in Sources */,
 				1A07D27D1B59F3B100A80B12 /* UIScrollView+EmptyDataSet.m in Sources */,
 				1AB9F08B1BAF16D100E273C8 /* RKDropdownAlert.m in Sources */,
-				1A6F2A2D1BAF31FF001BCA47 /* CalendarVC.m in Sources */,
 				1A97B04F1B51CC38006FC7C7 /* ListEntry.m in Sources */,
-				1AB9F09D1BAF28FF00E273C8 /* PDTSimpleCalendarViewHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,10 +588,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: James Dong (V76RB4U98E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -652,9 +602,9 @@
 				INFOPLIST_FILE = "FlatDatePicker/FlatDatePicker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apps.KingJ.Passerby;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.KingJ.Passerby;
 				PRODUCT_NAME = Passerby;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "135b8f35-be1a-4304-8b94-10c6fc2b0102";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -663,10 +613,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: James Dong (V76RB4U98E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -677,9 +627,9 @@
 				INFOPLIST_FILE = "FlatDatePicker/FlatDatePicker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apps.KingJ.Passerby;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.KingJ.Passerby;
 				PRODUCT_NAME = Passerby;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "135b8f35-be1a-4304-8b94-10c6fc2b0102";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

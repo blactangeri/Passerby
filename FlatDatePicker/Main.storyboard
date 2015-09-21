@@ -90,7 +90,7 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="RPN-11-Nrh" customClass="CalendarVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rbU-RH-B7P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -260,7 +260,6 @@
                     <connections>
                         <segue destination="TfW-jw-CD1" kind="relationship" relationship="viewControllers" id="t7z-Ex-a8l"/>
                         <segue destination="V1Z-O2-RUv" kind="relationship" relationship="viewControllers" id="1JC-kC-bEG"/>
-                        <segue destination="RPN-11-Nrh" kind="relationship" relationship="viewControllers" id="41H-pH-8p5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4w-LE-Eej" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -49,7 +49,6 @@
 	UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target: self action:@selector(createNew)];
 	[rightBarButtonItem setTintColor:[UIColor lightGrayColor]];
 	self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-	
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,7 +18,7 @@
     // Do any additional setup after loading the view.
     UINavigationController *nav = [self.viewControllers objectAtIndex:0];
     CGFloat navigationBarHeight = nav.navigationBar.frame.size.height;
-    CGRect r = CGRectMake([[UIScreen mainScreen] bounds].size.width / 4.0, 0, [[UIScreen mainScreen] bounds].size.width / 2.0, navigationBarHeight);
+    CGRect r = CGRectMake([[UIScreen mainScreen] bounds].size.width / 4.0, 0, [[UIScreen mainScreen] bounds].size.width / 2.0, navigationBarHeight - 18);
     [self.tabBar setFrame:r];
     [self.tabBar setTintColor:[UIColor grayColor]];
     [self.tabBar setBarTintColor:[UIColor colorWithRed:39.0 / 255.0 green:40.0 / 255.0 blue:34.0 / 255.0 alpha:1.0]];

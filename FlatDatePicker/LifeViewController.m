@@ -200,8 +200,10 @@ static NSString * const reuseIdentifier = @"Cell";
 		label.numberOfLines = 0;
 		label.textAlignment = NSTextAlignmentCenter;
 		label.textColor = [UIColor whiteColor];
-		label.font = [UIFont fontWithName:@"din-light" size:23];
-		label.text = [NSString stringWithFormat:@"%d/900\n\nToday begins\nthe rest of your life", month];
+		label.font = [UIFont fontWithName:@"din-light" size:22];
+		//label.text = [NSString stringWithFormat:@"%d/900\n\nToday begins\nthe rest of your life", month];
+		label.text = [NSString stringWithFormat:@"%d/900\n\nLife is only about 900 months\r\rThis is all you have left", month];
+
 		header.backgroundColor = [UIColor blackColor];
 		[header addSubview:label];
 		return  header;
@@ -241,7 +243,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 	if (_months.count > 0) {
 		NSNumber *number = [NSNumber numberWithInteger:indexPath.row];
-		if ([_months containsObject:number]) {
+		if ([_months containsObject:number] && number.intValue >= month) {
 			cell.backgroundColor = [UIColor yellowColor];
 		}
 	}

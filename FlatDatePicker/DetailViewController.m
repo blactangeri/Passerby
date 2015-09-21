@@ -207,6 +207,7 @@ CGFloat h;
 			NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Mission Failed" attributes:dict];
 
 			[_dateLabel setAttributedText:str];
+			[_descField setEditable:NO];
 			[self.view addSubview:_dateLabel];
 		}
 		else {
@@ -336,10 +337,10 @@ CGFloat h;
     self.entry.dateCreated = [NSDate date];
     
     // local notification
-	NSString *alertBodyStr = @"You have new task to do";
+	NSString *alertBodyStr = @"You have a task to complete";
 	
 	now = [NSDate date];
-	NSDate *timeToFire = [NSDate dateWithTimeInterval:(12 * 60 * 60) sinceDate:now];
+	NSDate *timeToFire = [NSDate dateWithTimeInterval:(24 * 60 * 60) sinceDate:now];
 	
 	UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 	localNotification.fireDate = timeToFire;
@@ -407,8 +408,8 @@ CGFloat h;
 		_ppc = destNav.popoverPresentationController;
 		_ppc.delegate = self;
 		_ppc.sourceView = self.view;
-		_ppc.sourceRect = [_descField frame];
-		[_ppc setPermittedArrowDirections:UIPopoverArrowDirectionAny];
+		_ppc.sourceRect = [_dateLabel frame];
+		[_ppc setPermittedArrowDirections:UIPopoverArrowDirectionDown];
 		[_ppc setBackgroundColor:[UIColor darkGrayColor]];
 		
 		destNav.navigationBarHidden = YES;

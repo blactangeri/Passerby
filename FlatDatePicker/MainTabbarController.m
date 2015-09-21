@@ -24,7 +24,7 @@
 	UITabBar *bar = self.tabBar;
 	UITabBarItem *item1 = [[bar items] objectAtIndex:0];
 	UITabBarItem *item2 = [[bar items] objectAtIndex:1];
-	UITabBarItem *item3 = [[bar items] objectAtIndex:2];
+	//UITabBarItem *item3 = [[bar items] objectAtIndex:2];
 	
 	/*CGRect rect = CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen] bounds].size.width / 2.0, navigationBarHeight);
 	UIGraphicsBeginImageContext(rect.size);
@@ -53,11 +53,11 @@
 	
 	[item1 setImage:img1];
 	[item2 setImage:img2];
-	[item3 setImage:img3];
+	//[item3 setImage:img3];
 	
 	[item1 setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
 	[item2 setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
-	[item3 setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
+	//[item3 setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
 	
 }
 
