@@ -4,7 +4,7 @@
 
 @interface DetailViewController : UIViewController
 
-@property (nonatomic, strong) ListEntry *entry;
+@property (nonatomic, strong, nonnull) ListEntry *entry;
 @property (nonnull, copy) void (^dismissBlock)(void);
 @property (nonatomic) BOOL isNew;
 @property (nonatomic) BOOL isComplete;

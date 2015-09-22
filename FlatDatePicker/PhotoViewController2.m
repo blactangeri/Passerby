@@ -131,16 +131,6 @@
     //cell.detailTextLabel.font = [UIFont fontWithName:@"din-light" size:15];
 }
 
-
-- (IBAction)createNew:(id)sender
-{
-    DetailViewController *dvc = (DetailViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
-    dvc.isNew = YES;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dvc];
-    nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:nav animated:YES completion:nil];
-}
-
 /*
  #pragma mark - Navigation
  

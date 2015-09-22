@@ -32,14 +32,18 @@ CGFloat h;
 	
     [self setNavbarTitle];
     [self setupTextView];
-    [self setDaysLabel];
 	[self setupBackground];
 	
 	[self.navigationController.navigationBar setTitleTextAttributes:
 		[NSDictionary dictionaryWithObjectsAndKeys:
 			[UIFont fontWithName:@"din-light" size:18], NSFontAttributeName, [UIColor lightGrayColor], NSForegroundColorAttributeName, nil]];
+}
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self setDaysLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -225,20 +229,22 @@ CGFloat h;
 									NSForegroundColorAttributeName: [UIColor colorWithRed:234.0/255.0 green:0.0/255.0 blue:42.0/255.0 alpha:1.0]
 									};
 			
-			NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
+			NSMutableAttributedString *attrString1 = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
 			
 			const NSRange range = [text rangeOfString:num];
-			[attrString addAttributes:dict2 range:range];
-			[_dateLabel setAttributedText:attrString];
+			[attrString1 addAttributes:dict2 range:range];
+			[_dateLabel setAttributedText:attrString1];
 			
 			[self.view addSubview:_dateLabel];
 		}
 	}
 	if (_isComplete) {
-		NSDateComponents *comp = [cal components:unit fromDate:_entry.dateCompleted toDate:[NSDate date] options:0];
 		
-		NSString *text = [NSString stringWithFormat:@"You did it\r\r%d\rdays ago", (int)[comp day]];
-		NSString *num = [NSString stringWithFormat:@"%d", (int)[comp day	]];
+		NSDate *dateCompletedStart = [[NSCalendar currentCalendar] startOfDayForDate:_entry.dateCompleted];
+		NSDateComponents *comp2 = [cal components:unit fromDate:dateCompletedStart toDate:[NSDate date] options:0];
+		
+		NSString *text = [NSString stringWithFormat:@"You did it\r\r%d\rdays ago", (int)[comp2 day]];
+		NSString *num = [NSString stringWithFormat:@"%d", (int)[comp2 day]];
 
 		NSDictionary *dict1 = @{NSFontAttributeName: [UIFont fontWithName:@"din-light" size:18],
 								NSForegroundColorAttributeName: [UIColor lightGrayColor]
@@ -250,9 +256,9 @@ CGFloat h;
 		
 		const NSRange range = [text rangeOfString:num];
 		
-		NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
-		[attrString addAttributes:dict2 range:range];
-		[_dateLabel setAttributedText:attrString];
+		NSMutableAttributedString *attrString2 = [[NSMutableAttributedString alloc] initWithString:text attributes:dict1];
+		[attrString2 addAttributes:dict2 range:range];
+		[_dateLabel setAttributedText:attrString2];
 		
 		[self.view addSubview:_dateLabel];
     }
@@ -335,26 +341,41 @@ CGFloat h;
     self.entry.desc = [_descField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     self.entry.dateToFulfill = _dtc;
     self.entry.dateCreated = [NSDate date];
-    
-    // local notification
+	
+	if ([[ListEntries sharedEntries] allEntries].count == 1) {
+		[self createLocalNotif];
+	}
+
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+- (void)createLocalNotif {
+	
+	[self clearNotifications];
+	
 	NSString *alertBodyStr = @"You have a task to complete";
 	
-	now = [NSDate date];
-	NSDate *timeToFire = [NSDate dateWithTimeInterval:(24 * 60 * 60) sinceDate:now];
+	NSDate *now = [NSDate date];
+	NSDate *startOfToday = [[NSCalendar currentCalendar] startOfDayForDate:now];
+	NSDate *notif1 = [startOfToday dateByAddingTimeInterval:(8 * 60 * 60)];
+	NSDate *notif2 = [startOfToday dateByAddingTimeInterval:(20 * 60 * 60)];
+	
+	//NSDate *timeToFire = [NSDate dateWithTimeInterval:(24 * 60 * 60) sinceDate:now];
+	//NSDate *timeToFire = [NSDate dateWithTimeInterval:(60 * 60) sinceDate:now];
 	
 	UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-	localNotification.fireDate = timeToFire;
+	localNotification.fireDate = notif1;
 	localNotification.repeatCalendar = [NSCalendar currentCalendar];
 	localNotification.repeatInterval = NSCalendarUnitDay;
 	localNotification.alertBody = alertBodyStr;
-    localNotification.alertAction = @"open Passerby";
+	localNotification.alertAction = @"open Passerby";
 	localNotification.soundName = UILocalNotificationDefaultSoundName;
 	localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber]  + 1;
-
-	[[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+	
+	[[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+	
+	localNotification.fireDate = notif2;
+	[[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 
@@ -369,11 +390,7 @@ CGFloat h;
 	
 	UIAlertAction *complete = [UIAlertAction actionWithTitle:@"Complete Task" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
 		
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setLocale:[NSLocale currentLocale]];
-		[formatter setDateStyle:NSDateFormatterMediumStyle];
-		
-		self.entry.dateCompleted = [NSDate date];
+		_entry.dateCompleted = [NSDate date];
 		[[ListEntries sharedEntries] moveToCompleted:self.entry];
 		
 		UIButton *delBtn = [[UIButton alloc] init];
@@ -385,12 +402,21 @@ CGFloat h;
 		UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:delBtn];
 		self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 		
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setLocale:[NSLocale currentLocale]];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
 		[self.navigationItem setTitle: [NSString stringWithFormat:@"Completed on %@", [formatter stringFromDate:_entry.dateCompleted]]];
 		
 		_isNew = NO;
 		_isComplete = YES;
 		
 		[self setDaysLabel];
+		
+		if ([[ListEntries sharedEntries] allEntries].count == 0) {
+			
+			[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+			[[UIApplication sharedApplication] cancelAllLocalNotifications];
+		}
 	}];
 	
 	UIAlertAction *edit = [UIAlertAction actionWithTitle:@"Edit Deadline" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
@@ -562,6 +588,18 @@ CGFloat h;
 		}
 	}
 	[super decodeRestorableStateWithCoder:coder];
+}
+
+- (void) clearNotifications
+{
+	//NSLog(@"Clearing notifications");
+	[[UIApplication sharedApplication] cancelAllLocalNotifications];
+	long count;
+	while ((count = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]) > 0) {
+		//NSLog(@"Remaining notificaitons to cancel: %lu",(unsigned long)count);
+		[NSThread sleepForTimeInterval:.01f];
+	}
+	//NSLog(@"Notifications cleared");
 }
 
 /*

@@ -15,14 +15,41 @@
     
     //[Parse setApplicationId:@"ODa3WmLq7fkFrSVDHu9jU3qaYvMAsTjVqYQgHllI" clientKey:@"zGKQnGxOh5cW0Rf3OTbY3VXC0zwdVWURgCWmGkwe"];
 	
+	[application setApplicationIconBadgeNumber:0];
 	
-	if ([[ListEntries sharedEntries] allEntries].count == 0) {
-		[application setApplicationIconBadgeNumber:0];
-		[[UIApplication sharedApplication] cancelAllLocalNotifications];
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"TheFirstLaunchOfNewVersion"]) {
+		
+		if ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] > 0) {
+			
+			[self clearNotifications];
+			
+			UILocalNotification *localNotification1 = [[UILocalNotification alloc] init];
+			
+			NSDate *now = [NSDate date];
+			NSDate *startOfToday = [[NSCalendar currentCalendar] startOfDayForDate:now];
+			NSDate *notifTime1 = [startOfToday dateByAddingTimeInterval:(8 * 60 * 60)];
+			NSDate *notifTime2 = [startOfToday dateByAddingTimeInterval:(20 * 60 * 60)];
+			
+			localNotification1.repeatCalendar = [NSCalendar currentCalendar];
+			localNotification1.repeatInterval = NSCalendarUnitDay;
+			localNotification1.alertBody = @"You have a task to complete";
+			localNotification1.alertAction = @"open Passerby";
+			localNotification1.soundName = UILocalNotificationDefaultSoundName;
+			localNotification1.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber]  + 1;
+			localNotification1.fireDate = notifTime1;
+			[[UIApplication sharedApplication] scheduleLocalNotification:localNotification1];
+			
+			localNotification1.fireDate = notifTime2;
+			[[UIApplication sharedApplication] scheduleLocalNotification:localNotification1];
+		}
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isTheFirstLaunchOfNewVersion"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
 	
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
          
         
@@ -88,6 +115,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+	
+	[application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -141,5 +170,16 @@
     application.applicationIconBadgeNumber = 0;
 }
 
+- (void) clearNotifications
+{
+	NSLog(@"Clearing notifications");
+	[[UIApplication sharedApplication] cancelAllLocalNotifications];
+	long count;
+	while ((count = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]) > 0) {
+		NSLog(@"Remaining notificaitons to cancel: %lu",(unsigned long)count);
+		[NSThread sleepForTimeInterval:.01f];
+	}
+	NSLog(@"Notifications cleared");
+}
 
 @end
