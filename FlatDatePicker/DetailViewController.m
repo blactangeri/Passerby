@@ -414,8 +414,7 @@ CGFloat h;
 		
 		if ([[ListEntries sharedEntries] allEntries].count == 0) {
 			
-			[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-			[[UIApplication sharedApplication] cancelAllLocalNotifications];
+			[self clearNotifications];
 		}
 	}];
 	
