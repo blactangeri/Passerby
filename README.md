@@ -5,3 +5,5 @@ Passerby app on the App Store https://itunes.apple.com/us/app/passerby/id1021792
 ![alt tag](http://a1.mzstatic.com/us/r30/Purple69/v4/7a/f2/bd/7af2bd5b-290c-aa1d-f97f-d1e913979db3/screen322x572.jpeg)
 ![alt tag](http://a5.mzstatic.com/us/r30/Purple3/v4/0e/27/0e/0e270e02-2caf-ad33-d3fe-befb0d2c0b77/screen322x572.jpeg)
 ![alt tag](http://a3.mzstatic.com/us/r30/Purple3/v4/d7/cd/1b/d7cd1b21-873b-8385-2d92-74112f745d45/screen322x572.jpeg)
+
+NO more available for download after my Apple developer account expired
